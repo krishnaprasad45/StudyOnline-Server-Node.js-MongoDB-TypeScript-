@@ -1,5 +1,5 @@
-import { adminLogin } from "../../business/usecases/adminUseCases/adminLogin";
-import { getUsers } from "../../business/usecases/adminUseCases/getUsers";
+import { adminLogin } from "../../../business/usecases/adminUseCases/adminLogin";
+import { getUsers } from "../../../business/usecases/adminUseCases/getUsers";
 
 import { FlattenMaps, Types } from "mongoose";
 import { Request, Response } from 'express';

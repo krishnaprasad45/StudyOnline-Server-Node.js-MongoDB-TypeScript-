@@ -8,22 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.adminLogin = void 0;
-const adminRepository_1 = require("../../../adapters/data-access/repositories/adminRepository");
-const jwtTokenAuth_1 = require("../../../frameworks/express/middlewares/jwtTokenAuth");
-function adminLogin({ email, password }) {
+exports.saveCourse = void 0;
+const courseModel_1 = __importDefault(require("../models/courseModel"));
+function saveCourse(data) {
     return __awaiter(this, void 0, void 0, function* () {
-        const adminData = yield (0, adminRepository_1.findAdmin)({ email, password });
-        if (adminData.email && adminData.password === password) {
-            const adminToken = (0, jwtTokenAuth_1.generateadminToken)(adminData);
-            return { adminData, adminToken };
-        }
-        else {
-            console.log(adminData === null || adminData === void 0 ? void 0 : adminData.password, password);
-            return { message: "password not match" };
-        }
+        const course = new courseModel_1.default(Object.assign({}, data));
+        console.log("course repo", course);
+        return yield course.save();
     });
 }
-exports.adminLogin = adminLogin;
-module.exports = { adminLogin };
+exports.saveCourse = saveCourse;

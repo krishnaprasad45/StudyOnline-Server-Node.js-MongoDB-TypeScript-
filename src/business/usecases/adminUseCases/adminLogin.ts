@@ -1,6 +1,6 @@
 
 import { findAdmin } from "../../../adapters/data-access/repositories/adminRepository";
-import { generateadminToken } from "../../../frameworks/express/middlewares/auth";
+import { generateadminToken } from "../../../frameworks/express/middlewares/jwtTokenAuth";
 import  {adminSigninInterface} from "../../interfaces/adminInterfaces"
 
 export async function adminLogin({email,password}:adminSigninInterface) {

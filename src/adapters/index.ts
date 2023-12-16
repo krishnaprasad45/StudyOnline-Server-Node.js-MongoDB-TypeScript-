@@ -1,4 +1,3 @@
-// app.js
 
 import express from 'express';
 import cookieParser from "cookie-parser";
@@ -7,12 +6,13 @@ import connectDB from "../frameworks/database/mongo";
 import userRoute from "../frameworks/express/routes/userRoute";
 import mentorRoute from "../frameworks/express/routes/mentorRoute";
 import adminRoute from "../frameworks/express/routes/adminRoute";
+import {validateRole} from "../frameworks/express/middlewares/jwtTokenAuth"
 const debug = require("debug")("myapp:server");
 
 const app = express();
 const port = 5000;
 
-// Connect to MongoDB
+
 connectDB();
 
 // Middleware
@@ -22,6 +22,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/public/images", express.static("public/images"));
 
+
+
+//CROSS ORIGIN RESOURCE SHARING
 const allowedOrigins = ["http://localhost:5173"];
 app.use(
   cors({
@@ -35,7 +38,8 @@ app.use(
     credentials: true,
   })
 );
-console.log("server-index.ts")
+// Role Based Authentication
+app.use(validateRole); 
 // Routes
 app.use("/", userRoute);
 app.use("/mentor", mentorRoute);

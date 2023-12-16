@@ -34,8 +34,12 @@ const mentorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  block: {
+    type: Boolean,
+    default: false,
+  },
+ 
 });
 
-
-const Mentor = mongoose.model('Mentor', mentorSchema);
+const Mentor = mongoose.model("Mentor", mentorSchema);
 export default Mentor;

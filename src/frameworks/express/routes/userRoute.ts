@@ -2,9 +2,9 @@
 
 import express from "express";
 import { upload } from "../middlewares/multer";
-import { userSignup, userLogin, profile, profileUpdate } from "../../../adapters/controllers/userController";
-import { verifyToken } from "../middlewares/auth";
-import signIn from "../../../adapters/controllers/user/userSigninController";
+import { userSignup, userLogin, profile, profileUpdate } from "../../../adapters/controllers/userController/userController";
+import { verifyToken } from "../middlewares/jwtTokenAuth";
+import signIn from "../../../adapters/controllers/userController/userSigninController";
 
 const userRoute = express.Router();
 console.log("server-userRoute.ts")
@@ -15,6 +15,6 @@ userRoute.post("/profile-update", upload.single("image"), verifyToken, profileUp
 
 //GoogleSignIn
 
-userRoute.post("/google/signin", signIn.googleSignin)
+userRoute.post("/google/signin",verifyToken, signIn.googleSignin)
 
 export default userRoute;

@@ -1,10 +1,10 @@
-import { createMentor } from '../../business/usecases/mentorUseCases/createMentor';
-import { loginMentor } from '../../business/usecases/mentorUseCases/loginMentor';
-import { findMentor } from '../../business/usecases/mentorUseCases/findMentor';
-import { updateMentor } from '../../business/usecases/mentorUseCases/updateMentor';
+import { createMentor } from '../../../business/usecases/mentorUseCases/createMentor';
+import { loginMentor } from '../../../business/usecases/mentorUseCases/loginMentor';
+import { findMentor } from '../../../business/usecases/mentorUseCases/findMentor';
+import { updateMentor } from '../../../business/usecases/mentorUseCases/updateMentor';
 import { Request, Response } from 'express';
-import { mentorSignupInterface } from "../../business/interfaces/mentorInterfaces";
-import { mentorProfile} from "../../business/interfaces/mentorInterfaces";
+import { mentorSignupInterface } from "../../../business/interfaces/mentorInterfaces";
+import { mentorProfile} from "../../../business/interfaces/mentorInterfaces";
 
 export const mentorSignup = async (req:Request,res:Response) => {
   try {

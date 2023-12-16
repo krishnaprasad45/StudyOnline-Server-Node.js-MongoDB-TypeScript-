@@ -25,7 +25,7 @@ exports.default = {
                     throw new Error("Oops! It seems you signed up with Google");
                 }
                 else if (response[0].block) {
-                    throw new Error("Oops! It seems you Account is blocked by admin please contact boookat@gmail.com");
+                    throw new Error("Oops! It seems you Account is blocked by admin ");
                 }
                 else {
                     const comparePassword = yield encryptionDecryption_1.default.comparePassword(data.password, response[0].password);
@@ -56,7 +56,7 @@ exports.default = {
             const response = yield userRepositoryGetQuery_1.default.getUser("email", email);
             if (response.length != 0) {
                 if (response[0].block) {
-                    throw new Error("Oops! It seems you Account is blocked by admin please contact boookat@gmail.com");
+                    throw new Error("Oops! It seems you Account is blocked by admin");
                 }
                 const token = encryptionDecryption_2.default.createToken(response[0]._id, "user", "1h");
                 const data = {

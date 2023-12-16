@@ -1,4 +1,4 @@
-import { userSignup } from './../../controllers/userController';
+import { userSignup } from '../../controllers/userController/userController';
 import userModel from "../models/userModel";
 
 import { userSignupInterface } from '../../../business/interfaces/userInterfaces';

@@ -2,8 +2,8 @@
 
 import express from "express";
 import { upload } from "../middlewares/multer";
-import { loginAdmin, loadDashboard } from "../../../adapters/controllers/adminController";
-import { verifyToken } from "../middlewares/auth";
+import { loginAdmin, loadDashboard } from "../../../adapters/controllers/adminController/adminController";
+import { verifyToken } from "../middlewares/jwtTokenAuth";
 
 const adminRoute = express.Router();
 

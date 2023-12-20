@@ -16,18 +16,10 @@ export const loginAdmin = async (req:Request,res:Response) => {
   }
 };
 
-export const loadDashboard = async (req:Request,res:Response) => {
-  try {
-    const userData = await getUsers();
-    res.json(userData);
-  } catch (error) {
-    throw new Error("Something error happened");
-  }
-};
 
 
 
 
 
 
-module.exports = { loginAdmin, loadDashboard };
+module.exports = { loginAdmin };

@@ -1,6 +1,7 @@
 import adminModel from "../../data-access/models/adminModel";
-import userModel from "../../data-access/models/adminModel";
+import userModel from "../../data-access/models/userModel";
 import {adminSigninInterface} from "../../../business/interfaces/adminInterfaces"
+import mentorModel from "../models/mentorModel";
 
 export async function findAdmin({email,password}:adminSigninInterface) {
   console.log()
@@ -11,6 +12,9 @@ export async function findAdmin({email,password}:adminSigninInterface) {
 export async function getAllUsers() {
   return await userModel.find().lean();
 }
+export async function getAllMentors() {
+  return await mentorModel.find().lean();
+}
 
 export async function findUpdateUser(_id:string) {
   const userData = await userModel.findById(_id);
@@ -19,4 +23,4 @@ export async function findUpdateUser(_id:string) {
 
 
 
-module.exports = { findAdmin, getAllUsers, findUpdateUser };
+module.exports = { findAdmin, getAllUsers, findUpdateUser,getAllMentors };

@@ -9,20 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginAdmin = void 0;
-const adminLogin_1 = require("../../../business/usecases/adminUseCases/adminLogin");
-const loginAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.getMentorsList = void 0;
+const getMentors_1 = require("../../../business/usecases/adminUseCases/getMentors");
+const getMentorsList = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let { email, password } = req.body;
-        email = 'admin@gmail.com';
-        password = 'password';
-        console.log(password);
-        const adminData = yield (0, adminLogin_1.adminLogin)({ email, password });
-        res.json(adminData);
+        const mentorData = yield (0, getMentors_1.getMentors)();
+        res.json(mentorData);
     }
     catch (error) {
         throw new Error("Something error happened");
     }
 });
-exports.loginAdmin = loginAdmin;
-module.exports = { loginAdmin: exports.loginAdmin };
+exports.getMentorsList = getMentorsList;

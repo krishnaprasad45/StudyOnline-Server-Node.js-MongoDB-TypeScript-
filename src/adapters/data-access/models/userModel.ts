@@ -22,6 +22,11 @@ const userSchema = new mongoose.Schema({
   date: {
     type: String,
   },
+  block: {
+    type: Boolean,
+    default: false,
+},
+
 });
 
 const User = mongoose.model('User', userSchema);

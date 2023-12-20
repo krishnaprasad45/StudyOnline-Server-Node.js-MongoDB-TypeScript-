@@ -1,4 +1,4 @@
-import { userSignup } from './../../../adapters/controllers/userController';
+import { userSignup } from '../../../adapters/controllers/userController/userController';
 import { saveUser, findUserByEmail } from "../../../adapters/data-access/repositories/userRepository";
 import { securePassword } from '../../../adapters/external services/bcrypt';
 import { formatDate } from "../../../adapters/external services/moment";

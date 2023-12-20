@@ -13,14 +13,14 @@ exports.loginMentor = void 0;
 const mentorRepository_1 = require("../../../adapters/data-access/repositories/mentorRepository");
 ;
 const bcrypt_1 = require("../../../adapters/external services/bcrypt");
-const auth_1 = require("../../../frameworks/express/middlewares/auth");
+const jwtTokenAuth_1 = require("../../../frameworks/express/middlewares/jwtTokenAuth");
 function loginMentor(email, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const existingMentor = yield (0, mentorRepository_1.findMentorByEmail)(email);
         if (existingMentor) {
             const isMatch = yield (0, bcrypt_1.matchPassword)(password, existingMentor.password);
             if (isMatch) {
-                const token = (0, auth_1.generateAuthToken)(existingMentor);
+                const token = (0, jwtTokenAuth_1.generateMentorAuthToken)(existingMentor);
                 return { mentorData: existingMentor, token };
             }
             else {

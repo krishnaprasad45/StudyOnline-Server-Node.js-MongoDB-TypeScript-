@@ -38,6 +38,10 @@ const mentorSchema = new mongoose_1.default.Schema({
         type: String,
         required: true,
     },
+    block: {
+        type: Boolean,
+        default: false,
+    },
 });
-const Mentor = mongoose_1.default.model('Mentor', mentorSchema);
+const Mentor = mongoose_1.default.model("Mentor", mentorSchema);
 exports.default = Mentor;

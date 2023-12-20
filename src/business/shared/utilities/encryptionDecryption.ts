@@ -4,7 +4,7 @@ import { ObjectId } from "mongoose";
 
 
 
-export default {
+    export default {
 
     hashPassword: async (password: string): Promise<string> => {
         try {
@@ -20,7 +20,7 @@ export default {
 
     createToken: (data: string | ObjectId, role: string, expireIn: string): string => {
         try {
-            const secretKey = process.env.SECRET_KEY
+            const secretKey = process.env.JWT_SECRETKEY
 
             const payload = {
                 data: data,
@@ -46,7 +46,7 @@ export default {
 
     encryptData: (data: string | ObjectId, expireIn: string): string => {
         try {
-            const secretKey = process.env.SECRET_KEY || ""
+            const secretKey = process.env.JWT_SECRETKEY || ""
 
             const payload = {
                 payload: data,
@@ -67,7 +67,7 @@ export default {
 
     decryptdata: (data: string) => {
         try {
-            const secretKey = process.env.SECRET_KEY || ""
+            const secretKey = process.env.JWT_SECRETKEY || ""
 
             const decodedToken = jwt.verify(data, secretKey) as JwtPayload;
 

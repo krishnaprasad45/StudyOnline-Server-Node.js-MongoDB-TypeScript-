@@ -28,7 +28,7 @@ exports.default = {
     }),
     createToken: (data, role, expireIn) => {
         try {
-            const secretKey = process.env.SECRET_KEY;
+            const secretKey = process.env.JWT_SECRETKEY;
             const payload = {
                 data: data,
                 role: role,
@@ -50,7 +50,7 @@ exports.default = {
     },
     encryptData: (data, expireIn) => {
         try {
-            const secretKey = process.env.SECRET_KEY || "";
+            const secretKey = process.env.JWT_SECRETKEY || "";
             const payload = {
                 payload: data,
             };
@@ -67,7 +67,7 @@ exports.default = {
     },
     decryptdata: (data) => {
         try {
-            const secretKey = process.env.SECRET_KEY || "";
+            const secretKey = process.env.JWT_SECRETKEY || "";
             const decodedToken = jsonwebtoken_1.default.verify(data, secretKey);
             return decodedToken;
         }

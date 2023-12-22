@@ -1,0 +1,1 @@
+🚀"StudyOnline" is a platform designed to make coding education accessible for individuals who face challenges attending institutions or struggle with self-learning.This project aims to offer vital learning materials and assign dedicated mentors to support candidates throughout their learning journey via video calls, chats, and screen sharing.📚

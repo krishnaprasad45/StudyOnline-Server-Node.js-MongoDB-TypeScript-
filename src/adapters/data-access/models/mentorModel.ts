@@ -34,7 +34,7 @@ const mentorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  block: {
+  isBlock: {
     type: Boolean,
     default: false,
   },

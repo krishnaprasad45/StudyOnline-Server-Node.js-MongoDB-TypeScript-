@@ -13,7 +13,7 @@ export default {
                 if (!response[0].password) {
                     throw new Error("Oops! It seems you signed up with Google")
                 }
-                else if (response[0].block) {
+                else if (response[0].isBlock) {
                     throw new Error("Oops! It seems you Account is blocked by admin ")
                 }
                 else {
@@ -43,7 +43,7 @@ export default {
         try {
             const response = await userRepository.getUser("email", email)
             if (response.length != 0) {
-                if (response[0].block) {
+                if (response[0].isBlock) {
                     throw new Error("Oops! It seems you Account is blocked by admin")
                 }
                 const token = encryptionDecryption.createToken(response[0]._id as unknown as ObjectId, "user", "1h")

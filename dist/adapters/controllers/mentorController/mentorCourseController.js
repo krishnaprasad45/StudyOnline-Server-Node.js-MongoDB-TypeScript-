@@ -13,15 +13,12 @@ exports.addCourse = void 0;
 const createCourse_1 = require("../../../business/usecases/courseUseCases/createCourse");
 const addCourse = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("addCourse fun");
-        console.log("req..body..", req.body);
         const { title, subtitle, duration, fee, createdby, description, banner, introvideo } = req.body;
         const courseData = yield (0, createCourse_1.createCourse)({ title, subtitle, duration, description, fee, createdby, banner, introvideo });
-        console.log(courseData);
         // res.status(201).json(courseData);
     }
     catch (error) {
-        console.error(error);
+        console.log(error);
         // res.json( error as Error );
     }
 });

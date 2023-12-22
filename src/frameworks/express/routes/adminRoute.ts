@@ -2,12 +2,18 @@
 
 import express from "express";
 import { upload } from "../middlewares/multer";
-import { loginAdmin, loadDashboard } from "../../../adapters/controllers/adminController/adminController";
+import { loginAdmin } from "../../../adapters/controllers/adminController/adminController";
 import { verifyToken } from "../middlewares/jwtTokenAuth";
+import  adminUserController  from "../../../adapters/controllers/adminController/adminUserController";
+import adminMentorController from "../../../adapters/controllers/adminController/adminMentorController";
+
 
 const adminRoute = express.Router();
 
 adminRoute.post("/login", loginAdmin);
-adminRoute.get("/loadDashboard",verifyToken, loadDashboard); 
+adminRoute.get("/getUsersList", verifyToken, adminUserController.getUsersList);
+adminRoute.get("/getMentorsList", verifyToken, adminMentorController.getMentorsList);
+adminRoute.patch("/block/user", verifyToken, adminUserController.blockUser);
+adminRoute.post("/block/mentor", verifyToken, adminMentorController.blockMentor);
 
-export default  adminRoute;
+export default adminRoute;

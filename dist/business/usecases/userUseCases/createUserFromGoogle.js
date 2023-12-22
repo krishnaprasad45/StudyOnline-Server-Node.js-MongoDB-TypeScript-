@@ -14,7 +14,6 @@ const userRepository_1 = require("../../../adapters/data-access/repositories/use
 const moment_1 = require("../../../adapters/external services/moment");
 function createUserFromGoogle({ name, email }) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("createUserFromGoogle fn..");
         const formattedDate = yield (0, moment_1.formatDate)(Date.now().toString());
         const date = formattedDate;
         return yield (0, userRepository_1.saveUser)({ name, email, date });

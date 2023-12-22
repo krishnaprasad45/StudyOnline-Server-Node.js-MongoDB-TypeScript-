@@ -14,7 +14,6 @@ const mentorRepository_1 = require("../../../adapters/data-access/repositories/m
 ;
 function findMentor(email) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("findmentor");
         const mentorData = yield (0, mentorRepository_1.findMentorByEmail)(email);
         return mentorData;
     });

@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
   date: {
     type: String,
   },
-  block: {
+  isBlock: {
     type: Boolean,
     default: false,
 },

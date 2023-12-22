@@ -5,10 +5,6 @@ export default {
     
     googleSignin: async (req: Request, res: Response) => {
         try {
-            console.log("googlesignin..fn")
-            console.log("name",req.body.displayName)
-            console.log("email",req.body.email)
-
             const data = {
                 name: req.body.displayName,
                 email: req.body.email,

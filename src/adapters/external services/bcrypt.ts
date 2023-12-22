@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-export async function securePassword(password:string | null) {
+export async function securePassword(password:string) {
   if(password){
   return await bcrypt.hash(password, 10);
   }

@@ -16,7 +16,6 @@ exports.default = {
     googleSignin: (data) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const checkEmailExists = yield (0, findUser_1.findUser)(data.email);
-            console.log("checkEmailExists", checkEmailExists);
             if (checkEmailExists) {
                 return true;
             }

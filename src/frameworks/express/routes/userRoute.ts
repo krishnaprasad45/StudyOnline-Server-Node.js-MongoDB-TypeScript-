@@ -7,7 +7,6 @@ import { verifyToken } from "../middlewares/jwtTokenAuth";
 import signIn from "../../../adapters/controllers/userController/userSigninController";
 
 const userRoute = express.Router();
-console.log("server-userRoute.ts")
 userRoute.post("/register", upload.single("image"), userSignup);
 userRoute.get("/login", userLogin);
 userRoute.get("/profile", verifyToken, profile);

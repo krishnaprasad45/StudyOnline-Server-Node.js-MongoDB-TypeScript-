@@ -8,16 +8,14 @@ import { mentorProfile} from "../../../business/interfaces/mentorInterfaces";
 
 export const mentorSignup = async (req:Request,res:Response) => {
   try {
-    console.log("mentor signup")
-    console.log("req..body..",req.body)
-
+    
     const { firstname,lastname, email, mobile, password , confirm_password } = req.body;
     const image = req.file?.filename;
     if( password != confirm_password){
       return res.status(400).json({ message: 'Password mismatch' });
     }
     const mentorData = await createMentor({firstname,lastname, email, mobile, password, image} as mentorSignupInterface);
-    console.log(mentorData);
+ 
     res.status(201).json(mentorData);
   } catch (error) {
     console.error(error);
@@ -27,13 +25,11 @@ export const mentorSignup = async (req:Request,res:Response) => {
 
 export const mentorLogin = async (req:Request,res:Response) => {
   try {
-    console.log("metorController..");
+   
     
     const email = req.query.email?.toString();
     const password = req.query.password?.toString();
-    
-    console.log(email, password);
-    console.log(121);
+  
     if (!email || !password) {
       return res.status(400).json({ message: 'Email and password are required.' });
     }
@@ -48,14 +44,14 @@ export const mentorLogin = async (req:Request,res:Response) => {
 
 export const profile = async (req:Request,res:Response) => {
   try {
-    console.log("mentor profile-server")
+   
     const email = req.query.email?.toString();
-    console.log(email)
+    
     if (!email) {
       return res.status(400).json({ message: 'Something Error' });
     }
     const mentorData = await findMentor(email);
-    console.log("mentordata",mentorData)
+   
     res.json(mentorData);
   } catch (error) {
     throw new Error("Something error happened");
@@ -85,7 +81,7 @@ export const profileUpdate = async (req:Request,res:Response) => {
     res.json(mentorData);
     }
   } catch (error) {
-    console.log(error as Error);
+    console.log(error);
   }
 };
 

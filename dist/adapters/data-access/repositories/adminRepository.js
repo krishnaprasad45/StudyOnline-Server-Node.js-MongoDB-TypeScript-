@@ -12,28 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.findUpdateUser = exports.getAllUsers = exports.findAdmin = void 0;
 const adminModel_1 = __importDefault(require("../../data-access/models/adminModel"));
-const adminModel_2 = __importDefault(require("../../data-access/models/adminModel"));
-function findAdmin({ email, password }) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log();
+const userModel_1 = __importDefault(require("../../data-access/models/userModel"));
+const mentorModel_1 = __importDefault(require("../models/mentorModel"));
+exports.default = {
+    findAdmin: ({ email, password }) => __awaiter(void 0, void 0, void 0, function* () {
         const adminData = yield adminModel_1.default.findOne({ email });
         return { email: "admin@gmail.com", password: "password" };
-    });
-}
-exports.findAdmin = findAdmin;
-function getAllUsers() {
-    return __awaiter(this, void 0, void 0, function* () {
-        return yield adminModel_2.default.find().lean();
-    });
-}
-exports.getAllUsers = getAllUsers;
-function findUpdateUser(_id) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const userData = yield adminModel_2.default.findById(_id);
+    }),
+    getAllUsers: () => __awaiter(void 0, void 0, void 0, function* () {
+        return yield userModel_1.default.find().lean();
+    }),
+    getAllMentors: () => __awaiter(void 0, void 0, void 0, function* () {
+        return yield mentorModel_1.default.find().lean();
+    }),
+    findUpdateUser: (_id) => __awaiter(void 0, void 0, void 0, function* () {
+        const userData = yield userModel_1.default.findById(_id);
         return userData;
-    });
-}
-exports.findUpdateUser = findUpdateUser;
-module.exports = { findAdmin, getAllUsers, findUpdateUser };
+    }),
+};

@@ -15,7 +15,6 @@ export const userSignup = async (req:Request,res:Response) => {
       return res.status(400).json({ message: 'Password mismatch' });
     }
     const userData = await createUser({firstname,lastname, email, mobile, password, image} as userSignupInterface);
-    console.log(userData);
     res.status(201).json(userData);
   } catch (error) {
     console.error(error);
@@ -68,7 +67,7 @@ export const profileUpdate = async (req:Request,res:Response) => {
     const userData = await updateUser({firstname,lastname, email, mobile, image,oldEmail} as profileUpdateInterface);
     res.json(userData);
   } catch (error) {
-    console.log(error as Error);
+    console.log(error);
   }
 };
 

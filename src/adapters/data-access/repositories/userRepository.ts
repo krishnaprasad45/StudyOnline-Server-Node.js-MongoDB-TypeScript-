@@ -1,34 +1,35 @@
-import { userSignup } from '../../controllers/userController/userController';
+import { userSignup } from "../../controllers/userController/userController";
 import userModel from "../models/userModel";
 
-import { userSignupInterface } from '../../../business/interfaces/userInterfaces';
-import { userProfileInterface } from '../../../business/interfaces/userInterfaces';
-export async function saveUser(data:{email:string,name:string,date:string}) {
-  try{
-    console.log("saveUser fn..")
-  const user = new userModel({ ...data});
-  console.log("user",user)
- const result =  await user.save();
- console.log(result,"result")
- return result
-  }catch(error){
-    console.log(error)
+import { userSignupInterface } from "../../../business/interfaces/userInterfaces";
+import { userProfileInterface } from "../../../business/interfaces/userInterfaces";
+export async function saveUser(data: {
+  email: string;
+  name: string;
+  date: string;
+}) {
+  try {
+    const user = new userModel({ ...data });
+
+    const result = await user.save();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }
 
-export async function findUserByEmail(email:string | null) {
-  console.log("findUserByEmail fn..",email)
+export async function findUserByEmail(email: string | null) {
   const userData = await userModel.findOne({ email });
-  console.log("userData from findUserByEmail fn",userData)
+
   return userData;
 }
 
-export async function updateOne(data:userProfileInterface) {
+export async function updateOne(data: userProfileInterface) {
   const userData = await userModel.findOneAndUpdate(
-    { email:data.oldEmail },
+    { email: data.oldEmail },
     {
       $set: {
-        ...data
+        ...data,
       },
     },
     { new: true }

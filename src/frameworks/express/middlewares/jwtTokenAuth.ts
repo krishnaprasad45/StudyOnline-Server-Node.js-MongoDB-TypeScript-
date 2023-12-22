@@ -50,6 +50,7 @@ export async function verifyToken(
     const token = authHeader && authHeader.split(" ")[1];
 
     if (!token) {
+      console.log("token verification failed");
       return res.status(401).json({ error: "No token provided" });
     }
 
@@ -65,7 +66,7 @@ export async function verifyToken(
 export function validateRole(req: Request, res: Response, next: NextFunction) {
   try {
     const requestedRoute = req.path;
-    console.log("path...++ :", requestedRoute);
+   
     const publicRoutes = [
       /**********  User **********/
       "/",
@@ -80,20 +81,22 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
       /**********  Admin **********/
       "/admin/dashboard",
       "/admin/login",
+     
     ];
 
     if (publicRoutes.includes(requestedRoute)) {
       return next();
     }
     const authorizationHeader = req.header("Authorization");
-    console.log("authorizationHeader++", authorizationHeader);
+
     if (!authorizationHeader) {
+      console.log("Unauthorized!!");
       return res.status(401).json({ error: "Unauthorized" });
     }
 
     const token = authorizationHeader.replace("Bearer ", "");
     const decodedToken = encryptionDecryption.decryptdata(token);
-    console.log("decodedToken++", decodedToken);
+
     const userRouteSegment = "/";
     const mentorRouteSegment = "/mentor";
     const adminRouteSegment = "/admin";
@@ -122,8 +125,8 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
       return res.status(401).json({ error: "Unauthorized" });
     }
   } catch (error) {
-    console.log("error in jwt ", error);
-    return res.status(401).json({ error: (error as Error).message });
+    console.log(error);
+    // return res.status(401).json({ error: (error as Error).message });
   }
 }
 

@@ -17,11 +17,8 @@ const userModel_1 = __importDefault(require("../models/userModel"));
 function saveUser(data) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log("saveUser fn..");
             const user = new userModel_1.default(Object.assign({}, data));
-            console.log("user", user);
             const result = yield user.save();
-            console.log(result, "result");
             return result;
         }
         catch (error) {
@@ -32,9 +29,7 @@ function saveUser(data) {
 exports.saveUser = saveUser;
 function findUserByEmail(email) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("findUserByEmail fn..", email);
         const userData = yield userModel_1.default.findOne({ email });
-        console.log("userData from findUserByEmail fn", userData);
         return userData;
     });
 }

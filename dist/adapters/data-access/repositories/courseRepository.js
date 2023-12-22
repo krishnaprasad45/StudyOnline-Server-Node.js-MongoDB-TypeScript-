@@ -17,7 +17,6 @@ const courseModel_1 = __importDefault(require("../models/courseModel"));
 function saveCourse(data) {
     return __awaiter(this, void 0, void 0, function* () {
         const course = new courseModel_1.default(Object.assign({}, data));
-        console.log("course repo", course);
         return yield course.save();
     });
 }

@@ -14,7 +14,6 @@ const userRepository_1 = require("../../../adapters/data-access/repositories/use
 ;
 function findUser(email) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("findUser fn");
         const userData = yield (0, userRepository_1.findUserByEmail)(email);
         return userData;
     });

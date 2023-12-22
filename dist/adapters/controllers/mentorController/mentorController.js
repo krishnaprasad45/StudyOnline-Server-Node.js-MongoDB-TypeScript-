@@ -17,15 +17,12 @@ const updateMentor_1 = require("../../../business/usecases/mentorUseCases/update
 const mentorSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        console.log("mentor signup");
-        console.log("req..body..", req.body);
         const { firstname, lastname, email, mobile, password, confirm_password } = req.body;
         const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
         if (password != confirm_password) {
             return res.status(400).json({ message: 'Password mismatch' });
         }
         const mentorData = yield (0, createMentor_1.createMentor)({ firstname, lastname, email, mobile, password, image });
-        console.log(mentorData);
         res.status(201).json(mentorData);
     }
     catch (error) {
@@ -37,11 +34,8 @@ exports.mentorSignup = mentorSignup;
 const mentorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _b, _c;
     try {
-        console.log("metorController..");
         const email = (_b = req.query.email) === null || _b === void 0 ? void 0 : _b.toString();
         const password = (_c = req.query.password) === null || _c === void 0 ? void 0 : _c.toString();
-        console.log(email, password);
-        console.log(121);
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
@@ -57,14 +51,11 @@ exports.mentorLogin = mentorLogin;
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _d;
     try {
-        console.log("mentor profile-server");
         const email = (_d = req.query.email) === null || _d === void 0 ? void 0 : _d.toString();
-        console.log(email);
         if (!email) {
             return res.status(400).json({ message: 'Something Error' });
         }
         const mentorData = yield (0, findMentor_1.findMentor)(email);
-        console.log("mentordata", mentorData);
         res.json(mentorData);
     }
     catch (error) {

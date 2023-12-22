@@ -26,7 +26,7 @@ const userSchema = new mongoose_1.default.Schema({
     date: {
         type: String,
     },
-    block: {
+    isBlock: {
         type: Boolean,
         default: false,
     },

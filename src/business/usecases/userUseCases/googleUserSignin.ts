@@ -8,7 +8,7 @@ export default {
     googleSignin: async (data: userGoogleSignUp) => {
         try {
             const checkEmailExists = await findUser(data.email)
-            console.log("checkEmailExists",checkEmailExists)
+    
             if (checkEmailExists) {
                 
                 return true

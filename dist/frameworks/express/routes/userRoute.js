@@ -10,7 +10,6 @@ const userController_1 = require("../../../adapters/controllers/userController/u
 const jwtTokenAuth_1 = require("../middlewares/jwtTokenAuth");
 const userSigninController_1 = __importDefault(require("../../../adapters/controllers/userController/userSigninController"));
 const userRoute = express_1.default.Router();
-console.log("server-userRoute.ts");
 userRoute.post("/register", multer_1.upload.single("image"), userController_1.userSignup);
 userRoute.get("/login", userController_1.userLogin);
 userRoute.get("/profile", jwtTokenAuth_1.verifyToken, userController_1.profile);

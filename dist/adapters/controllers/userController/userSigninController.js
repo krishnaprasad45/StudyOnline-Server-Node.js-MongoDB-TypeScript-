@@ -16,9 +16,6 @@ const googleUserSignin_1 = __importDefault(require("../../../business/usecases/u
 exports.default = {
     googleSignin: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log("googlesignin..fn");
-            console.log("name", req.body.displayName);
-            console.log("email", req.body.email);
             const data = {
                 name: req.body.displayName,
                 email: req.body.email,

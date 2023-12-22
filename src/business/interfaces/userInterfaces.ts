@@ -1,3 +1,5 @@
+import { ArrayExpressionOperatorReturningBoolean } from "mongoose"
+
 export interface userSignupInterface {
     _id?:string,
     firstname:string | null,
@@ -25,7 +27,8 @@ export interface userProfileInterface {
     mobile?:string,
     password?:string,
     image?:string,
-    oldEmail?:string
+    oldEmail?:string,
+    isBlock?:boolean
    
 }
 export interface userGoogleSignUp {

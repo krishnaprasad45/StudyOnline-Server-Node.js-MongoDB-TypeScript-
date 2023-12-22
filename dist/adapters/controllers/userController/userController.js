@@ -23,7 +23,6 @@ const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             return res.status(400).json({ message: 'Password mismatch' });
         }
         const userData = yield (0, createUser_1.createUser)({ firstname, lastname, email, mobile, password, image });
-        console.log(userData);
         res.status(201).json(userData);
     }
     catch (error) {

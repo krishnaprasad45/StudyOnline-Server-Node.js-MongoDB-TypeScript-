@@ -68,6 +68,7 @@ function verifyToken(req, res, next) {
             const authHeader = req.headers.authorization;
             const token = authHeader && authHeader.split(" ")[1];
             if (!token) {
+                console.log("token verification failed");
                 return res.status(401).json({ error: "No token provided" });
             }
             const jwtSecretKey = process.env.JWT_SECRETKEY || "";
@@ -83,7 +84,6 @@ exports.verifyToken = verifyToken;
 function validateRole(req, res, next) {
     try {
         const requestedRoute = req.path;
-        console.log("path...++ :", requestedRoute);
         const publicRoutes = [
             /**********  User **********/
             "/",
@@ -103,13 +103,12 @@ function validateRole(req, res, next) {
             return next();
         }
         const authorizationHeader = req.header("Authorization");
-        console.log("authorizationHeader++", authorizationHeader);
         if (!authorizationHeader) {
+            console.log("Unauthorized!!");
             return res.status(401).json({ error: "Unauthorized" });
         }
         const token = authorizationHeader.replace("Bearer ", "");
         const decodedToken = encryptionDecryption_1.default.decryptdata(token);
-        console.log("decodedToken++", decodedToken);
         const userRouteSegment = "/";
         const mentorRouteSegment = "/mentor";
         const adminRouteSegment = "/admin";
@@ -135,8 +134,8 @@ function validateRole(req, res, next) {
         }
     }
     catch (error) {
-        console.log("error in jwt ", error);
-        return res.status(401).json({ error: error.message });
+        console.log(error);
+        // return res.status(401).json({ error: (error as Error).message });
     }
 }
 exports.validateRole = validateRole;

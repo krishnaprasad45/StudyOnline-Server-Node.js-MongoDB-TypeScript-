@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-
+import * as dotenv from "dotenv";
+dotenv.config();
+const mongoUrl:string | undefined = process.env.MONGO_URI;
 const connectDB = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/StudyOnline');
+    if(mongoUrl)await mongoose.connect(mongoUrl);
     console.log("database connected");
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);

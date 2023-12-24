@@ -19,8 +19,11 @@ var __rest = (this && this.__rest) || function (s, e) {
         }
     return t;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const courseRepository_1 = require("../../../adapters/data-access/repositories/courseRepository");
+const courseRepository_1 = __importDefault(require("../../../adapters/data-access/repositories/courseRepository"));
 const moment_1 = require("../../../adapters/external services/moment");
 exports.default = {
     createCourse: (_a) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,14 +32,21 @@ exports.default = {
             const formattedDate = yield (0, moment_1.formatDate)(Date.now().toString());
             const date = formattedDate;
             data.createdat = date;
-            return yield (0, courseRepository_1.saveCourse)(Object.assign({}, data));
+            return yield courseRepository_1.default.saveCourse(Object.assign({}, data));
         }
         catch (error) {
             console.log(error);
         }
     }),
-    getMentors: () => __awaiter(void 0, void 0, void 0, function* () {
-        const mentorData = yield adminRepository.getAllMentors();
-        return mentorData;
+    getCoursesList: () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const coursesData = yield courseRepository_1.default.getAllCourses();
+            return coursesData;
+        }
+        catch (error) {
+            console.log(error);
+            // Assuming you want to return something in case of an error
+            throw new Error("Error fetching courses");
+        }
     }),
 };

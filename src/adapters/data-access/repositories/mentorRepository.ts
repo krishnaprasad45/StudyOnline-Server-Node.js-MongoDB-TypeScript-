@@ -4,15 +4,15 @@ import {mentorSignupInterface} from "../../../business/interfaces/mentorInterfac
 
 export async function saveMentor(data:mentorSignupInterface) {
   const mentor = new mentorModel({ ...data });
-  console.log("mentor repo")
+
   return await mentor.save();
 }
 
 export async function findMentorByEmail(email:string) {
-  console.log("findMentorByEmail")
-  console.log(email)
+  
+
   const mentorData = await mentorModel.findOne({ email });
-  console.log(mentorData)
+
   return mentorData;
 }
 

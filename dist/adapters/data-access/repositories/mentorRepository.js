@@ -17,17 +17,13 @@ const mentorModel_1 = __importDefault(require("../models/mentorModel"));
 function saveMentor(data) {
     return __awaiter(this, void 0, void 0, function* () {
         const mentor = new mentorModel_1.default(Object.assign({}, data));
-        console.log("mentor repo");
         return yield mentor.save();
     });
 }
 exports.saveMentor = saveMentor;
 function findMentorByEmail(email) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("findMentorByEmail");
-        console.log(email);
         const mentorData = yield mentorModel_1.default.findOne({ email });
-        console.log(mentorData);
         return mentorData;
     });
 }

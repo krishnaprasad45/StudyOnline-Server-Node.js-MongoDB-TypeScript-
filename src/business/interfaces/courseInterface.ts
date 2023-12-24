@@ -1,4 +1,4 @@
-export interface addCourseInterface{
+export default interface addCourseInterface{
     title:String,
     subtitle:String,
     duration:String,

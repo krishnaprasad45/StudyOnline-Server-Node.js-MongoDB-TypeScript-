@@ -1,15 +1,26 @@
-import { addCourseInterface } from "../../../business/interfaces/courseInterface";
-import { createCourse } from "../../../business/usecases/courseUseCases/createCourse";
-import { createMentor } from "../../../business/usecases/mentorUseCases/createMentor";
+import CourseInterface  from "../../../business/interfaces/courseInterface";
+import courseManagementUsecases  from "../../../business/usecases/courseUseCases/courseManagementUsecases";
 import { Request, Response } from 'express';
-export const addCourse = async (req:Request,res:Response) => {
+export default { 
+  addCourse : async (req:Request,res:Response) => {
     try {
       const { title,subtitle,duration,fee,createdby,description,banner,introvideo} = req.body;
-      const courseData = await createCourse({title,subtitle,duration,description,fee,createdby,banner,introvideo} as addCourseInterface);
+      const courseData = await courseManagementUsecases.createCourse({title,subtitle,duration,description,fee,createdby,banner,introvideo} as CourseInterface);
      
-      // res.status(201).json(courseData);
+      res.status(201).json(courseData);
     } catch (error) {
       console.log(error);
-      // res.json( error as Error );
+      res.json( error as Error );
     }
-  };
+  },
+  getCourseList: async (req: Request, res: Response) => {
+    try {
+     
+      const coursesData = await courseManagementUsecases.getCoursesList(); 
+      res.json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+}

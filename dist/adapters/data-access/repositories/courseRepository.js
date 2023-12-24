@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveCourse = void 0;
 const courseModel_1 = __importDefault(require("../models/courseModel"));
-function saveCourse(data) {
-    return __awaiter(this, void 0, void 0, function* () {
+exports.default = {
+    saveCourse: (data) => __awaiter(void 0, void 0, void 0, function* () {
         const course = new courseModel_1.default(Object.assign({}, data));
         return yield course.save();
-    });
-}
-exports.saveCourse = saveCourse;
+    }),
+    getAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
+        return yield courseModel_1.default.find().lean();
+    }),
+};

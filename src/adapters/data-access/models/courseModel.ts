@@ -37,6 +37,10 @@ const courseSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      isUnlisted: {
+        type: Boolean,
+        default: false,
+      },
   
   });
   

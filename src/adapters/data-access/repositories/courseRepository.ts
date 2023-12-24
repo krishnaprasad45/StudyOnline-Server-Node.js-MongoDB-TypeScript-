@@ -1,7 +1,14 @@
-import { addCourseInterface } from "../../../business/interfaces/courseInterface";
+import  CourseInterface  from "../../../business/interfaces/courseInterface";
 import courseModel from "../models/courseModel";
 
-export async function saveCourse(data:addCourseInterface) {
+export default{
+  saveCourse : async(data:CourseInterface)=> {
     const course = new courseModel({ ...data });
     return await course.save();
-  }
+  },
+  getAllCourses: async () => {
+    
+    return await courseModel.find().lean();
+  },
+
+}

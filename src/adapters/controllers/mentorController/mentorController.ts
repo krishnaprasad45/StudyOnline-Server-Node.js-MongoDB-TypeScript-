@@ -8,9 +8,8 @@ import { mentorProfile} from "../../../business/interfaces/mentorInterfaces";
 
 export const mentorSignup = async (req:Request,res:Response) => {
   try {
-    
-    const { firstname,lastname, email, mobile, password , confirm_password } = req.body;
-    const image = req.file?.filename;
+    console.log("bpdy",req.body)
+    const { firstname,lastname, email, mobile, password , confirm_password,image } = req.body;
     if( password != confirm_password){
       return res.status(400).json({ message: 'Password mismatch' });
     }
@@ -62,14 +61,14 @@ export const profile = async (req:Request,res:Response) => {
 
 export const profileUpdate = async (req:Request,res:Response) => {
   try {
+    console.log("by",req.body)
    
-    const { firstname,lastname, email, mobile ,password} = req.body;
+    const { firstname,lastname, email, mobile ,password,images} = req.body;
    
-    const images:any= req.files;
+   
     if(images){
-    const filenames = images.map((image: { filename: string; }) => image.filename);
 
-    const [image, aadhar_image, experience_image] = filenames;
+    const [image, aadhar_image, experience_image] = [...images];
     
   
     const mentorEmail = req.query.mentorEmail?.toString();

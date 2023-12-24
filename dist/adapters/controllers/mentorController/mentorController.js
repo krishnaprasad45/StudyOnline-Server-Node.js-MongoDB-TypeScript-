@@ -15,10 +15,9 @@ const loginMentor_1 = require("../../../business/usecases/mentorUseCases/loginMe
 const findMentor_1 = require("../../../business/usecases/mentorUseCases/findMentor");
 const updateMentor_1 = require("../../../business/usecases/mentorUseCases/updateMentor");
 const mentorSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     try {
-        const { firstname, lastname, email, mobile, password, confirm_password } = req.body;
-        const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
+        console.log("bpdy", req.body);
+        const { firstname, lastname, email, mobile, password, confirm_password, image } = req.body;
         if (password != confirm_password) {
             return res.status(400).json({ message: 'Password mismatch' });
         }
@@ -32,10 +31,10 @@ const mentorSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.mentorSignup = mentorSignup;
 const mentorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b, _c;
+    var _a, _b;
     try {
-        const email = (_b = req.query.email) === null || _b === void 0 ? void 0 : _b.toString();
-        const password = (_c = req.query.password) === null || _c === void 0 ? void 0 : _c.toString();
+        const email = (_a = req.query.email) === null || _a === void 0 ? void 0 : _a.toString();
+        const password = (_b = req.query.password) === null || _b === void 0 ? void 0 : _b.toString();
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
@@ -49,9 +48,9 @@ const mentorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.mentorLogin = mentorLogin;
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _d;
+    var _c;
     try {
-        const email = (_d = req.query.email) === null || _d === void 0 ? void 0 : _d.toString();
+        const email = (_c = req.query.email) === null || _c === void 0 ? void 0 : _c.toString();
         if (!email) {
             return res.status(400).json({ message: 'Something Error' });
         }
@@ -64,14 +63,13 @@ const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.profile = profile;
 const profileUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _e;
+    var _d;
     try {
-        const { firstname, lastname, email, mobile, password } = req.body;
-        const images = req.files;
+        console.log("by", req.body);
+        const { firstname, lastname, email, mobile, password, images } = req.body;
         if (images) {
-            const filenames = images.map((image) => image.filename);
-            const [image, aadhar_image, experience_image] = filenames;
-            const mentorEmail = (_e = req.query.mentorEmail) === null || _e === void 0 ? void 0 : _e.toString();
+            const [image, aadhar_image, experience_image] = [...images];
+            const mentorEmail = (_d = req.query.mentorEmail) === null || _d === void 0 ? void 0 : _d.toString();
             if (!mentorEmail) {
                 return res.status(400).json({ message: 'No email provided' });
             }

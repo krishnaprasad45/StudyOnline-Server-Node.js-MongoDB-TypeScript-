@@ -18,6 +18,17 @@ blockMentor: async (mentorId: string) => {
     throw new Error((error as Error).message);
   }
 },
+verifyMentor: async (mentorId: string, status:string) => {
+  try {
+    const mentor = await mentorModel.findById(mentorId);
+    if (mentor) {
+      mentor.verification = status;
+      return await mentor.save();
+    }
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+},
 
 }
 

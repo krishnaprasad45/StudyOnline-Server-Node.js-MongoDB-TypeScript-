@@ -42,6 +42,10 @@ const mentorSchema = new mongoose_1.default.Schema({
         type: Boolean,
         default: false,
     },
+    verification: {
+        type: String,
+        default: 'Pending'
+    }
 });
 const Mentor = mongoose_1.default.model("Mentor", mentorSchema);
 exports.default = Mentor;

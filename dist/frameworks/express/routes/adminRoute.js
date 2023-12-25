@@ -15,4 +15,5 @@ adminRoute.get("/getUsersList", jwtTokenAuth_1.verifyToken, adminUserController_
 adminRoute.get("/getMentorsList", jwtTokenAuth_1.verifyToken, adminMentorController_1.default.getMentorsList);
 adminRoute.patch("/block/user", jwtTokenAuth_1.verifyToken, adminUserController_1.default.blockUser);
 adminRoute.post("/block/mentor", jwtTokenAuth_1.verifyToken, adminMentorController_1.default.blockMentor);
+adminRoute.post("/mentor-verify", jwtTokenAuth_1.verifyToken, adminMentorController_1.default.verifyMentor);
 exports.default = adminRoute;

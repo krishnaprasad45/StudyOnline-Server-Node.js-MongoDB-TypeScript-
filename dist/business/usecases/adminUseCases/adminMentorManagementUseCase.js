@@ -31,4 +31,16 @@ exports.default = {
             throw new Error(error.message);
         }
     }),
+    verifyMentor: (mentorId, status) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const mentor = yield mentorModel_1.default.findById(mentorId);
+            if (mentor) {
+                mentor.verification = status;
+                return yield mentor.save();
+            }
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }),
 };

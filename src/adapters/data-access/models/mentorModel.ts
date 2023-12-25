@@ -38,6 +38,10 @@ const mentorSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  verification:{
+    type:String,
+    default:'Pending'
+  }
  
 });
 

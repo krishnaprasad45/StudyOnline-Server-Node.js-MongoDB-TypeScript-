@@ -15,5 +15,6 @@ adminRoute.get("/getUsersList", verifyToken, adminUserController.getUsersList);
 adminRoute.get("/getMentorsList", verifyToken, adminMentorController.getMentorsList);
 adminRoute.patch("/block/user", verifyToken, adminUserController.blockUser);
 adminRoute.post("/block/mentor", verifyToken, adminMentorController.blockMentor);
+adminRoute.post("/mentor-verify", verifyToken, adminMentorController.verifyMentor);
 
 export default adminRoute;

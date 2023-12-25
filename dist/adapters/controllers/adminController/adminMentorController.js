@@ -32,4 +32,14 @@ exports.default = {
             res.status(500).json({ error: error.message });
         }
     }),
+    verifyMentor: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const mentorId = req.query.id;
+            const status = req.query.status;
+            res.json(yield adminMentorManagementUseCase_1.default.verifyMentor(mentorId, status));
+        }
+        catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    }),
 };

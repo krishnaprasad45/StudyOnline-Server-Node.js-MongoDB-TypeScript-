@@ -19,6 +19,7 @@ export interface mentorProfile {
     aadhar_image:string,
     experience_image:string,
     password:string,
+    verification?:string
    
 }
 

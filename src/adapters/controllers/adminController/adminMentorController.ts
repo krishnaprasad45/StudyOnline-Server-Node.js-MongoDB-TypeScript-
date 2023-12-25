@@ -19,6 +19,15 @@ export default{
         res.status(500).json({ error: (error as Error).message })
     }
 },
+  verifyMentor: async (req: Request, res: Response) => {
+    try {
+        const mentorId = req.query.id as string;
+        const status = req.query.status as string;
+        res.json(await adminMentorManagementUseCase.verifyMentor(mentorId,status))
+    } catch (error) {
+        res.status(500).json({ error: (error as Error).message })
+    }
+},
 }
 
   

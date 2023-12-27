@@ -11,7 +11,7 @@ const jwtTokenAuth_1 = require("../middlewares/jwtTokenAuth");
 const userSigninController_1 = __importDefault(require("../../../adapters/controllers/userController/userSigninController"));
 const userCourseController_1 = __importDefault(require("../../../adapters/controllers/userController/userCourseController"));
 const userRoute = express_1.default.Router();
-userRoute.post("/register", multer_1.upload.single("image"), userController_1.userSignup);
+userRoute.post("/signup", multer_1.upload.single("image"), userController_1.userSignup);
 userRoute.get("/login", userController_1.userLogin);
 userRoute.get("/profile", jwtTokenAuth_1.verifyToken, userController_1.profile);
 userRoute.post("/profile/update", multer_1.upload.single("image"), jwtTokenAuth_1.verifyToken, userController_1.profileUpdate);

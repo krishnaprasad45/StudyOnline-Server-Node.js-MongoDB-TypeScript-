@@ -15,10 +15,8 @@ const loginUser_1 = require("../../../business/usecases/userUseCases/loginUser")
 const findUser_1 = require("../../../business/usecases/userUseCases/findUser");
 const updateUser_1 = require("../../../business/usecases/userUseCases/updateUser");
 const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     try {
-        const { firstname, lastname, email, mobile, password, confirm_password } = req.body;
-        const image = (_a = req.file) === null || _a === void 0 ? void 0 : _a.filename;
+        const { firstname, lastname, email, mobile, password, confirm_password, image } = req.body;
         if (password != confirm_password) {
             return res.status(400).json({ message: 'Password mismatch' });
         }
@@ -32,10 +30,10 @@ const userSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.userSignup = userSignup;
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b, _c;
+    var _a, _b;
     try {
-        const email = (_b = req.query.email) === null || _b === void 0 ? void 0 : _b.toString();
-        const password = (_c = req.query.password) === null || _c === void 0 ? void 0 : _c.toString();
+        const email = (_a = req.query.email) === null || _a === void 0 ? void 0 : _a.toString();
+        const password = (_b = req.query.password) === null || _b === void 0 ? void 0 : _b.toString();
         if (!email || !password) {
             return res.status(400).json({ message: 'Email and password are required.' });
         }
@@ -49,9 +47,9 @@ const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.userLogin = userLogin;
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _d;
+    var _c;
     try {
-        const email = (_d = req.query.email) === null || _d === void 0 ? void 0 : _d.toString();
+        const email = (_c = req.query.email) === null || _c === void 0 ? void 0 : _c.toString();
         if (!email) {
             return res.status(400).json({ message: 'Something Error' });
         }
@@ -64,11 +62,11 @@ const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.profile = profile;
 const profileUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _e, _f;
+    var _d, _e;
     try {
         const { firstname, lastname, email, mobile } = req.body;
-        const image = (_e = req.file) === null || _e === void 0 ? void 0 : _e.filename;
-        const oldEmail = (_f = req.query.userEmail) === null || _f === void 0 ? void 0 : _f.toString();
+        const image = (_d = req.file) === null || _d === void 0 ? void 0 : _d.filename;
+        const oldEmail = (_e = req.query.userEmail) === null || _e === void 0 ? void 0 : _e.toString();
         if (!oldEmail) {
             return res.status(400).json({ message: 'No email provided' });
         }

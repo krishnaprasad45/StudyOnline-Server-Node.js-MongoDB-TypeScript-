@@ -69,12 +69,13 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
   try {
 
     const requestedRoute = req.path;
+    console.log("Path",requestedRoute)
    
     const publicRoutes = [
       /**********  User **********/
       "/",
       "/login",
-      "/register",
+      "/signup",
       "/google/signin",
       /**********  Mentor **********/
       "/mentor/home",
@@ -82,7 +83,7 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
       "/mentor/register",
       "/mentor/login",
       /**********  Admin **********/
-      "/admin/dashboard",
+      // "/admin/dashboard",
       "/admin/login",
      
     ];

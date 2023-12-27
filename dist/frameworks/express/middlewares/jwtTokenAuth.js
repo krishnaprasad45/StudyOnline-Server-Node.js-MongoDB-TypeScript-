@@ -84,11 +84,12 @@ exports.verifyToken = verifyToken;
 function validateRole(req, res, next) {
     try {
         const requestedRoute = req.path;
+        console.log("Path", requestedRoute);
         const publicRoutes = [
             /**********  User **********/
             "/",
             "/login",
-            "/register",
+            "/signup",
             "/google/signin",
             /**********  Mentor **********/
             "/mentor/home",
@@ -96,7 +97,7 @@ function validateRole(req, res, next) {
             "/mentor/register",
             "/mentor/login",
             /**********  Admin **********/
-            "/admin/dashboard",
+            // "/admin/dashboard",
             "/admin/login",
         ];
         if (publicRoutes.includes(requestedRoute)) {

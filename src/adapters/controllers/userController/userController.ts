@@ -9,8 +9,7 @@ import { Request, Response } from 'express';
 
 export const userSignup = async (req:Request,res:Response) => {
   try {
-    const { firstname,lastname, email, mobile, password , confirm_password } = req.body;
-    const image = req.file?.filename; 
+    const { firstname,lastname, email, mobile, password , confirm_password ,image} = req.body;
     if( password != confirm_password){
       return res.status(400).json({ message: 'Password mismatch' });
     }

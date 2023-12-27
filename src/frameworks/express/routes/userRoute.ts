@@ -8,7 +8,7 @@ import signIn from "../../../adapters/controllers/userController/userSigninContr
 import userCourseController from "../../../adapters/controllers/userController/userCourseController";
 const userRoute = express.Router();
 
-userRoute.post("/register", upload.single("image"), userSignup);
+userRoute.post("/signup", upload.single("image"), userSignup);
 userRoute.get("/login", userLogin);
 userRoute.get("/profile", verifyToken, profile);
 userRoute.post("/profile/update", upload.single("image"), verifyToken, profileUpdate);

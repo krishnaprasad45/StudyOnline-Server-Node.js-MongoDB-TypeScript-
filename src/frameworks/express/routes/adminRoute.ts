@@ -3,9 +3,9 @@
 import express from "express";
 import { upload } from "../middlewares/multer";
 import { loginAdmin } from "../../../adapters/controllers/adminController/adminController";
-import { verifyToken } from "../middlewares/jwtTokenAuth";
 import  adminUserController  from "../../../adapters/controllers/adminController/adminUserController";
 import adminMentorController from "../../../adapters/controllers/adminController/adminMentorController";
+import { verifyToken } from "../middlewares/jwtTokenAuth";
 
 
 const adminRoute = express.Router();

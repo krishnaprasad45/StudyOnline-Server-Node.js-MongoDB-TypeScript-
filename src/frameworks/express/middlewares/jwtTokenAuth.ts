@@ -40,11 +40,13 @@ interface CustomHeaders extends Record<string, string | string[] | undefined> {
 }
 
 export async function verifyToken(
+
   req: Request<{}, {}, {}, CustomHeaders>,
   res: Response,
   next: NextFunction
 ) {
   try {
+   
     const authHeader = req.headers.authorization;
 
     const token = authHeader && authHeader.split(" ")[1];
@@ -65,6 +67,7 @@ export async function verifyToken(
 
 export function validateRole(req: Request, res: Response, next: NextFunction) {
   try {
+
     const requestedRoute = req.path;
    
     const publicRoutes = [

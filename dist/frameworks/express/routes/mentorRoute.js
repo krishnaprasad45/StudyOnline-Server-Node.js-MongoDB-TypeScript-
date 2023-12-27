@@ -13,8 +13,7 @@ const mentorRoute = express_1.default.Router();
 mentorRoute.post("/register", multer_1.upload.single("image"), mentorController_1.mentorSignup);
 mentorRoute.get("/login", mentorController_1.mentorLogin);
 mentorRoute.get("/profile", jwtTokenAuth_1.verifyToken, mentorController_1.profile);
-mentorRoute.patch("/profile-update", multer_1.upload.array("images[]", 3), jwtTokenAuth_1.verifyToken, mentorController_1.profileUpdate);
-// COURSE
-mentorRoute.post("/add-course", multer_1.upload.array("images[]", 2), jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.addCourse);
-mentorRoute.get("/list-allcourses", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getCourseList);
+mentorRoute.patch("/profile/update", multer_1.upload.array("images[]", 3), jwtTokenAuth_1.verifyToken, mentorController_1.profileUpdate);
+mentorRoute.post("/add/course", multer_1.upload.array("images[]", 2), jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.addCourse);
+mentorRoute.get("/courses", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getCourseList);
 exports.default = mentorRoute;

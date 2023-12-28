@@ -16,7 +16,6 @@ const findMentor_1 = require("../../../business/usecases/mentorUseCases/findMent
 const updateMentor_1 = require("../../../business/usecases/mentorUseCases/updateMentor");
 const mentorSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log("bpdy", req.body);
         const { firstname, lastname, email, mobile, password, confirm_password, image } = req.body;
         if (password != confirm_password) {
             return res.status(400).json({ message: 'Password mismatch' });
@@ -65,7 +64,6 @@ exports.profile = profile;
 const profileUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _d;
     try {
-        console.log("by", req.body);
         const { firstname, lastname, email, mobile, password, images } = req.body;
         if (images) {
             const [image, aadhar_image, experience_image] = [...images];

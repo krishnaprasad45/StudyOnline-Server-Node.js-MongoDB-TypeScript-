@@ -69,7 +69,7 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
   try {
 
     const requestedRoute = req.path;
-    console.log("Path",requestedRoute)
+
    
     const publicRoutes = [
       /**********  User **********/

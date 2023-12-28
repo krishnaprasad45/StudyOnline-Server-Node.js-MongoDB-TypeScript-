@@ -8,13 +8,15 @@ import mentorRoute from "../frameworks/express/routes/mentorRoute";
 import adminRoute from "../frameworks/express/routes/adminRoute";
 import {validateRole} from "../frameworks/express/middlewares/jwtTokenAuth"
 const debug = require("debug")("myapp:server");
+import dotenv from "dotenv";
+
 
 const app = express();
 const port = 5000;
 
 
 connectDB();
-
+dotenv.config()
 // Middleware
 app.use(cors());
 app.use(cookieParser());

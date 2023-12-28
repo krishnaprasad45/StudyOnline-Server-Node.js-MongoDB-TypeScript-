@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const courseManagementUsecases_1 = __importDefault(require("../../../business/usecases/courseUseCases/courseManagementUsecases"));
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 exports.default = {
     getCourseList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
@@ -22,5 +24,21 @@ exports.default = {
         catch (error) {
             console.log(error);
         }
-    })
+    }),
+    payments: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        console.log("Payments");
+        const { amount } = req.body;
+        const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+        try {
+            const intent = yield stripe.paymentIntents.create({
+                amount: amount,
+                currency: "inr",
+                automatic_payment_methods: { enabled: true },
+            });
+            res.json({ client_secret: intent.client_secret });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
 };

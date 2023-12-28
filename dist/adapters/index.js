@@ -12,9 +12,11 @@ const mentorRoute_1 = __importDefault(require("../frameworks/express/routes/ment
 const adminRoute_1 = __importDefault(require("../frameworks/express/routes/adminRoute"));
 const jwtTokenAuth_1 = require("../frameworks/express/middlewares/jwtTokenAuth");
 const debug = require("debug")("myapp:server");
+const dotenv_1 = __importDefault(require("dotenv"));
 const app = (0, express_1.default)();
 const port = 5000;
 (0, mongo_1.default)();
+dotenv_1.default.config();
 // Middleware
 app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());

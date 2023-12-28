@@ -84,7 +84,6 @@ exports.verifyToken = verifyToken;
 function validateRole(req, res, next) {
     try {
         const requestedRoute = req.path;
-        console.log("Path", requestedRoute);
         const publicRoutes = [
             /**********  User **********/
             "/",

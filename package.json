@@ -5,6 +5,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@types/stripe": "^8.0.417",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
@@ -15,7 +16,8 @@
     "moment": "^2.29.4",
     "mongoose": "^7.5.2",
     "multer": "^1.4.5-lts.1",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "stripe": "^14.10.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",

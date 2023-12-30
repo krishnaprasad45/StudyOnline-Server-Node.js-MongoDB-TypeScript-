@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -40,10 +49,19 @@ app.use((0, cors_1.default)({
 }));
 const httpServer = (0, http_1.createServer)(app);
 // Assuming you have an HTTP server instance
+// const io = new Server(httpServer, {
+//   cors: {
+//     origin: 'http://localhost:5173',
+//   },
+// });
 const io = new socket_io_1.Server(httpServer, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: `http://localhost:5173`,
+        methods: ["GET", "POST"],
+        credentials: true,
     },
+    transports: ["websocket", "polling"],
+    allowEIO3: true,
 });
 // Role Based Authentication
 app.use(jwtTokenAuth_1.validateRole);
@@ -52,20 +70,26 @@ app.use("/", userRoute_1.default);
 app.use("/mentor", mentorRoute_1.default);
 app.use("/admin", adminRoute_1.default);
 //Add this before the app.get() block
-io.on("connection", (socket) => {
-    console.log(`⚡: ${socket.id} user just connected!`);
-    // Listens and logs the message to the console
-    socket.on("message", (data) => {
-        io.emit("messageResponse", data);
+// io.on("connection", (socket: Socket) => {
+//   console.log(`⚡: ${socket.id} user just connected!`);
+//   // Listens and logs the message to the console
+//   socket.on("message", (data: any) => {
+//     io.emit("messageResponse", data);
+//     console.log(data);
+//   });
+//   socket.on("disconnect", () => {
+//     console.log("🔥: A user disconnected");
+//   });
+// });
+io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("conected");
+    socket.on("test", (data) => {
         console.log(data);
     });
-    socket.on("disconnect", () => {
-        console.log("🔥: A user disconnected");
-    });
-});
+}));
 app.get("/", (req, res) => {
     res.send().status(200);
 });
-app.listen(port, () => {
+httpServer.listen(port, () => {
     debug(`Server is running on http://localhost:${port}`);
 });

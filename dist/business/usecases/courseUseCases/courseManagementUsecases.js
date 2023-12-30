@@ -49,4 +49,25 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
+    savePaymentDetails: (_b) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_b, []);
+        try {
+            yield courseRepository_1.default.savePayment(Object.assign({}, data));
+        }
+        catch (error) {
+            console.log(error);
+            // Assuming you want to return something in case of an error
+            throw new Error("Error fetching courses");
+        }
+    }),
+    getHistory: (id) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const historyData = yield courseRepository_1.default.getAllHistory(id);
+            return historyData;
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error("Error fetching courses");
+        }
+    }),
 };

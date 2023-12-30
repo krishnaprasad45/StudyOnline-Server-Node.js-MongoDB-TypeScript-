@@ -18,4 +18,5 @@ userRoute.post("/profile/update", multer_1.upload.single("image"), jwtTokenAuth_
 userRoute.post("/google/signin", userSigninController_1.default.googleSignin);
 userRoute.get("/courses", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getCourseList);
 userRoute.post("/payments", jwtTokenAuth_1.verifyToken, userCourseController_1.default.payments);
+userRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
 exports.default = userRoute;

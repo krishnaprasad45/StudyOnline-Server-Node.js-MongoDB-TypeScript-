@@ -1,6 +1,7 @@
 import courseRepository from "../../../adapters/data-access/repositories/courseRepository";
 import { formatDate } from "../../../adapters/external services/moment";
-import CourseInterface  from "../../interfaces/courseInterface";
+import CourseInterface from "../../interfaces/courseInterface";
+import PaymentDetails from "../../interfaces/paymentDetails";
 
 export default {
   createCourse: async ({ ...data }: CourseInterface) => {
@@ -15,13 +16,34 @@ export default {
     }
   },
   getCoursesList: async (): Promise<CourseInterface[]> => {
-    
     try {
-      const coursesData: CourseInterface[] = await courseRepository.getAllCourses();
+      const coursesData: CourseInterface[] =
+        await courseRepository.getAllCourses();
       return coursesData;
     } catch (error) {
       console.log(error);
       // Assuming you want to return something in case of an error
+      throw new Error("Error fetching courses");
+    }
+  },
+  savePaymentDetails: async ({ ...data }:PaymentDetails) => {
+    try {
+      await courseRepository.savePayment({
+        ...data
+      });
+    } catch (error) {
+      console.log(error);
+      // Assuming you want to return something in case of an error
+      throw new Error("Error fetching courses");
+    }
+  },
+  getHistory: async (id:string): Promise<PaymentDetails[]> => {
+    try {
+      const historyData: PaymentDetails[] =
+      await courseRepository.getAllHistory(id);
+      return historyData;
+    } catch (error) {
+      console.log(error);
       throw new Error("Error fetching courses");
     }
   },

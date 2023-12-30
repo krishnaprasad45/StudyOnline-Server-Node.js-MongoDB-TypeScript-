@@ -26,16 +26,37 @@ exports.default = {
         }
     }),
     payments: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("Payments");
-        const { amount } = req.body;
+        const paymentDetails = {
+            courseAmount: req.body.amount,
+            courseTitle: req.body.courseTitle,
+            usedEmail: req.body.token.email,
+            type: req.body.token.type,
+            transactionId: req.body.token.created,
+            cardType: req.body.token.card.brand,
+        };
         const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
         try {
             const intent = yield stripe.paymentIntents.create({
-                amount: amount,
+                amount: paymentDetails.courseAmount,
                 currency: "inr",
                 automatic_payment_methods: { enabled: true },
             });
+            yield courseManagementUsecases_1.default.savePaymentDetails(Object.assign({}, paymentDetails));
             res.json({ client_secret: intent.client_secret });
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    getPaymentHistory: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const id = req.query.id;
+            // console.log("**id**",id)
+            if (id) {
+                const historyData = yield courseManagementUsecases_1.default.getHistory(id);
+                // console.log("his..",historyData)
+                res.json(historyData);
+            }
         }
         catch (error) {
             console.log(error);

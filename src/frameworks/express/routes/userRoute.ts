@@ -15,5 +15,6 @@ userRoute.post("/profile/update", upload.single("image"), verifyToken, profileUp
 userRoute.post("/google/signin", signIn.googleSignin)
 userRoute.get("/courses", verifyToken,userCourseController.getCourseList );
 userRoute.post("/payments", verifyToken,userCourseController.payments );
+userRoute.get("/payments/history", verifyToken,userCourseController.getPaymentHistory );
 
 export default userRoute;

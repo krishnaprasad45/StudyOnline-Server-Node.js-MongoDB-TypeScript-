@@ -13,12 +13,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const courseModel_1 = __importDefault(require("../models/courseModel"));
+const paymentModel_1 = __importDefault(require("../models/paymentModel"));
 exports.default = {
     saveCourse: (data) => __awaiter(void 0, void 0, void 0, function* () {
         const course = new courseModel_1.default(Object.assign({}, data));
         return yield course.save();
     }),
+    savePayment: (data) => __awaiter(void 0, void 0, void 0, function* () {
+        const payment = new paymentModel_1.default(Object.assign({}, data));
+        return yield payment.save();
+    }),
     getAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.find().lean();
+    }),
+    getAllHistory: (id) => __awaiter(void 0, void 0, void 0, function* () {
+        // console.log("queryid",id)
+        return yield paymentModel_1.default.find({ _id: id }).lean();
     }),
 };

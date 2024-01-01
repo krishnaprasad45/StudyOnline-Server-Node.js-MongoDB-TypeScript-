@@ -60,9 +60,9 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
-    getHistory: (id) => __awaiter(void 0, void 0, void 0, function* () {
+    getHistory: (email) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const historyData = yield courseRepository_1.default.getAllHistory(id);
+            const historyData = yield courseRepository_1.default.getAllHistory(email);
             return historyData;
         }
         catch (error) {

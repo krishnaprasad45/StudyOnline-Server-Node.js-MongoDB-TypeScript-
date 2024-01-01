@@ -26,9 +26,11 @@ exports.default = {
         }
     }),
     payments: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        console.log("body-mentor--", req.body.createdBy);
         const paymentDetails = {
             courseAmount: req.body.amount,
             courseTitle: req.body.courseTitle,
+            createdBy: req.body.createdBy,
             usedEmail: req.body.token.email,
             type: req.body.token.type,
             transactionId: req.body.token.created,
@@ -50,11 +52,11 @@ exports.default = {
     }),
     getPaymentHistory: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const id = req.query.id;
-            // console.log("**id**",id)
-            if (id) {
-                const historyData = yield courseManagementUsecases_1.default.getHistory(id);
-                // console.log("his..",historyData)
+            const email = req.query.email;
+            console.log("**email**", email);
+            if (email) {
+                const historyData = yield courseManagementUsecases_1.default.getHistory(email);
+                console.log("his..", historyData);
                 res.json(historyData);
             }
         }

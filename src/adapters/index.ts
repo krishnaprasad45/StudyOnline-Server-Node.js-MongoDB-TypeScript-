@@ -40,12 +40,6 @@ app.use(
 
 const httpServer = createServer(app);
 
-// Assuming you have an HTTP server instance
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: 'http://localhost:5173',
-//   },
-// });
 const io = new Server(httpServer, {
   cors: {
     origin: `http://localhost:5173`,
@@ -63,25 +57,20 @@ app.use("/", userRoute);
 app.use("/mentor", mentorRoute);
 app.use("/admin", adminRoute);
 
-//Add this before the app.get() block
-// io.on("connection", (socket: Socket) => {
-//   console.log(`⚡: ${socket.id} user just connected!`);
-
-//   // Listens and logs the message to the console
-//   socket.on("message", (data: any) => {
-//     io.emit("messageResponse", data);
-//     console.log(data);
-//   });
-
-//   socket.on("disconnect", () => {
-//     console.log("🔥: A user disconnected");
-//   });
-// });
 
 io.on("connection", async (socket: Socket) => {
-  console.log("conected");
+
   socket.on("test", (data: string) => {
     console.log(data);
+  });
+});
+io.on("connection", async (socket: Socket) => {
+  
+  socket.on("SentMessage", (data: {message:string,to:string}) => {
+    // console.log(data.text);
+    // console.log(data.name);
+    io.to(data.to).emit('ReceiveMessage',{from:data.to})
+
   });
 });
 

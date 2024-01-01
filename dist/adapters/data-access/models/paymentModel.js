@@ -11,6 +11,9 @@ const paymentSchema = new mongoose_1.default.Schema({
     courseTitle: {
         type: String,
     },
+    createdBy: {
+        type: String,
+    },
     usedEmail: {
         type: String,
     },

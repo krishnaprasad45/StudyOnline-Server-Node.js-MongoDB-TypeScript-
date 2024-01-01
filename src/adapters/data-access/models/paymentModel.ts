@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
-import { ObjectId } from 'mongoose';
 
 const paymentSchema = new mongoose.Schema({
   courseAmount: {
     type: Number,
   },
   courseTitle: {
+    type: String,
+  },
+  createdBy:{
     type: String,
   },
   usedEmail: {

@@ -16,9 +16,11 @@ export default {
   },
 
   payments: async (req: Request, res: Response) => {
+    console.log("body-mentor--",req.body.createdBy)
     const paymentDetails: PaymentDetails = {
       courseAmount: req.body.amount,
       courseTitle: req.body.courseTitle,
+      createdBy:req.body.createdBy,
       usedEmail: req.body.token.email,
       type: req.body.token.type,
       transactionId: req.body.token.created,
@@ -36,6 +38,7 @@ export default {
       await courseManagementUsecases.savePaymentDetails({
         ...paymentDetails,
       });
+      
 
       res.json({ client_secret: intent.client_secret });
     } catch (error) {
@@ -44,11 +47,11 @@ export default {
   },
   getPaymentHistory: async (req: Request, res: Response) => {
     try {
-      const id = req.query.id as string | undefined;
-      // console.log("**id**",id)
-      if (id) {
-        const historyData = await courseManagementUsecases.getHistory(id);
-        // console.log("his..",historyData)
+      const email = req.query.email as string | undefined;
+      console.log("**email**",email)
+      if (email) {
+        const historyData = await courseManagementUsecases.getHistory(email);
+        console.log("his..",historyData)
         res.json(historyData);
       }
     } catch (error) {

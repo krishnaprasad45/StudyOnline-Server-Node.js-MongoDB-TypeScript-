@@ -37,10 +37,10 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
-  getHistory: async (id:string): Promise<PaymentDetails[]> => {
+  getHistory: async (email:string): Promise<PaymentDetails[]> => {
     try {
       const historyData: PaymentDetails[] =
-      await courseRepository.getAllHistory(id);
+      await courseRepository.getAllHistory(email);
       return historyData;
     } catch (error) {
       console.log(error);

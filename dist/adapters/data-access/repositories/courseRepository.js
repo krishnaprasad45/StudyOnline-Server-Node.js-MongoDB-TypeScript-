@@ -26,8 +26,7 @@ exports.default = {
     getAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.find().lean();
     }),
-    getAllHistory: (id) => __awaiter(void 0, void 0, void 0, function* () {
-        // console.log("queryid",id)
-        return yield paymentModel_1.default.find({ _id: id }).lean();
+    getAllHistory: (email) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield paymentModel_1.default.find({ usedEmail: email }).lean();
     }),
 };

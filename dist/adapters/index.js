@@ -48,12 +48,6 @@ app.use((0, cors_1.default)({
     credentials: true,
 }));
 const httpServer = (0, http_1.createServer)(app);
-// Assuming you have an HTTP server instance
-// const io = new Server(httpServer, {
-//   cors: {
-//     origin: 'http://localhost:5173',
-//   },
-// });
 const io = new socket_io_1.Server(httpServer, {
     cors: {
         origin: `http://localhost:5173`,
@@ -69,22 +63,16 @@ app.use(jwtTokenAuth_1.validateRole);
 app.use("/", userRoute_1.default);
 app.use("/mentor", mentorRoute_1.default);
 app.use("/admin", adminRoute_1.default);
-//Add this before the app.get() block
-// io.on("connection", (socket: Socket) => {
-//   console.log(`⚡: ${socket.id} user just connected!`);
-//   // Listens and logs the message to the console
-//   socket.on("message", (data: any) => {
-//     io.emit("messageResponse", data);
-//     console.log(data);
-//   });
-//   socket.on("disconnect", () => {
-//     console.log("🔥: A user disconnected");
-//   });
-// });
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("conected");
     socket.on("test", (data) => {
         console.log(data);
+    });
+}));
+io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
+    socket.on("SentMessage", (data) => {
+        // console.log(data.text);
+        // console.log(data.name);
+        io.to(data.to).emit('ReceiveMessage', { from: data.to });
     });
 }));
 app.get("/", (req, res) => {

@@ -2,7 +2,8 @@ import courseManagementUsecases from "../../../business/usecases/courseUseCases/
 import { Request, Response, Express } from "express";
 import dotenv from "dotenv";
 import Stripe from "stripe";
-import PaymentDetails from "../../../business/interfaces/paymentDetails";
+import PaymentDetails from '../../../business/interfaces/paymentDetails';
+import updateUser  from "../../../business/usecases/userUseCases/updateUser";
 dotenv.config();
 
 export default {
@@ -28,7 +29,7 @@ export default {
     };
 
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
+   
     try {
       const intent = await stripe.paymentIntents.create({
         amount: paymentDetails.courseAmount,
@@ -38,6 +39,9 @@ export default {
       await courseManagementUsecases.savePaymentDetails({
         ...paymentDetails,
       });
+      await updateUser.updateMentorName(
+        paymentDetails.createdBy,paymentDetails.usedEmail
+      );
       
 
       res.json({ client_secret: intent.client_secret });

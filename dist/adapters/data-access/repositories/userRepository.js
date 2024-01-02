@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOne = exports.updateOne = exports.findUserByEmail = exports.saveUser = void 0;
+exports.deleteOne = exports.updateMentor = exports.updateOne = exports.findUserByEmail = exports.saveUser = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
 function saveUser(data) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,6 +43,17 @@ function updateOne(data) {
     });
 }
 exports.updateOne = updateOne;
+function updateMentor(email, mentorName) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const userData = yield userModel_1.default.findOneAndUpdate({ email: email }, {
+            $set: {
+                mentorIncharge: mentorName
+            },
+        }, { new: true });
+        return userData;
+    });
+}
+exports.updateMentor = updateMentor;
 function deleteOne(_id) {
     return __awaiter(this, void 0, void 0, function* () {
         const response = yield userModel_1.default.findByIdAndDelete(_id);
@@ -55,4 +66,4 @@ function deleteOne(_id) {
     });
 }
 exports.deleteOne = deleteOne;
-module.exports = { saveUser, findUserByEmail, updateOne, deleteOne };
+module.exports = { saveUser, findUserByEmail, updateOne, deleteOne, updateMentor };

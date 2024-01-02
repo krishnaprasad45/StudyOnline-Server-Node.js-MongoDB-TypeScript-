@@ -1,11 +1,11 @@
-import { userSignupInterface } from '../../../business/interfaces/userInterfaces';
+import { userProfileInterface, userSignupInterface } from '../../../business/interfaces/userInterfaces';
 import { profileUpdateInterface } from '../../../business/interfaces/userInterfaces';
 import { createUser } from '../../../business/usecases/userUseCases/createUser';
 import { loginUser } from '../../../business/usecases/userUseCases/loginUser';
 import { findUser } from '../../../business/usecases/userUseCases/findUser';
-import { updateUser } from '../../../business/usecases/userUseCases/updateUser';
 
 import { Request, Response } from 'express'; 
+import { updateUser } from '../../../business/usecases/userUseCases/updateUser';
 
 export const userSignup = async (req:Request,res:Response) => {
   try {
@@ -63,7 +63,7 @@ export const profileUpdate = async (req:Request,res:Response) => {
     if (!oldEmail) {
       return res.status(400).json({ message: 'No email provided' });
     }
-    const userData = await updateUser({firstname,lastname, email, mobile, image,oldEmail} as profileUpdateInterface);
+    const userData = await updateUser({firstname,lastname, email, mobile, image,oldEmail} as userProfileInterface);
     res.json(userData);
   } catch (error) {
     console.log(error);

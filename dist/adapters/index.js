@@ -70,9 +70,12 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => {
-        // console.log(data.text);
-        // console.log(data.name);
-        io.to(data.to).emit('ReceiveMessage', { from: data.to });
+        console.log(data.from);
+        console.log(data.message);
+        console.log(data.to);
+        console.log(data.id);
+        // io.to(data.to).emit('ReceiveMessage',{from:data.to})
+        io.emit('SentMessage', data);
     });
 }));
 app.get("/", (req, res) => {

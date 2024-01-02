@@ -66,10 +66,13 @@ io.on("connection", async (socket: Socket) => {
 });
 io.on("connection", async (socket: Socket) => {
   
-  socket.on("SentMessage", (data: {message:string,to:string}) => {
-    // console.log(data.text);
-    // console.log(data.name);
-    io.to(data.to).emit('ReceiveMessage',{from:data.to})
+  socket.on("SentMessage", (data: {message:string,to:string,from:string,id:number}) => {
+    console.log(data.from);
+    console.log(data.message);
+    console.log(data.to);
+    console.log(data.id);
+    // io.to(data.to).emit('ReceiveMessage',{from:data.to})
+    io.emit('SentMessage',data)
 
   });
 });

@@ -26,6 +26,10 @@ const userSchema = new mongoose_1.default.Schema({
     date: {
         type: String,
     },
+    mentorIncharge: {
+        type: String,
+        default: 'not assigned'
+    },
     isBlock: {
         type: Boolean,
         default: false,

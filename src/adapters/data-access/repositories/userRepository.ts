@@ -36,6 +36,18 @@ export async function updateOne(data: userProfileInterface) {
   );
   return userData;
 }
+export async function updateMentor(email:string,mentorName:string) {
+  const userData = await userModel.findOneAndUpdate(
+    { email: email },
+    {
+      $set: {
+        mentorIncharge:mentorName
+      },
+    },
+    { new: true }
+  );
+  return userData;
+}
 
 export async function deleteOne(_id: string) {
   const response = await userModel.findByIdAndDelete(_id);
@@ -46,4 +58,4 @@ export async function deleteOne(_id: string) {
   }
 }
 
-module.exports = { saveUser, findUserByEmail, updateOne, deleteOne };
+module.exports = { saveUser, findUserByEmail, updateOne, deleteOne ,updateMentor};

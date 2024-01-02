@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const courseManagementUsecases_1 = __importDefault(require("../../../business/usecases/courseUseCases/courseManagementUsecases"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const updateUser_1 = __importDefault(require("../../../business/usecases/userUseCases/updateUser"));
 dotenv_1.default.config();
 exports.default = {
     getCourseList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -44,6 +45,7 @@ exports.default = {
                 automatic_payment_methods: { enabled: true },
             });
             yield courseManagementUsecases_1.default.savePaymentDetails(Object.assign({}, paymentDetails));
+            yield updateUser_1.default.updateMentorName(paymentDetails.createdBy, paymentDetails.usedEmail);
             res.json({ client_secret: intent.client_secret });
         }
         catch (error) {

@@ -9,27 +9,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = void 0;
+exports.updateMentorName = exports.updateUser = void 0;
 const userRepository_1 = require("../../../adapters/data-access/repositories/userRepository");
 ;
-function updateUser({ firstname, lastname, email, mobile, image, oldEmail }) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            if (oldEmail) {
-                const existingUser = yield (0, userRepository_1.findUserByEmail)(oldEmail);
-                if (existingUser) {
-                    const userData = yield (0, userRepository_1.updateOne)({ firstname, lastname, email, mobile, image, oldEmail });
-                    return userData;
-                }
-            }
-            else {
-                throw new Error("Email is undefined");
+const updateUser = ({ firstname, lastname, email, mobile, image, oldEmail }) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (oldEmail) {
+            const existingUser = yield (0, userRepository_1.findUserByEmail)(oldEmail);
+            if (existingUser) {
+                const userData = yield (0, userRepository_1.updateOne)({ firstname, lastname, email, mobile, image, oldEmail });
+                return userData;
             }
         }
-        catch (error) {
-            throw new Error("User not found");
+        else {
+            throw new Error("Email is undefined");
         }
-    });
-}
+    }
+    catch (error) {
+        throw new Error("User not found");
+    }
+});
 exports.updateUser = updateUser;
-module.exports = { updateUser };
+const updateMentorName = (mentorName, email) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        if (email) {
+            const existingUser = yield (0, userRepository_1.findUserByEmail)(email);
+            if (existingUser) {
+                const userData = yield (0, userRepository_1.updateMentor)(email, mentorName);
+                return userData;
+            }
+        }
+        else {
+            throw new Error("Email is undefined");
+        }
+    }
+    catch (error) {
+        throw new Error("User not found");
+    }
+});
+exports.updateMentorName = updateMentorName;

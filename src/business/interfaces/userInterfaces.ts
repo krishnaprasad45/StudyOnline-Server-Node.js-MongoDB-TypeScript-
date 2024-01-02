@@ -28,7 +28,8 @@ export interface userProfileInterface {
     password?:string,
     image?:string,
     oldEmail?:string,
-    isBlock?:boolean
+    isBlock?:boolean,
+    mentorIncharge?:string
    
 }
 export interface userGoogleSignUp {

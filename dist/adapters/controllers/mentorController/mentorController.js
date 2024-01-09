@@ -16,11 +16,18 @@ const findMentor_1 = require("../../../business/usecases/mentorUseCases/findMent
 const updateMentor_1 = require("../../../business/usecases/mentorUseCases/updateMentor");
 const mentorSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { firstname, lastname, email, mobile, password, confirm_password, image } = req.body;
+        const { firstname, lastname, email, mobile, password, confirm_password, image, } = req.body;
         if (password != confirm_password) {
-            return res.status(400).json({ message: 'Password mismatch' });
+            return res.status(400).json({ message: "Password mismatch" });
         }
-        const mentorData = yield (0, createMentor_1.createMentor)({ firstname, lastname, email, mobile, password, image });
+        const mentorData = yield (0, createMentor_1.createMentor)({
+            firstname,
+            lastname,
+            email,
+            mobile,
+            password,
+            image,
+        });
         res.status(201).json(mentorData);
     }
     catch (error) {
@@ -35,7 +42,9 @@ const mentorLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const email = (_a = req.query.email) === null || _a === void 0 ? void 0 : _a.toString();
         const password = (_b = req.query.password) === null || _b === void 0 ? void 0 : _b.toString();
         if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password are required.' });
+            return res
+                .status(400)
+                .json({ message: "Email and password are required." });
         }
         const response = yield (0, loginMentor_1.loginMentor)(email, password);
         const { mentorData, token } = response;
@@ -51,7 +60,7 @@ const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = (_c = req.query.email) === null || _c === void 0 ? void 0 : _c.toString();
         if (!email) {
-            return res.status(400).json({ message: 'Something Error' });
+            return res.status(400).json({ message: "Something Error" });
         }
         const mentorData = yield (0, findMentor_1.findMentor)(email);
         res.json(mentorData);
@@ -64,18 +73,22 @@ exports.profile = profile;
 const profileUpdate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _d;
     try {
-        const { firstname, lastname, email, mobile, password, images } = req.body;
-        if (images) {
-            const [image, aadhar_image, experience_image] = [...images];
-            const mentorEmail = (_d = req.query.mentorEmail) === null || _d === void 0 ? void 0 : _d.toString();
-            if (!mentorEmail) {
-                return res.status(400).json({ message: 'No email provided' });
-            }
-            const mentorData = yield (0, updateMentor_1.updateMentor)({
-                firstname, lastname, email, mobile, image, aadhar_image, experience_image, password
-            });
-            res.json(mentorData);
+        const { firstname, lastname, email, mobile, password, image, aadhar_image, experience_image, } = req.body;
+        const mentorEmail = (_d = req.query.mentorEmail) === null || _d === void 0 ? void 0 : _d.toString();
+        if (!mentorEmail) {
+            return res.status(400).json({ message: "No email provided" });
         }
+        const mentorData = yield (0, updateMentor_1.updateMentor)({
+            firstname,
+            lastname,
+            email,
+            mobile,
+            image,
+            aadhar_image,
+            experience_image,
+            password,
+        });
+        res.json(mentorData);
     }
     catch (error) {
         console.log(error);

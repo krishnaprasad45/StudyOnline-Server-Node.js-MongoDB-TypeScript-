@@ -10,6 +10,7 @@ const debug = require("debug")("myapp:server");
 import dotenv from "dotenv";
 import { Server, Socket } from "socket.io";
 import { createServer } from "http";
+import chatUseCase from "../business/usecases/chat-useCase/chat-useCase";
 
 const app = express();
 const port = 5000;
@@ -75,6 +76,11 @@ io.on("connection", async (socket: Socket) => {
     io.emit('SentMessage',data)
 
   });
+
+//   socket.on("SentMessage", async (data) => {
+//     console.log("update-chat-message", data)
+//     const result = await chatUseCase.saveChat(data)
+// })
 });
 
 app.get("/", (req, res) => {

@@ -54,6 +54,7 @@ const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(400).json({ message: 'Something Error' });
         }
         const userData = yield (0, findUser_1.findUser)(email);
+        console.log("userSData..", userData);
         res.json(userData);
     }
     catch (error) {

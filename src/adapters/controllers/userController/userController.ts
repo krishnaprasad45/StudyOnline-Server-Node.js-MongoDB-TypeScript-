@@ -48,6 +48,7 @@ export const profile = async (req: Request, res: Response) => {
 
   
     const userData = await findUser(email);
+    console.log("userSData..",userData)
     res.json(userData);
   } catch (error) {
     throw new Error((error as Error).message);

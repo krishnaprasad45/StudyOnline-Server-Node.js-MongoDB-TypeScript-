@@ -3,7 +3,9 @@ import { Request, Response, Express } from "express";
 import dotenv from "dotenv";
 import Stripe from "stripe";
 import PaymentDetails from '../../../business/interfaces/paymentDetails';
-import updateUser  from "../../../business/usecases/userUseCases/updateUser";
+import { updateMentorName } from "../../../business/usecases/userUseCases/updateUser";
+
+
 dotenv.config();
 
 export default {
@@ -39,7 +41,8 @@ export default {
       await courseManagementUsecases.savePaymentDetails({
         ...paymentDetails,
       });
-      await updateUser.updateMentorName(
+      await updateMentorName(
+    
         paymentDetails.createdBy,paymentDetails.usedEmail
       );
       

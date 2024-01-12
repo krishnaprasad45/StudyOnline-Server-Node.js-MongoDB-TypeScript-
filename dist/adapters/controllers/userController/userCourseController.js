@@ -27,7 +27,6 @@ exports.default = {
         }
     }),
     payments: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("body-mentor--", req.body.createdBy);
         const paymentDetails = {
             courseAmount: req.body.amount,
             courseTitle: req.body.courseTitle,

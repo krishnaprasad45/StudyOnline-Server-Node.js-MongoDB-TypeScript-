@@ -19,7 +19,6 @@ export default {
   },
 
   payments: async (req: Request, res: Response) => {
-    console.log("body-mentor--",req.body.createdBy)
     const paymentDetails: PaymentDetails = {
       courseAmount: req.body.amount,
       courseTitle: req.body.courseTitle,

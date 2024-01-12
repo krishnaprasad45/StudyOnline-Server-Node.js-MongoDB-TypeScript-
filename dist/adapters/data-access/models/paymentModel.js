@@ -29,6 +29,10 @@ const paymentSchema = new mongoose_1.default.Schema({
     cardType: {
         type: String,
     },
+    date: {
+        type: Date,
+        default: Date.now(),
+    }
 });
 const Payment = mongoose_1.default.model("Payment", paymentSchema);
 exports.default = Payment;

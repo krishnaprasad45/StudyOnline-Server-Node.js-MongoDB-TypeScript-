@@ -25,6 +25,10 @@ const paymentSchema = new mongoose.Schema({
   cardType: {
     type: String,
   },
+  date: {
+    type: Date,
+    default: Date.now(),
+  }
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);

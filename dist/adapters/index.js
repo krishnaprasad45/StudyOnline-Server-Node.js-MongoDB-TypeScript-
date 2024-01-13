@@ -24,6 +24,7 @@ const debug = require("debug")("myapp:server");
 const dotenv_1 = __importDefault(require("dotenv"));
 const socket_io_1 = require("socket.io");
 const http_1 = require("http");
+const socket_io_2 = __importDefault(require("../frameworks/socket-io/socket-io"));
 const app = (0, express_1.default)();
 const port = 5000;
 (0, mongo_1.default)();
@@ -70,21 +71,19 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => {
-        console.log(data.from);
-        console.log(data.message);
-        console.log(data.to);
-        console.log(data.id);
         // io.to(data.to).emit('ReceiveMessage',{from:data.to})
-        io.emit('SentMessage', data);
+        io.emit("SentMessage", data);
     });
     //   socket.on("SentMessage", async (data) => {
     //     console.log("update-chat-message", data)
     //     const result = await chatUseCase.saveChat(data)
     // })
+    //----video------------------
 }));
 app.get("/", (req, res) => {
     res.send().status(200);
 });
-httpServer.listen(port, () => {
+const server = httpServer.listen(port, () => {
     debug(`Server is running on http://localhost:${port}`);
 });
+(0, socket_io_2.default)(io);

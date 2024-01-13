@@ -11,7 +11,7 @@ import dotenv from "dotenv";
 import { Server, Socket } from "socket.io";
 import { createServer } from "http";
 import chatUseCase from "../business/usecases/chat-useCase/chat-useCase";
-
+import socketManager from "../frameworks/socket-io/socket-io";
 const app = express();
 const port = 5000;
 
@@ -58,35 +58,32 @@ app.use("/", userRoute);
 app.use("/mentor", mentorRoute);
 app.use("/admin", adminRoute);
 
-
 io.on("connection", async (socket: Socket) => {
-
   socket.on("test", (data: string) => {
     console.log(data);
   });
 });
 io.on("connection", async (socket: Socket) => {
-  
-  socket.on("SentMessage", (data: {message:string,to:string,from:string,id:number}) => {
-    console.log(data.from);
-    console.log(data.message);
-    console.log(data.to);
-    console.log(data.id);
-    // io.to(data.to).emit('ReceiveMessage',{from:data.to})
-    io.emit('SentMessage',data)
-
-  });
-
-//   socket.on("SentMessage", async (data) => {
-//     console.log("update-chat-message", data)
-//     const result = await chatUseCase.saveChat(data)
-// })
+  socket.on(
+    "SentMessage",
+    (data: { message: string; to: string; from: string; id: number }) => {
+      // io.to(data.to).emit('ReceiveMessage',{from:data.to})
+      io.emit("SentMessage", data);
+    }
+  );
+  //   socket.on("SentMessage", async (data) => {
+  //     console.log("update-chat-message", data)
+  //     const result = await chatUseCase.saveChat(data)
+  // })
+  //----video------------------
 });
 
 app.get("/", (req, res) => {
   res.send().status(200);
 });
 
-httpServer.listen(port, () => {
+const server = httpServer.listen(port, () => {
   debug(`Server is running on http://localhost:${port}`);
 });
+
+socketManager(io);

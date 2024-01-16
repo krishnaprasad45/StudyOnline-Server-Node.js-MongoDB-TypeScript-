@@ -1,3 +1,4 @@
+import ChapterInterface from "../../../business/interfaces/chapterInterface";
 import CourseInterface  from "../../../business/interfaces/courseInterface";
 import courseManagementUsecases  from "../../../business/usecases/courseUseCases/courseManagementUsecases";
 import { Request, Response } from 'express';
@@ -13,6 +14,45 @@ export default {
       res.json( error as Error );
     }
   },
+  addChapter : async (req:Request,res:Response) => {
+    try {
+      const { title,duration,description,chaptervideo,courseId} = req.body;
+      const chapterData = await courseManagementUsecases.createChapter({title,duration,description,chaptervideo,courseId} as ChapterInterface);
+     
+      res.status(201).json(chapterData);
+    } catch (error) {
+      console.log(error);
+      res.json( error as Error );
+    }
+  },
+  getChaptersList: async (req: Request, res: Response) => {
+    try {
+      const courseId = req.query.courseId as string | undefined;
+      console.log("**courseId**",courseId)
+      if (courseId) {
+        const chapersData = await courseManagementUsecases.getChapters(courseId);
+        console.log("chp..",chapersData)
+        res.json(chapersData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  
+},
+  getChapterDetails: async (req: Request, res: Response) => {
+    try {
+      const chapterId = req.query.chapterId as string | undefined;
+      console.log("**chapterId**",chapterId)
+      if (chapterId) {
+        const chapersData = await courseManagementUsecases.getChapter(chapterId);
+        console.log("chp..",chapersData)
+        res.json(chapersData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  
+},
   getCourseList: async (req: Request, res: Response) => {
     try {
      

@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const chapterRepository_1 = __importDefault(require("../../../adapters/data-access/repositories/chapterRepository"));
 const courseRepository_1 = __importDefault(require("../../../adapters/data-access/repositories/courseRepository"));
 const moment_1 = require("../../../adapters/external services/moment");
 exports.default = {
@@ -33,6 +34,15 @@ exports.default = {
             const date = formattedDate;
             data.createdat = date;
             return yield courseRepository_1.default.saveCourse(Object.assign({}, data));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    createChapter: (_b) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_b, []);
+        try {
+            return yield chapterRepository_1.default.saveChapter(Object.assign({}, data));
         }
         catch (error) {
             console.log(error);
@@ -49,8 +59,29 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
-    savePaymentDetails: (_b) => __awaiter(void 0, void 0, void 0, function* () {
-        var data = __rest(_b, []);
+    getChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const chaptersData = yield courseRepository_1.default.getAllChapters(courseId);
+            return chaptersData;
+        }
+        catch (error) {
+            console.log(error);
+            // Assuming you want to return something in case of an error
+            throw new Error("Error fetching courses");
+        }
+    }),
+    getChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const chapterData = yield courseRepository_1.default.getChapterDetails(chapterId);
+            return chapterData;
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error("Error fetching courses");
+        }
+    }),
+    savePaymentDetails: (_c) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_c, []);
         try {
             yield courseRepository_1.default.savePayment(Object.assign({}, data));
         }

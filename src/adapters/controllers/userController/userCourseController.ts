@@ -64,4 +64,17 @@ export default {
       console.log(error);
     }
   },
+  getChaptersList: async (req: Request, res: Response) => {
+    try {
+      const email = req.query.email as string | undefined;
+      console.log("**email**",email)
+      if (email) {
+        const historyData = await courseManagementUsecases.getHistory(email);
+        console.log("his..",historyData)
+        res.json(historyData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

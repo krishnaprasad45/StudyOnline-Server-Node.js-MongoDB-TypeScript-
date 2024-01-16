@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const chapterModel_1 = __importDefault(require("../models/chapterModel"));
 const courseModel_1 = __importDefault(require("../models/courseModel"));
 const paymentModel_1 = __importDefault(require("../models/paymentModel"));
 exports.default = {
@@ -25,6 +26,14 @@ exports.default = {
     }),
     getAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.find().lean();
+    }),
+    getAllChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield chapterModel_1.default.find({ courseId: courseId }).lean();
+    }),
+    getChapterDetails: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        const data = yield chapterModel_1.default.findById(chapterId);
+        if (data)
+            return data;
     }),
     getAllHistory: (email) => __awaiter(void 0, void 0, void 0, function* () {
         return yield paymentModel_1.default.find({ usedEmail: email }).lean();

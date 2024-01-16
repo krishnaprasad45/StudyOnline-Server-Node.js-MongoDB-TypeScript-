@@ -1,5 +1,7 @@
+import ChapterInterface from "../../../business/interfaces/chapterInterface";
 import CourseInterface from "../../../business/interfaces/courseInterface";
 import PaymentDetails from "../../../business/interfaces/paymentDetails";
+import chapterModel from "../models/chapterModel";
 import courseModel from "../models/courseModel";
 import paymentModel from "../models/paymentModel";
 
@@ -14,6 +16,13 @@ export default {
   },
   getAllCourses: async () => {
     return await courseModel.find().lean();
+  },
+  getAllChapters: async (courseId: string): Promise<ChapterInterface[]> => {
+    return await chapterModel.find({ courseId: courseId }).lean();
+  },
+  getChapterDetails: async (chapterId: string)=> {
+    const data = await chapterModel.findById(chapterId)
+    if(data) return data;
   },
   getAllHistory: async (email: string): Promise<PaymentDetails[]> => {
     return await paymentModel.find({ usedEmail: email }).lean();

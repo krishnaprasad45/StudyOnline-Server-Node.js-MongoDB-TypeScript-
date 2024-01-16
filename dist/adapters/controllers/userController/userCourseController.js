@@ -65,4 +65,18 @@ exports.default = {
             console.log(error);
         }
     }),
+    getChaptersList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const email = req.query.email;
+            console.log("**email**", email);
+            if (email) {
+                const historyData = yield courseManagementUsecases_1.default.getHistory(email);
+                console.log("his..", historyData);
+                res.json(historyData);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
 };

@@ -36,12 +36,13 @@ export async function updateOne(data: userProfileInterface) {
   );
   return userData;
 }
-export async function updateMentor(email:string,mentorName:string) {
+export async function updateMentor(email:string,mentorName:string,courseId:string) {
   const userData = await userModel.findOneAndUpdate(
     { email: email },
     {
       $set: {
-        mentorIncharge:mentorName
+        mentorIncharge:mentorName,
+        courseId:courseId,
       },
     },
     { new: true }

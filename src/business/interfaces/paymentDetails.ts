@@ -6,4 +6,5 @@ export default interface PaymentDetails {
     type: string;
     transactionId: number;
     cardType: string;
+    courseId:string;
   }

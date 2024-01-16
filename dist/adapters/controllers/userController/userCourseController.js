@@ -26,6 +26,16 @@ exports.default = {
             console.log(error);
         }
     }),
+    getCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const courseId = req.query.courseId;
+            const coursesData = yield courseManagementUsecases_1.default.getCourse(courseId);
+            res.json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
     payments: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const paymentDetails = {
             courseAmount: req.body.amount,
@@ -35,6 +45,7 @@ exports.default = {
             type: req.body.token.type,
             transactionId: req.body.token.created,
             cardType: req.body.token.card.brand,
+            courseId: req.body.courseId
         };
         const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
         try {
@@ -44,7 +55,7 @@ exports.default = {
                 automatic_payment_methods: { enabled: true },
             });
             yield courseManagementUsecases_1.default.savePaymentDetails(Object.assign({}, paymentDetails));
-            yield (0, updateUser_1.updateMentorName)(paymentDetails.createdBy, paymentDetails.usedEmail);
+            yield (0, updateUser_1.updateMentorName)(paymentDetails.createdBy, paymentDetails.usedEmail, paymentDetails.courseId);
             res.json({ client_secret: intent.client_secret });
         }
         catch (error) {

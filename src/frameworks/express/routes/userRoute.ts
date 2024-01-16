@@ -14,6 +14,7 @@ userRoute.get("/profile", verifyToken, profile);
 userRoute.post("/profile/update", upload.single("image"), verifyToken, profileUpdate);
 userRoute.post("/google/signin", signIn.googleSignin)
 userRoute.get("/courses", verifyToken,userCourseController.getCourseList );
+userRoute.get("/course", verifyToken,userCourseController.getCourse);
 userRoute.post("/payments", verifyToken,userCourseController.payments );
 userRoute.get("/payments/history", verifyToken,userCourseController.getPaymentHistory );
 userRoute.get("/chapter/list", verifyToken,userCourseController.getPaymentHistory );

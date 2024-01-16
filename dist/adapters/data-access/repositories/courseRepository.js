@@ -27,6 +27,9 @@ exports.default = {
     getAllCourses: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.find().lean();
     }),
+    getCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield courseModel_1.default.findById(courseId);
+    }),
     getAllChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         return yield chapterModel_1.default.find({ courseId: courseId }).lean();
     }),

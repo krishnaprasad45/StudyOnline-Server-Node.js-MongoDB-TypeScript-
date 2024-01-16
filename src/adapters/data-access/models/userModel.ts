@@ -26,6 +26,10 @@ const userSchema = new mongoose.Schema({
     type:String,
     default:'not assigned'
   },
+  courseId:{
+    type:String,
+    default:''
+  },
   isBlock: {
     type: Boolean,
     default: false,

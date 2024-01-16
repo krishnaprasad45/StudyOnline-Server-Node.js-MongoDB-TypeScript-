@@ -17,6 +17,15 @@ export default {
       console.log(error);
     }
   },
+  getCourse: async (req: Request, res: Response) => {
+    try {
+      const courseId = req.query.courseId as string 
+      const coursesData = await courseManagementUsecases.getCourse(courseId);
+      res.json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
   payments: async (req: Request, res: Response) => {
     const paymentDetails: PaymentDetails = {
@@ -27,6 +36,7 @@ export default {
       type: req.body.token.type,
       transactionId: req.body.token.created,
       cardType: req.body.token.card.brand,
+      courseId:req.body.courseId
     };
 
     const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
@@ -42,7 +52,7 @@ export default {
       });
       await updateMentorName(
     
-        paymentDetails.createdBy,paymentDetails.usedEmail
+        paymentDetails.createdBy,paymentDetails.usedEmail,paymentDetails.courseId
       );
       
 

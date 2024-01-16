@@ -30,12 +30,12 @@ const updateUser = ({ firstname, lastname, email, mobile, image, oldEmail }) => 
     }
 });
 exports.updateUser = updateUser;
-const updateMentorName = (mentorName, email) => __awaiter(void 0, void 0, void 0, function* () {
+const updateMentorName = (mentorName, email, courseId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (email) {
             const existingUser = yield (0, userRepository_1.findUserByEmail)(email);
             if (existingUser) {
-                const userData = yield (0, userRepository_1.updateMentor)(email, mentorName);
+                const userData = yield (0, userRepository_1.updateMentor)(email, mentorName, courseId);
                 return userData;
             }
         }

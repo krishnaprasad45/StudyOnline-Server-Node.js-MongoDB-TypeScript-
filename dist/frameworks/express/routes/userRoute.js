@@ -17,6 +17,7 @@ userRoute.get("/profile", jwtTokenAuth_1.verifyToken, userController_1.profile);
 userRoute.post("/profile/update", multer_1.upload.single("image"), jwtTokenAuth_1.verifyToken, userController_1.profileUpdate);
 userRoute.post("/google/signin", userSigninController_1.default.googleSignin);
 userRoute.get("/courses", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getCourseList);
+userRoute.get("/course", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getCourse);
 userRoute.post("/payments", jwtTokenAuth_1.verifyToken, userCourseController_1.default.payments);
 userRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
 userRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);

@@ -17,6 +17,9 @@ export default {
   getAllCourses: async () => {
     return await courseModel.find().lean();
   },
+  getCourse: async (courseId:string) => {
+    return await courseModel.findById(courseId)
+  },
   getAllChapters: async (courseId: string): Promise<ChapterInterface[]> => {
     return await chapterModel.find({ courseId: courseId }).lean();
   },

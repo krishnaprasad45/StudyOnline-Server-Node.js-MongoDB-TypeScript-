@@ -43,11 +43,12 @@ function updateOne(data) {
     });
 }
 exports.updateOne = updateOne;
-function updateMentor(email, mentorName) {
+function updateMentor(email, mentorName, courseId) {
     return __awaiter(this, void 0, void 0, function* () {
         const userData = yield userModel_1.default.findOneAndUpdate({ email: email }, {
             $set: {
-                mentorIncharge: mentorName
+                mentorIncharge: mentorName,
+                courseId: courseId,
             },
         }, { new: true });
         return userData;

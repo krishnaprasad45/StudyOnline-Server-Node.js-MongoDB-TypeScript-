@@ -17,12 +17,12 @@ export const updateUser = async ({ firstname, lastname, email, mobile, image, ol
   }
 };
 
-export const updateMentorName = async (mentorName:string,email:string) => {
+export const updateMentorName = async (mentorName:string,email:string,courseId:string) => {
   try {
     if (email) {
       const existingUser = await findUserByEmail(email);
       if (existingUser) {
-        const userData = await updateMentor(email,mentorName);
+        const userData = await updateMentor(email,mentorName,courseId);
         return userData;
       }
     } else {

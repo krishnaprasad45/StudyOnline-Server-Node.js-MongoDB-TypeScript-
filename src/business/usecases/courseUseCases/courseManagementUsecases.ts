@@ -36,6 +36,17 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
+  getCourse: async (courseId:string): Promise<CourseInterface[]> => {
+    try {
+      const coursesData: CourseInterface[] =
+        await courseRepository.getCourse(courseId);
+      return coursesData;
+    } catch (error) {
+      console.log(error);
+      // Assuming you want to return something in case of an error
+      throw new Error("Error fetching courses");
+    }
+  },
   getChapters: async (courseId:string): Promise<ChapterInterface[]> => {
     try {
       const chaptersData: ChapterInterface[] =

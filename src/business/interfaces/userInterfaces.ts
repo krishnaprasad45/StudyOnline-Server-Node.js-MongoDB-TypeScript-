@@ -29,7 +29,8 @@ export interface userProfileInterface {
     image?:string,
     oldEmail?:string,
     isBlock?:boolean,
-    mentorIncharge?:string
+    mentorIncharge?:string,
+    courseId?:string
    
 }
 export interface userGoogleSignUp {

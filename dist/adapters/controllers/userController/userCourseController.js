@@ -78,12 +78,26 @@ exports.default = {
     }),
     getChaptersList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const email = req.query.email;
-            console.log("**email**", email);
-            if (email) {
-                const historyData = yield courseManagementUsecases_1.default.getHistory(email);
-                console.log("his..", historyData);
-                res.json(historyData);
+            const courseId = req.query.courseId;
+            console.log("**courseId**", courseId);
+            if (courseId) {
+                const chapersData = yield courseManagementUsecases_1.default.getChapters(courseId);
+                console.log("chp..", chapersData);
+                res.json(chapersData);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    getChapterDetails: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const chapterId = req.query.chapterId;
+            console.log("**chapterId**", chapterId);
+            if (chapterId) {
+                const chapersData = yield courseManagementUsecases_1.default.getChapter(chapterId);
+                console.log("chp..", chapersData);
+                res.json(chapersData);
             }
         }
         catch (error) {

@@ -17,6 +17,8 @@ userRoute.get("/courses", verifyToken,userCourseController.getCourseList );
 userRoute.get("/course", verifyToken,userCourseController.getCourse);
 userRoute.post("/payments", verifyToken,userCourseController.payments );
 userRoute.get("/payments/history", verifyToken,userCourseController.getPaymentHistory );
-userRoute.get("/chapter/list", verifyToken,userCourseController.getPaymentHistory );
+userRoute.get("/chapter/list", verifyToken,userCourseController.getChaptersList );
+userRoute.get("/chapter/details", verifyToken,userCourseController.getChapterDetails );
+
 
 export default userRoute;

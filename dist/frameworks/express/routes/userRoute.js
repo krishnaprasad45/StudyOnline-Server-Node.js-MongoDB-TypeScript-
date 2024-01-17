@@ -20,5 +20,6 @@ userRoute.get("/courses", jwtTokenAuth_1.verifyToken, userCourseController_1.def
 userRoute.get("/course", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getCourse);
 userRoute.post("/payments", jwtTokenAuth_1.verifyToken, userCourseController_1.default.payments);
 userRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
-userRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
+userRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChaptersList);
+userRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChapterDetails);
 exports.default = userRoute;

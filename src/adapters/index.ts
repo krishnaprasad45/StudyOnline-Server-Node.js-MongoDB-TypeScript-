@@ -67,15 +67,10 @@ io.on("connection", async (socket: Socket) => {
   socket.on(
     "SentMessage",
     (data: { message: string; to: string; from: string; id: number }) => {
-      // io.to(data.to).emit('ReceiveMessage',{from:data.to})
       io.emit("SentMessage", data);
     }
   );
-  //   socket.on("SentMessage", async (data) => {
-  //     console.log("update-chat-message", data)
-  //     const result = await chatUseCase.saveChat(data)
-  // })
-  //----video------------------
+
 });
 
 app.get("/", (req, res) => {

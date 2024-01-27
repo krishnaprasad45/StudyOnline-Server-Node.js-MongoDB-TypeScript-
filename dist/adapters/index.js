@@ -71,14 +71,8 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => {
-        // io.to(data.to).emit('ReceiveMessage',{from:data.to})
         io.emit("SentMessage", data);
     });
-    //   socket.on("SentMessage", async (data) => {
-    //     console.log("update-chat-message", data)
-    //     const result = await chatUseCase.saveChat(data)
-    // })
-    //----video------------------
 }));
 app.get("/", (req, res) => {
     res.send().status(200);

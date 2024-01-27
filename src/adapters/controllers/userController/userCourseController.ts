@@ -1,7 +1,6 @@
 import courseManagementUsecases from "../../../business/usecases/courseUseCases/courseManagementUsecases";
 import { Request, Response, Express } from "express";
 import dotenv from "dotenv";
-import Stripe from "stripe";
 import PaymentDetails from '../../../business/interfaces/paymentDetails';
 import { updateMentorName } from "../../../business/usecases/userUseCases/updateUser";
 
@@ -64,10 +63,8 @@ export default {
   getPaymentHistory: async (req: Request, res: Response) => {
     try {
       const email = req.query.email as string | undefined;
-      console.log("**email**",email)
       if (email) {
         const historyData = await courseManagementUsecases.getHistory(email);
-        console.log("his..",historyData)
         res.json(historyData);
       }
     } catch (error) {
@@ -77,10 +74,8 @@ export default {
   getChaptersList: async (req: Request, res: Response) => {
     try {
       const courseId = req.query.courseId as string | undefined;
-      console.log("**courseId**",courseId)
       if (courseId) {
         const chapersData = await courseManagementUsecases.getChapters(courseId);
-        console.log("chp..",chapersData)
         res.json(chapersData);
       }
     } catch (error) {
@@ -90,10 +85,8 @@ export default {
   getChapterDetails: async (req: Request, res: Response) => {
     try {
       const chapterId = req.query.chapterId as string | undefined;
-      console.log("**chapterId**",chapterId)
       if (chapterId) {
         const chapersData = await courseManagementUsecases.getChapter(chapterId);
-        console.log("chp..",chapersData)
         res.json(chapersData);
       }
     } catch (error) {

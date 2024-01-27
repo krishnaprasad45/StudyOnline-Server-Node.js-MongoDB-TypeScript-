@@ -19,4 +19,5 @@ mentorRoute.post("/add/chapter", multer_1.upload.array("images[]", 2), jwtTokenA
 mentorRoute.get("/courses", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getCourseList);
 mentorRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getChaptersList);
 mentorRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getChapterDetails);
+mentorRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getPaymentHistory);
 exports.default = mentorRoute;

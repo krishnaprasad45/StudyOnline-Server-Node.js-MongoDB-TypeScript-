@@ -16,8 +16,17 @@ const courseManagementUsecases_1 = __importDefault(require("../../../business/us
 exports.default = {
     addCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            const { title, subtitle, duration, fee, createdby, description, banner, introvideo } = req.body;
-            const courseData = yield courseManagementUsecases_1.default.createCourse({ title, subtitle, duration, description, fee, createdby, banner, introvideo });
+            const { title, subtitle, duration, fee, createdby, description, banner, introvideo, } = req.body;
+            const courseData = yield courseManagementUsecases_1.default.createCourse({
+                title,
+                subtitle,
+                duration,
+                description,
+                fee,
+                createdby,
+                banner,
+                introvideo,
+            });
             res.status(201).json(courseData);
         }
         catch (error) {
@@ -28,7 +37,13 @@ exports.default = {
     addChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { title, duration, description, chaptervideo, courseId } = req.body;
-            const chapterData = yield courseManagementUsecases_1.default.createChapter({ title, duration, description, chaptervideo, courseId });
+            const chapterData = yield courseManagementUsecases_1.default.createChapter({
+                title,
+                duration,
+                description,
+                chaptervideo,
+                courseId,
+            });
             res.status(201).json(chapterData);
         }
         catch (error) {
@@ -39,10 +54,8 @@ exports.default = {
     getChaptersList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const courseId = req.query.courseId;
-            console.log("**courseId**", courseId);
             if (courseId) {
                 const chapersData = yield courseManagementUsecases_1.default.getChapters(courseId);
-                console.log("chp..", chapersData);
                 res.json(chapersData);
             }
         }
@@ -53,11 +66,21 @@ exports.default = {
     getChapterDetails: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const chapterId = req.query.chapterId;
-            console.log("**chapterId**", chapterId);
             if (chapterId) {
                 const chapersData = yield courseManagementUsecases_1.default.getChapter(chapterId);
-                console.log("chp..", chapersData);
                 res.json(chapersData);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    getPaymentHistory: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const email = req.query.email;
+            if (email) {
+                const historyData = yield courseManagementUsecases_1.default.getHistory(email);
+                res.json(historyData);
             }
         }
         catch (error) {
@@ -72,5 +95,5 @@ exports.default = {
         catch (error) {
             console.log(error);
         }
-    })
+    }),
 };

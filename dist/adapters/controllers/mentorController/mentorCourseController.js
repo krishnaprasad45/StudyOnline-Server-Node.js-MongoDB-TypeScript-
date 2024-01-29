@@ -96,4 +96,16 @@ exports.default = {
             console.log(error);
         }
     }),
+    getMyCourseList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const email = req.query.email;
+            if (email) {
+                const coursesData = yield courseManagementUsecases_1.default.getMyCoursesList(email);
+                res.json(coursesData);
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
 };

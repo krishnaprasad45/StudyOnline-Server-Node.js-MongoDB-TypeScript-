@@ -92,4 +92,15 @@ export default {
       console.log(error);
     }
   },
+  getMyCourseList: async (req: Request, res: Response) => {
+    try {
+      const email = req.query.email as string | undefined;
+      if(email){
+      const coursesData = await courseManagementUsecases.getMyCoursesList(email);
+      res.json(coursesData);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };

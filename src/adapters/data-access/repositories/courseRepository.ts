@@ -17,6 +17,9 @@ export default {
   getAllCourses: async () => {
     return await courseModel.find().lean();
   },
+  getMyAllCourses: async (email:string) => {
+    return await courseModel.find({createdby:email}).lean();
+  },
   getCourse: async (courseId:string) => {
     return await courseModel.findById(courseId)
   },

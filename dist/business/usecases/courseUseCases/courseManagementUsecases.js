@@ -55,7 +55,16 @@ exports.default = {
         }
         catch (error) {
             console.log(error);
-            // Assuming you want to return something in case of an error
+            throw new Error("Error fetching courses");
+        }
+    }),
+    getMyCoursesList: (email) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const coursesData = yield courseRepository_1.default.getMyAllCourses(email);
+            return coursesData;
+        }
+        catch (error) {
+            console.log(error);
             throw new Error("Error fetching courses");
         }
     }),
@@ -66,7 +75,6 @@ exports.default = {
         }
         catch (error) {
             console.log(error);
-            // Assuming you want to return something in case of an error
             throw new Error("Error fetching courses");
         }
     }),
@@ -77,7 +85,6 @@ exports.default = {
         }
         catch (error) {
             console.log(error);
-            // Assuming you want to return something in case of an error
             throw new Error("Error fetching courses");
         }
     }),
@@ -98,7 +105,6 @@ exports.default = {
         }
         catch (error) {
             console.log(error);
-            // Assuming you want to return something in case of an error
             throw new Error("Error fetching courses");
         }
     }),

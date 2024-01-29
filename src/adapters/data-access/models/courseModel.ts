@@ -19,7 +19,7 @@ const courseSchema = new mongoose.Schema({
     },
     createdby: {
       type: String,
-      required: true,
+      
     },
     createdat:{
       type:String,

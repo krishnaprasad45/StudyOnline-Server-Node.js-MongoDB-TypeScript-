@@ -16,6 +16,7 @@ mentorRoute.patch("/profile/update", upload.array("images[]",3), verifyToken, pr
 mentorRoute.post("/add/course", upload.array("images[]",2), verifyToken,mentorCourseController.addCourse );
 mentorRoute.post("/add/chapter", upload.array("images[]",2), verifyToken,mentorCourseController.addChapter );
 mentorRoute.get("/courses", verifyToken,mentorCourseController.getCourseList );
+mentorRoute.get("/mycourses", verifyToken,mentorCourseController.getMyCourseList );
 mentorRoute.get("/chapter/list", verifyToken,mentorCourseController.getChaptersList );
 mentorRoute.get("/chapter/details", verifyToken,mentorCourseController.getChapterDetails );
 mentorRoute.get("/payments/history", verifyToken,mentorCourseController.getPaymentHistory );

@@ -23,7 +23,6 @@ const courseSchema = new mongoose_1.default.Schema({
     },
     createdby: {
         type: String,
-        required: true,
     },
     createdat: {
         type: String,

@@ -20,15 +20,8 @@ const chatSchema = new Schema({
             timestamp: {
                 type: Date,
                 default: Date.now
-            },
-            id:{
-                type:String,
-                required:true
-            },
-            chatId:{
-                type:String,
-                required:true
             }
+            
             
         }
     ]

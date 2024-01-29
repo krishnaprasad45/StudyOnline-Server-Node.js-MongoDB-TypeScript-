@@ -46,7 +46,7 @@ export const mentorLogin = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "Email and password are required." });
     }
-
+    
     const response = await loginMentor(email, password);
     const { mentorData, token } = response;
     res.json({ mentorData, token });

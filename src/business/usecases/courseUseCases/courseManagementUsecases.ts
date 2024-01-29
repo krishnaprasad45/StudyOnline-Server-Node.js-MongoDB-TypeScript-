@@ -32,7 +32,16 @@ export default {
       return coursesData;
     } catch (error) {
       console.log(error);
-      // Assuming you want to return something in case of an error
+      throw new Error("Error fetching courses");
+    }
+  },
+  getMyCoursesList: async (email:string): Promise<CourseInterface[]> => {
+    try {
+      const coursesData: CourseInterface[] =
+        await courseRepository.getMyAllCourses(email);
+      return coursesData;
+    } catch (error) {
+      console.log(error);
       throw new Error("Error fetching courses");
     }
   },
@@ -43,7 +52,6 @@ export default {
       return coursesData;
     } catch (error) {
       console.log(error);
-      // Assuming you want to return something in case of an error
       throw new Error("Error fetching courses");
     }
   },
@@ -54,7 +62,6 @@ export default {
       return chaptersData;
     } catch (error) {
       console.log(error);
-      // Assuming you want to return something in case of an error
       throw new Error("Error fetching courses");
     }
   },
@@ -75,7 +82,6 @@ export default {
       });
     } catch (error) {
       console.log(error);
-      // Assuming you want to return something in case of an error
       throw new Error("Error fetching courses");
     }
   },

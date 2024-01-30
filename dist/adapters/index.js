@@ -24,6 +24,7 @@ const debug = require("debug")("myapp:server");
 const dotenv_1 = __importDefault(require("dotenv"));
 const socket_io_1 = require("socket.io");
 const http_1 = require("http");
+const chat_useCase_1 = __importDefault(require("../business/usecases/chat-useCase/chat-useCase"));
 const socket_io_2 = __importDefault(require("../frameworks/socket-io/socket-io"));
 const app = (0, express_1.default)();
 const port = 5000;
@@ -70,9 +71,12 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     });
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
-    socket.on("SentMessage", (data) => {
+    socket.on("SentMessage", (data) => __awaiter(void 0, void 0, void 0, function* () {
+        console.log("SentMessage", data);
+        const result = yield chat_useCase_1.default.saveChat(data);
+        console.log("message-index", result);
         io.emit("SentMessage", data);
-    });
+    }));
 }));
 app.get("/", (req, res) => {
     res.send().status(200);

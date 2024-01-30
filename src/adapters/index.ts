@@ -65,8 +65,10 @@ io.on("connection", async (socket: Socket) => {
 });
 io.on("connection", async (socket: Socket) => {
   socket.on(
-    "SentMessage",
-    (data: { message: string; to: string; from: string; id: number }) => {
+    "SentMessage",async (data: IMessage) => {
+      console.log("SentMessage",data)
+      const result = await chatUseCase.saveChat(data)
+      console.log("message-index",result)
       io.emit("SentMessage", data);
     }
   );

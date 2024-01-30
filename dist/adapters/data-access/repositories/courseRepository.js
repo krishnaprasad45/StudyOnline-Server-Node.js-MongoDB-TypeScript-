@@ -42,7 +42,7 @@ exports.default = {
             return data;
     }),
     getAllHistory: (email) => __awaiter(void 0, void 0, void 0, function* () {
-        return yield paymentModel_1.default.find({ usedEmail: email }).lean();
+        return yield paymentModel_1.default.find({ createdBy: email }).lean();
     }),
     getFullHistory: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield paymentModel_1.default.find().lean();

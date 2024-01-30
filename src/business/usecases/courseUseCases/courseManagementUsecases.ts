@@ -95,6 +95,16 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
+  getHistoryForUser: async (email:string): Promise<PaymentDetails[]> => {
+    try {
+      const historyData: PaymentDetails[] =
+      await courseRepository.getAllHistoryForUser(email);
+      return historyData;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
   getFullHistory: async (): Promise<PaymentDetails[]> => {
     try {
       const historyData: PaymentDetails[] =

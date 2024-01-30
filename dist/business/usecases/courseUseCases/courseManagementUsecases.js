@@ -118,6 +118,16 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
+    getHistoryForUser: (email) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const historyData = yield courseRepository_1.default.getAllHistoryForUser(email);
+            return historyData;
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error("Error fetching courses");
+        }
+    }),
     getFullHistory: () => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const historyData = yield courseRepository_1.default.getFullHistory();

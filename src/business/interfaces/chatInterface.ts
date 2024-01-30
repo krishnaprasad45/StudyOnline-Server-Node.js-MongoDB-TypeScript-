@@ -17,13 +17,14 @@
 // }
 
 interface IMessage {
-    private _id(_id: any): unknown;
+   
+    _id?:string;
     from: string;
     to: string;
     message: string;
     // timestamp: Date;
     id: string;
-    // chatId: string;
+    
 }
 
 // message: string; to: string; from: string; id: number

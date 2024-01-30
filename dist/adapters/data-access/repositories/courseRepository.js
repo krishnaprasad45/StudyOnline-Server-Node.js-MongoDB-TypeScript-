@@ -44,6 +44,9 @@ exports.default = {
     getAllHistory: (email) => __awaiter(void 0, void 0, void 0, function* () {
         return yield paymentModel_1.default.find({ createdBy: email }).lean();
     }),
+    getAllHistoryForUser: (email) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield paymentModel_1.default.find({ usedEmail: email }).lean();
+    }),
     getFullHistory: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield paymentModel_1.default.find().lean();
     }),

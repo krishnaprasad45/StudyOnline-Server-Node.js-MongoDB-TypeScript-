@@ -72,7 +72,7 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("SentMessage", data);
+        console.log("SentMessage++", data);
         const result = yield chat_useCase_1.default.saveChat(data);
         console.log("message-index", result);
         io.emit("SentMessage", data);

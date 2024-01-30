@@ -33,6 +33,9 @@ export default {
   getAllHistory: async (email: string): Promise<PaymentDetails[]> => {
     return await paymentModel.find({ createdBy: email }).lean();
   },
+  getAllHistoryForUser: async (email: string): Promise<PaymentDetails[]> => {
+    return await paymentModel.find({ usedEmail: email }).lean();
+  },
   getFullHistory: async (): Promise<PaymentDetails[]> => {
     return await paymentModel.find().lean();
   },

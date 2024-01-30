@@ -22,4 +22,5 @@ userRoute.post("/payments", jwtTokenAuth_1.verifyToken, userCourseController_1.d
 userRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
 userRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChaptersList);
 userRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChapterDetails);
+// userRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
 exports.default = userRoute;

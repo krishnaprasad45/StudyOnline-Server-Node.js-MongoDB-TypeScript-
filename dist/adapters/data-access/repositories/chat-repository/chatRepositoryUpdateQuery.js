@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chatModel_1 = __importDefault(require("../../models/chatModel"));
 exports.default = {
     updateChat: (chatId, message) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("function update", message);
         try {
             const result = yield chatModel_1.default.findByIdAndUpdate(chatId, {
                 $push: {
@@ -24,11 +23,9 @@ exports.default = {
             }, {
                 new: true
             });
-            console.log("result", result);
             return result;
         }
         catch (error) {
-            console.log("error in chat update repo", error);
             throw new Error(error.message);
         }
     })

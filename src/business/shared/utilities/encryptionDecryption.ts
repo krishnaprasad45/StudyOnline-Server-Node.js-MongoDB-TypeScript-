@@ -59,7 +59,6 @@ import { ObjectId } from "mongoose";
 
 
         } catch (error) {
-            console.error('Encryption error:', error);
             throw new Error((error as Error).message)
         }
 

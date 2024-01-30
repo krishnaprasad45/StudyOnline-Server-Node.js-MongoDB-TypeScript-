@@ -1,6 +1,7 @@
 import chatRepositoryGetQuery from "../../../adapters/data-access/repositories/chat-repository/chatRepositoryGetQuery"
 import chatRepositorySaveQuery from "../../../adapters/data-access/repositories/chat-repository/chatRepositorySaveQuery"
 import chatRepositoryUpdateQuery from "../../../adapters/data-access/repositories/chat-repository/chatRepositoryUpdateQuery"
+import { Request, Response } from "express";
 
 
 
@@ -9,9 +10,7 @@ import chatRepositoryUpdateQuery from "../../../adapters/data-access/repositorie
 export default {
     saveChat: async (data: IMessage) => {
         try {
-            console.log("saveChat...",data);
             const checkChatExists = await chatRepositoryGetQuery.getChatByChatId(data.id);
-            console.log("checkChatExists..",checkChatExists)
             if (checkChatExists) {
                 // Assuming updateChat function takes an id and the entire data
                 await chatRepositoryUpdateQuery.updateChat(checkChatExists._id, data);
@@ -24,10 +23,11 @@ export default {
         }
     },
 
-    getChatByChatId: async (chatId: string) => {
+    getChatByChatId: async (req: Request, res: Response) => {
         try {
+            const chatId = req.query.chatId as string | undefined;
             const response = await chatRepositoryGetQuery.getChatByChatId(chatId)
-            return response?.messages
+            res.json(response)
         } catch (error) {
             throw new Error((error as Error).message);
         }

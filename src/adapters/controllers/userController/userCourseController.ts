@@ -63,7 +63,7 @@ export default {
   getPaymentHistory: async (req: Request, res: Response) => {
     try {
       const email = req.query.email as string | undefined;
-      console.log("pay-his-email",email)
+    
       if (email) {
         const historyData = await courseManagementUsecases.getHistoryForUser(email);
         res.json(historyData);

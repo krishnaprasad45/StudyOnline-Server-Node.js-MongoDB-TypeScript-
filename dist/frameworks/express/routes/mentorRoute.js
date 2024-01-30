@@ -9,6 +9,7 @@ const multer_1 = require("../middlewares/multer");
 const mentorController_1 = require("../../../adapters/controllers/mentorController/mentorController");
 const jwtTokenAuth_1 = require("../middlewares/jwtTokenAuth");
 const mentorCourseController_1 = __importDefault(require("../../../adapters/controllers/mentorController/mentorCourseController"));
+const chat_useCase_1 = __importDefault(require("../../../business/usecases/chat-useCase/chat-useCase"));
 const mentorRoute = express_1.default.Router();
 mentorRoute.post("/register", multer_1.upload.single("image"), mentorController_1.mentorSignup);
 mentorRoute.get("/login", mentorController_1.mentorLogin);
@@ -21,4 +22,5 @@ mentorRoute.get("/mycourses", jwtTokenAuth_1.verifyToken, mentorCourseController
 mentorRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getChaptersList);
 mentorRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getChapterDetails);
 mentorRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getPaymentHistory);
+mentorRoute.get("/chat/history", jwtTokenAuth_1.verifyToken, chat_useCase_1.default.getChatByChatId);
 exports.default = mentorRoute;

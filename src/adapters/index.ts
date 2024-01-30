@@ -60,15 +60,12 @@ app.use("/admin", adminRoute);
 
 io.on("connection", async (socket: Socket) => {
   socket.on("test", (data: string) => {
-    console.log(data);
   });
 });
 io.on("connection", async (socket: Socket) => {
   socket.on(
     "SentMessage",async (data: IMessage) => {
-      console.log("SentMessage++",data)
       const result = await chatUseCase.saveChat(data)
-      console.log("message-index",result)
       io.emit("SentMessage", data);
     }
   );

@@ -5,6 +5,7 @@ import { upload } from "../middlewares/multer";
 import { mentorSignup, mentorLogin, profile, profileUpdate } from "../../../adapters/controllers/mentorController/mentorController";
 import { verifyToken } from "../middlewares/jwtTokenAuth";
 import  mentorCourseController  from "../../../adapters/controllers/mentorController/mentorCourseController";
+import chatUseCase from "../../../business/usecases/chat-useCase/chat-useCase";
 
 const mentorRoute = express.Router();
 
@@ -20,6 +21,7 @@ mentorRoute.get("/mycourses", verifyToken,mentorCourseController.getMyCourseList
 mentorRoute.get("/chapter/list", verifyToken,mentorCourseController.getChaptersList );
 mentorRoute.get("/chapter/details", verifyToken,mentorCourseController.getChapterDetails );
 mentorRoute.get("/payments/history", verifyToken,mentorCourseController.getPaymentHistory );
+mentorRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
 
 
 export default mentorRoute;

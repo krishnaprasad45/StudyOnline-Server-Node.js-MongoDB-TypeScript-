@@ -65,7 +65,6 @@ exports.default = {
     getPaymentHistory: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const email = req.query.email;
-            console.log("pay-his-email", email);
             if (email) {
                 const historyData = yield courseManagementUsecases_1.default.getHistoryForUser(email);
                 res.json(historyData);

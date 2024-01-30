@@ -67,14 +67,11 @@ app.use("/mentor", mentorRoute_1.default);
 app.use("/admin", adminRoute_1.default);
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("test", (data) => {
-        console.log(data);
     });
 }));
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("SentMessage++", data);
         const result = yield chat_useCase_1.default.saveChat(data);
-        console.log("message-index", result);
         io.emit("SentMessage", data);
     }));
 }));

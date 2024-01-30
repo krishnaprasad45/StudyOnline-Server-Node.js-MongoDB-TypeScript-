@@ -16,7 +16,6 @@ const chatModel_1 = __importDefault(require("../../models/chatModel"));
 exports.default = {
     createNewChat: (data) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log("data from createNewChat", data);
             const chat = new chatModel_1.default({
                 chatId: data.id,
                 messages: [{
@@ -25,13 +24,10 @@ exports.default = {
                         to: data.to,
                     }]
             });
-            console.log("chat schema", chat);
             const result = yield chat.save();
-            console.log("result saved :", result);
             return result;
         }
         catch (error) {
-            console.log("error in chat save repo", error);
             throw new Error(error.message);
         }
     })

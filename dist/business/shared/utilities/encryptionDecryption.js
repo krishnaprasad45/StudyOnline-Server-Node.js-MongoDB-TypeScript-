@@ -61,7 +61,6 @@ exports.default = {
             return token;
         }
         catch (error) {
-            console.error('Encryption error:', error);
             throw new Error(error.message);
         }
     },

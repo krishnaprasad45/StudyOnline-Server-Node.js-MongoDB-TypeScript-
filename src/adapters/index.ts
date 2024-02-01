@@ -66,7 +66,8 @@ io.on("connection", async (socket: Socket) => {
   socket.on(
     "SentMessage",async (data: IMessage) => {
       const result = await chatUseCase.saveChat(data)
-      io.emit("SentMessage", data);
+      console.log("data",result)
+      io.emit("SentUpdatedMessage", result);
     }
   );
 

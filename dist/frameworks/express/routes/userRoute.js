@@ -10,6 +10,7 @@ const userController_1 = require("../../../adapters/controllers/userController/u
 const jwtTokenAuth_1 = require("../middlewares/jwtTokenAuth");
 const userSigninController_1 = __importDefault(require("../../../adapters/controllers/userController/userSigninController"));
 const userCourseController_1 = __importDefault(require("../../../adapters/controllers/userController/userCourseController"));
+const chat_useCase_1 = __importDefault(require("../../../business/usecases/chat-useCase/chat-useCase"));
 const userRoute = express_1.default.Router();
 userRoute.post("/signup", multer_1.upload.single("image"), userController_1.userSignup);
 userRoute.get("/login", userController_1.userLogin);
@@ -22,5 +23,5 @@ userRoute.post("/payments", jwtTokenAuth_1.verifyToken, userCourseController_1.d
 userRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getPaymentHistory);
 userRoute.get("/chapter/list", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChaptersList);
 userRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, userCourseController_1.default.getChapterDetails);
-// userRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
+userRoute.get("/chat/history", jwtTokenAuth_1.verifyToken, chat_useCase_1.default.getChatByChatId);
 exports.default = userRoute;

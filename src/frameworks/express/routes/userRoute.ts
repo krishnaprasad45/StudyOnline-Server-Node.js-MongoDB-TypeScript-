@@ -20,6 +20,8 @@ userRoute.post("/payments", verifyToken,userCourseController.payments );
 userRoute.get("/payments/history", verifyToken,userCourseController.getPaymentHistory );
 userRoute.get("/chapter/list", verifyToken,userCourseController.getChaptersList );
 userRoute.get("/chapter/details", verifyToken,userCourseController.getChapterDetails );
-// userRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
+userRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
+
+
 
 export default userRoute;

@@ -72,7 +72,6 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
     socket.on("SentMessage", (data) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield chat_useCase_1.default.saveChat(data);
-        console.log("data", result);
         io.emit("SentUpdatedMessage", result);
     }));
 }));

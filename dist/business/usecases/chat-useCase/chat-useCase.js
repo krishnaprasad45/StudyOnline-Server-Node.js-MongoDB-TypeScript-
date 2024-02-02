@@ -18,7 +18,6 @@ const chatRepositoryUpdateQuery_1 = __importDefault(require("../../../adapters/d
 exports.default = {
     saveChat: (data) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(13);
             const checkChatExists = yield chatRepositoryGetQuery_1.default.getChatByChatId(data.id);
             let chat;
             if (checkChatExists) {

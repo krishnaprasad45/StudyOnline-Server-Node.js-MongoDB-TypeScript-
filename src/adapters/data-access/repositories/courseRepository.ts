@@ -23,9 +23,24 @@ export default {
   getCourse: async (courseId:string) => {
     return await courseModel.findById(courseId)
   },
+  deleteCourse: async (courseId:string) => {
+    return await courseModel.findByIdAndDelete(courseId)
+  },
   getAllChapters: async (courseId: string): Promise<ChapterInterface[]> => {
     return await chapterModel.find({ courseId: courseId }).lean();
   },
+  unlistCourse: async (courseId: string)=> {
+    try {
+      const course = await courseModel.findById(courseId);
+      if (course) {
+        course.isUnlisted = !course.isUnlisted;
+        return await course.save();
+      }
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  },
+ 
   getChapterDetails: async (chapterId: string)=> {
     const data = await chapterModel.findById(chapterId)
     if(data) return data;

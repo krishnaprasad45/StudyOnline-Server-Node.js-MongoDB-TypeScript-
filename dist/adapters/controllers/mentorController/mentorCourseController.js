@@ -96,6 +96,43 @@ exports.default = {
             console.log(error);
         }
     }),
+    getCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const courseId = req.query.courseId;
+            console.log(courseId);
+            const coursesData = yield courseManagementUsecases_1.default.getCourse(courseId);
+            console.log(coursesData);
+            res.json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    deleteCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const courseId = req.query.courseId;
+            console.log(courseId);
+            const coursesData = yield courseManagementUsecases_1.default.deleteCourse(courseId);
+            console.log(coursesData);
+            res.status(201).json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    unlistCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            console.log(222);
+            const courseId = req.query.courseId;
+            console.log(courseId);
+            const coursesData = yield courseManagementUsecases_1.default.unlistCourse(courseId);
+            console.log(coursesData);
+            res.status(201).json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
     getMyCourseList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const email = req.query.email;

@@ -33,8 +33,23 @@ exports.default = {
     getCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.findById(courseId);
     }),
+    deleteCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield courseModel_1.default.findByIdAndDelete(courseId);
+    }),
     getAllChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         return yield chapterModel_1.default.find({ courseId: courseId }).lean();
+    }),
+    unlistCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const course = yield courseModel_1.default.findById(courseId);
+            if (course) {
+                course.isUnlisted = !course.isUnlisted;
+                return yield course.save();
+            }
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
     }),
     getChapterDetails: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield chapterModel_1.default.findById(chapterId);

@@ -1,5 +1,4 @@
 import { userProfileInterface, userSignupInterface } from '../../../business/interfaces/userInterfaces';
-import { profileUpdateInterface } from '../../../business/interfaces/userInterfaces';
 import { createUser } from '../../../business/usecases/userUseCases/createUser';
 import { loginUser } from '../../../business/usecases/userUseCases/loginUser';
 import { findUser } from '../../../business/usecases/userUseCases/findUser';

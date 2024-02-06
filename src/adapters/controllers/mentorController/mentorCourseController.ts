@@ -92,6 +92,41 @@ export default {
       console.log(error);
     }
   },
+  getCourse: async (req: Request, res: Response) => {
+    try {
+      const courseId = req.query.courseId as string 
+      console.log(courseId)
+      const coursesData = await courseManagementUsecases.getCourse(courseId);
+      console.log(coursesData)
+      res.json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  deleteCourse: async (req: Request, res: Response) => {
+    try {
+      const courseId = req.query.courseId as string 
+      console.log(courseId)
+      const coursesData = await courseManagementUsecases.deleteCourse(courseId);
+      console.log(coursesData)
+      res.status(201).json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  unlistCourse: async (req: Request, res: Response) => {
+    try {
+      console.log(222)
+      const courseId = req.query.courseId as string 
+
+      console.log(courseId)
+      const coursesData = await courseManagementUsecases.unlistCourse(courseId);
+      console.log(coursesData)
+      res.status(201).json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
   getMyCourseList: async (req: Request, res: Response) => {
     try {
       const email = req.query.email as string | undefined;

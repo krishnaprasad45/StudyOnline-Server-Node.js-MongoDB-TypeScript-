@@ -19,7 +19,6 @@ export default {
   },
   createChapter: async ({ ...data }: ChapterInterface) => {
     try {
-    
       return await chapterRepository.saveChapter({ ...data });
     } catch (error) {
       console.log(error);
@@ -35,7 +34,7 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
-  getMyCoursesList: async (email:string): Promise<CourseInterface[]> => {
+  getMyCoursesList: async (email: string): Promise<CourseInterface[]> => {
     try {
       const coursesData: CourseInterface[] =
         await courseRepository.getMyAllCourses(email);
@@ -45,7 +44,7 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
-  getCourse: async (courseId:string): Promise<CourseInterface[]> => {
+  getCourse: async (courseId: string): Promise<CourseInterface[]> => {
     try {
       const coursesData: CourseInterface[] =
         await courseRepository.getCourse(courseId);
@@ -55,50 +54,67 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
-  getChapters: async (courseId:string): Promise<ChapterInterface[]> => {
+  deleteCourse: async (courseId: string) => {
+    try {
+      const result = await courseRepository.deleteCourse(courseId);
+      return result ;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  unlistCourse: async (courseId: string) => {
+    try {
+      const result = await courseRepository.unlistCourse(courseId);
+      return result ;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  getChapters: async (courseId: string): Promise<ChapterInterface[]> => {
     try {
       const chaptersData: ChapterInterface[] =
-        await courseRepository.getAllChapters(courseId)
+        await courseRepository.getAllChapters(courseId);
       return chaptersData;
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching courses");
     }
   },
-  getChapter: async (chapterId:string) => {
+  getChapter: async (chapterId: string) => {
     try {
-      const chapterData =
-        await courseRepository.getChapterDetails(chapterId)
+      const chapterData = await courseRepository.getChapterDetails(chapterId);
       return chapterData;
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching courses");
     }
   },
-  savePaymentDetails: async ({ ...data }:PaymentDetails) => {
+  savePaymentDetails: async ({ ...data }: PaymentDetails) => {
     try {
       await courseRepository.savePayment({
-        ...data
+        ...data,
       });
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching courses");
     }
   },
-  getHistory: async (email:string): Promise<PaymentDetails[]> => {
+  getHistory: async (email: string): Promise<PaymentDetails[]> => {
     try {
       const historyData: PaymentDetails[] =
-      await courseRepository.getAllHistory(email);
+        await courseRepository.getAllHistory(email);
       return historyData;
     } catch (error) {
       console.log(error);
       throw new Error("Error fetching courses");
     }
   },
-  getHistoryForUser: async (email:string): Promise<PaymentDetails[]> => {
+  getHistoryForUser: async (email: string): Promise<PaymentDetails[]> => {
     try {
       const historyData: PaymentDetails[] =
-      await courseRepository.getAllHistoryForUser(email);
+        await courseRepository.getAllHistoryForUser(email);
       return historyData;
     } catch (error) {
       console.log(error);
@@ -108,7 +124,7 @@ export default {
   getFullHistory: async (): Promise<PaymentDetails[]> => {
     try {
       const historyData: PaymentDetails[] =
-      await courseRepository.getFullHistory();
+        await courseRepository.getFullHistory();
       return historyData;
     } catch (error) {
       console.log(error);

@@ -15,11 +15,23 @@ mentorRoute.get("/profile", verifyToken, profile);
 mentorRoute.patch("/profile/update", upload.array("images[]",3), verifyToken, profileUpdate);
 
 mentorRoute.post("/add/course", upload.array("images[]",2), verifyToken,mentorCourseController.addCourse );
-mentorRoute.post("/add/chapter", upload.array("images[]",2), verifyToken,mentorCourseController.addChapter );
 mentorRoute.get("/courses", verifyToken,mentorCourseController.getCourseList );
+mentorRoute.get("/course", verifyToken,mentorCourseController.getCourse);
+
 mentorRoute.get("/mycourses", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.get("/update/course", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.get("/edit/course", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.delete("/delete/course", verifyToken,mentorCourseController.deleteCourse );
+mentorRoute.post("/unlist/course", verifyToken,mentorCourseController.unlistCourse );
+
+mentorRoute.post("/add/chapter", upload.array("images[]",2), verifyToken,mentorCourseController.addChapter );
 mentorRoute.get("/chapter/list", verifyToken,mentorCourseController.getChaptersList );
 mentorRoute.get("/chapter/details", verifyToken,mentorCourseController.getChapterDetails );
+mentorRoute.get("/update/chapter", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.get("/edit/chapter", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.get("/delete/chapter", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.get("/unlist/chapter", verifyToken,mentorCourseController.getMyCourseList );
+
 mentorRoute.get("/payments/history", verifyToken,mentorCourseController.getPaymentHistory );
 mentorRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);
 

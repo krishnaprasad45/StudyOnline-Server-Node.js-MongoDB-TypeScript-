@@ -37,6 +37,7 @@ exports.default = {
     addChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { title, duration, description, chaptervideo, courseId } = req.body;
+            console.log("add chapter data", req.body);
             const chapterData = yield courseManagementUsecases_1.default.createChapter({
                 title,
                 duration,
@@ -54,6 +55,7 @@ exports.default = {
     getChaptersList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const courseId = req.query.courseId;
+            console.log("chapter- courseId", courseId);
             if (courseId) {
                 const chapersData = yield courseManagementUsecases_1.default.getChapters(courseId);
                 res.json(chapersData);
@@ -128,6 +130,18 @@ exports.default = {
             const coursesData = yield courseManagementUsecases_1.default.unlistCourse(courseId);
             console.log(coursesData);
             res.status(201).json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    unlistChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            console.log(222);
+            const chapterId = req.query.chapterId;
+            console.log(chapterId);
+            const chapterData = yield courseManagementUsecases_1.default.unlistChapter(chapterId);
+            res.status(201).json(chapterData);
         }
         catch (error) {
             console.log(error);

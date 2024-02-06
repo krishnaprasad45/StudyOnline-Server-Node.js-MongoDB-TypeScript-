@@ -29,7 +29,7 @@ mentorRoute.get("/chapter/details", jwtTokenAuth_1.verifyToken, mentorCourseCont
 mentorRoute.get("/update/chapter", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getMyCourseList);
 mentorRoute.get("/edit/chapter", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getMyCourseList);
 mentorRoute.get("/delete/chapter", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getMyCourseList);
-mentorRoute.get("/unlist/chapter", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getMyCourseList);
+mentorRoute.post("/unlist/chapter", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.unlistChapter);
 mentorRoute.get("/payments/history", jwtTokenAuth_1.verifyToken, mentorCourseController_1.default.getPaymentHistory);
 mentorRoute.get("/chat/history", jwtTokenAuth_1.verifyToken, chat_useCase_1.default.getChatByChatId);
 exports.default = mentorRoute;

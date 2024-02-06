@@ -51,6 +51,18 @@ exports.default = {
             throw new Error(error.message);
         }
     }),
+    unlistChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const chapter = yield chapterModel_1.default.findById(chapterId);
+            if (chapter) {
+                chapter.isUnlisted = !chapter.isUnlisted;
+                return yield chapter.save();
+            }
+        }
+        catch (error) {
+            throw new Error(error.message);
+        }
+    }),
     getChapterDetails: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield chapterModel_1.default.findById(chapterId);
         if (data)

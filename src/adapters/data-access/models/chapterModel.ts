@@ -1,29 +1,30 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const chapterSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  duration: {
+    type: String,
+    required: true,
+  },
+  chaptervideo: {
+    type: String,
+    required: true,
+  },
+  courseId: {
+    type: String,
+  },
+  isUnlisted: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-    title: {
-      type: String,
-      required: true,
-    },
-    description: {
-        type: String,
-        required: true,
-    },
-    duration: {
-      type: String,
-      required: true,
-    },
-    chaptervideo: {
-        type: String,
-        required: true,
-      },
-    courseId: {
-        type: String,
-       
-      },
-
-  });
-  
-  const Chapter = mongoose.model('chapter', chapterSchema);
-  export default Chapter
+const Chapter = mongoose.model("chapter", chapterSchema);
+export default Chapter;

@@ -40,6 +40,17 @@ export default {
       throw new Error((error as Error).message);
     }
   },
+  unlistChapter: async (chapterId: string)=> {
+    try {
+      const chapter = await chapterModel.findById(chapterId);
+      if (chapter) {
+        chapter.isUnlisted = !chapter.isUnlisted;
+        return await chapter.save();
+      }
+    } catch (error) {
+      throw new Error((error as Error).message);
+    }
+  },
  
   getChapterDetails: async (chapterId: string)=> {
     const data = await chapterModel.findById(chapterId)

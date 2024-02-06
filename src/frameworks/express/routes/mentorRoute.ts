@@ -30,7 +30,7 @@ mentorRoute.get("/chapter/details", verifyToken,mentorCourseController.getChapte
 mentorRoute.get("/update/chapter", verifyToken,mentorCourseController.getMyCourseList );
 mentorRoute.get("/edit/chapter", verifyToken,mentorCourseController.getMyCourseList );
 mentorRoute.get("/delete/chapter", verifyToken,mentorCourseController.getMyCourseList );
-mentorRoute.get("/unlist/chapter", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.post("/unlist/chapter", verifyToken,mentorCourseController.unlistChapter );
 
 mentorRoute.get("/payments/history", verifyToken,mentorCourseController.getPaymentHistory );
 mentorRoute.get("/chat/history", verifyToken,chatUseCase.getChatByChatId);

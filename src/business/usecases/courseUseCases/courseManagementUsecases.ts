@@ -72,6 +72,15 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
+  unlistChapter: async (chapterId: string) => {
+    try {
+      const result = await courseRepository.unlistChapter(chapterId);
+      return result ;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
   getChapters: async (courseId: string): Promise<ChapterInterface[]> => {
     try {
       const chaptersData: ChapterInterface[] =

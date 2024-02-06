@@ -98,6 +98,16 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
+    unlistChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const result = yield courseRepository_1.default.unlistChapter(chapterId);
+            return result;
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error("Error fetching courses");
+        }
+    }),
     getChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const chaptersData = yield courseRepository_1.default.getAllChapters(courseId);

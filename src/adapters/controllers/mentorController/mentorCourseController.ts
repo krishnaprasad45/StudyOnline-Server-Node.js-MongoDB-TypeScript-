@@ -35,6 +35,7 @@ export default {
   addChapter: async (req: Request, res: Response) => {
     try {
       const { title, duration, description, chaptervideo, courseId } = req.body;
+      console.log("add chapter data",req.body)
       const chapterData = await courseManagementUsecases.createChapter({
         title,
         duration,
@@ -52,6 +53,7 @@ export default {
   getChaptersList: async (req: Request, res: Response) => {
     try {
       const courseId = req.query.courseId as string | undefined;
+      console.log("chapter- courseId",courseId)
       if (courseId) {
         const chapersData =
           await courseManagementUsecases.getChapters(courseId);
@@ -123,6 +125,18 @@ export default {
       const coursesData = await courseManagementUsecases.unlistCourse(courseId);
       console.log(coursesData)
       res.status(201).json(coursesData);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  unlistChapter: async (req: Request, res: Response) => {
+    try {
+      console.log(222)
+      const chapterId = req.query.chapterId as string 
+
+      console.log(chapterId)
+      const chapterData = await courseManagementUsecases.unlistChapter(chapterId);
+      res.status(201).json(chapterData);
     } catch (error) {
       console.log(error);
     }

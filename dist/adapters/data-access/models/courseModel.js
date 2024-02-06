@@ -44,5 +44,5 @@ const courseSchema = new mongoose_1.default.Schema({
         default: false,
     },
 });
-const Course = mongoose_1.default.model('course', courseSchema);
+const Course = mongoose_1.default.model("course", courseSchema);
 exports.default = Course;

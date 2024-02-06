@@ -24,6 +24,10 @@ const chapterSchema = new mongoose_1.default.Schema({
     courseId: {
         type: String,
     },
+    isUnlisted: {
+        type: Boolean,
+        default: false,
+    },
 });
-const Chapter = mongoose_1.default.model('chapter', chapterSchema);
+const Chapter = mongoose_1.default.model("chapter", chapterSchema);
 exports.default = Chapter;

@@ -1,6 +1,6 @@
 import { Types } from "mongoose"
 import ChatSchema from "../../models/chatModel";
-import { message } from '../../../../business/interfaces/chatInterface';
+import  message  from '../../../../business/interfaces/chatInterface';
 
 
 export default {

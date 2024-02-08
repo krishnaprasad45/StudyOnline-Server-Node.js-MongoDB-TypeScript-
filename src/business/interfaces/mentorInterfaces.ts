@@ -4,7 +4,7 @@ export interface mentorSignupInterface {
     lastname:string,
     email:string,
     mobile:string,
-    password:string,
+    password:string | undefined,
     confirm_password?:string,
     image:string,
     date?:string

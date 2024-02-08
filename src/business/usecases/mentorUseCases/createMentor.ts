@@ -6,7 +6,7 @@ import { mentorSignupInterface } from "../../../business/interfaces/mentorInterf
 export async function createMentor({firstname,lastname,email,mobile,password,image,date}:mentorSignupInterface) {
   const existingMentor = await findMentorByEmail(email);
   if (!existingMentor) {
-    const securedPassword:string = await securePassword(password);
+    const securedPassword:string | undefined = await securePassword(password);
     
     const formattedDate = await formatDate(Date.now().toString());
     password = securedPassword;

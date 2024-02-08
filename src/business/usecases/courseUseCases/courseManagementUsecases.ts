@@ -44,43 +44,6 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
-  getCourse: async (courseId: string): Promise<CourseInterface[]> => {
-    try {
-      const coursesData: CourseInterface[] =
-        await courseRepository.getCourse(courseId);
-      return coursesData;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Error fetching courses");
-    }
-  },
-  deleteCourse: async (courseId: string) => {
-    try {
-      const result = await courseRepository.deleteCourse(courseId);
-      return result ;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Error fetching courses");
-    }
-  },
-  unlistCourse: async (courseId: string) => {
-    try {
-      const result = await courseRepository.unlistCourse(courseId);
-      return result ;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Error fetching courses");
-    }
-  },
-  unlistChapter: async (chapterId: string) => {
-    try {
-      const result = await courseRepository.unlistChapter(chapterId);
-      return result ;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Error fetching courses");
-    }
-  },
   getChapters: async (courseId: string): Promise<ChapterInterface[]> => {
     try {
       const chaptersData: ChapterInterface[] =
@@ -91,6 +54,42 @@ export default {
       throw new Error("Error fetching courses");
     }
   },
+  getCourse: async (courseId: string) => {
+    try {
+       return await courseRepository.getCourse(courseId);
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  deleteCourse: async (courseId: string) => {
+    try {
+      const result = await courseRepository.deleteCourse(courseId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  unlistCourse: async (courseId: string) => {
+    try {
+      const result = await courseRepository.unlistCourse(courseId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  unlistChapter: async (chapterId: string) => {
+    try {
+      const result = await courseRepository.unlistChapter(chapterId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+
   getChapter: async (chapterId: string) => {
     try {
       const chapterData = await courseRepository.getChapterDetails(chapterId);

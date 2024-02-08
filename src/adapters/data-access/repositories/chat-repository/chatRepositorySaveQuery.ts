@@ -1,7 +1,7 @@
 import ChatSchema from "../../models/chatModel"
-
+import message from "../../../../business/interfaces/chatInterface"
 export default {
-    createNewChat: async (data: IMessage) => {
+    createNewChat: async (data: message) => {
         try {
 
             const chat = new ChatSchema({

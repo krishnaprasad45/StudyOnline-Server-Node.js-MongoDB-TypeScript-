@@ -2,13 +2,14 @@ import chatRepositoryGetQuery from "../../../adapters/data-access/repositories/c
 import chatRepositorySaveQuery from "../../../adapters/data-access/repositories/chat-repository/chatRepositorySaveQuery"
 import chatRepositoryUpdateQuery from "../../../adapters/data-access/repositories/chat-repository/chatRepositoryUpdateQuery"
 import { Request, Response } from "express";
+import message from "../../interfaces/chatInterface"
 
 
 
 
 
 export default {
-    saveChat: async (data: IMessage) => {
+    saveChat: async (data: message) => {
         try {
              const checkChatExists = await chatRepositoryGetQuery.getChatByChatId(data.id);
             let chat

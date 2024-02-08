@@ -1,13 +1,8 @@
-import { userSignup } from "../../controllers/userController/userController";
 import userModel from "../models/userModel";
 
-import { userSignupInterface } from "../../../business/interfaces/userInterfaces";
-import { userProfileInterface } from "../../../business/interfaces/userInterfaces";
-export async function saveUser(data: {
-  email: string;
-  name: string;
-  date: string;
-}) {
+import { userGoogleSignUp,userProfileInterface } from "../../../business/interfaces/userInterfaces";
+
+export async function saveUser(data:userProfileInterface) {
   try {
     const user = new userModel({ ...data });
 
@@ -18,7 +13,7 @@ export async function saveUser(data: {
   }
 }
 
-export async function findUserByEmail(email: string | null) {
+export async function findUserByEmail(email: string | undefined) {
   const userData = await userModel.findOne({ email });
 
   return userData;

@@ -12,11 +12,12 @@ import { Server, Socket } from "socket.io";
 import { createServer } from "http";
 import chatUseCase from "../business/usecases/chat-useCase/chat-useCase";
 import socketManager from "../frameworks/socket-io/socket-io";
+import message from "../business/interfaces/chatInterface";
 const app = express();
-const port = 5000;
 
 connectDB();
 dotenv.config();
+
 // Middleware
 app.use(cors());
 app.use(cookieParser());
@@ -25,7 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/public/images", express.static("public/images"));
 
 //CROSS ORIGIN RESOURCE SHARING
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app",
+];
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -35,7 +39,18 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    optionsSuccessStatus: 200, 
     credentials: true,
+    preflightContinue: true,
+    allowedHeaders: [
+      "Accept",
+      "Accept-Language",
+      "Content-Language",
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+    ],
   })
 );
 
@@ -43,9 +58,19 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: `http://localhost:5173`,
-    methods: ["GET", "POST"],
+    origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app"],
     credentials: true,
+    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    optionsSuccessStatus: 200, 
+    preflightContinue: true,
+    allowedHeaders: [
+      "Accept",
+      "Accept-Language",
+      "Content-Language",
+      "Content-Type",
+      "Authorization",
+      "Access-Control-Allow-Origin",
+	  ],
   },
   transports: ["websocket", "polling"],
   allowEIO3: true,
@@ -64,7 +89,7 @@ io.on("connection", async (socket: Socket) => {
 });
 io.on("connection", async (socket: Socket) => {
   socket.on(
-    "SentMessage",async (data: IMessage) => {
+    "SentMessage",async (data: message) => {
       const result = await chatUseCase.saveChat(data)
       io.emit("SentUpdatedMessage", result);
     }
@@ -76,8 +101,10 @@ app.get("/", (req, res) => {
   res.send().status(200);
 });
 
-const server = httpServer.listen(port, () => {
-  debug(`Server is running on http://localhost:${port}`);
+const {PORT, HOST} = process.env;
+
+httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
+  console.log(`Server listening at http://${HOST}:${PORT}`);
 });
 
 socketManager(io);

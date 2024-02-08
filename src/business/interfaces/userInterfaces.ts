@@ -2,9 +2,9 @@ import { ArrayExpressionOperatorReturningBoolean } from "mongoose"
 
 export interface userSignupInterface {
     _id?:string,
-    firstname:string | null,
+    firstname:string,
     lastname?:string,
-    email:string | null,
+    email:string | undefined,
     mobile?:string,
     password?:string,
     confirm_password?:string,
@@ -30,10 +30,13 @@ export interface userProfileInterface {
     oldEmail?:string,
     isBlock?:boolean,
     mentorIncharge?:string,
-    courseId?:string
+    courseId?:string,
+    date?:string,
+    name?:string
    
 }
 export interface userGoogleSignUp {
     name: string,
     email: string,
+    date?:string
 }

@@ -65,7 +65,8 @@ app.use((0, cors_1.default)({
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
     cors: {
-        origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app"],
+        origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
+            "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
         credentials: true,
         methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
         optionsSuccessStatus: 200,
@@ -102,7 +103,8 @@ app.get("/", (req, res) => {
     res.send().status(200);
 });
 const { PORT, HOST } = process.env;
-httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST !== null && HOST !== void 0 ? HOST : '0.0.0.0', () => {
-    console.log(`Server listening at http://${HOST}:${PORT}`);
-});
+// httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
+//   console.log(`Server listening at http://${HOST}:${PORT}`);
+// });
+app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`));
 (0, socket_io_2.default)(io);

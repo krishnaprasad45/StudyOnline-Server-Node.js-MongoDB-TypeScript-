@@ -29,7 +29,7 @@ app.use("/public/images", express.static("public/images"));
 const allowedOrigins = [
   "http://localhost:5173",
   "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app",
-];
+  ];
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -58,7 +58,8 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app"],
+    origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
+    "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
     credentials: true,
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
     optionsSuccessStatus: 200, 
@@ -103,8 +104,10 @@ app.get("/", (req, res) => {
 
 const {PORT, HOST} = process.env;
 
-httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
-  console.log(`Server listening at http://${HOST}:${PORT}`);
-});
+// httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
+//   console.log(`Server listening at http://${HOST}:${PORT}`);
+// });
+
+app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`))
 
 socketManager(io);

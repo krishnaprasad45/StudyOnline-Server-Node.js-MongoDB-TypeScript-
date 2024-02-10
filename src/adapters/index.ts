@@ -28,7 +28,7 @@ app.use("/public/images", express.static("public/images"));
 //CROSS ORIGIN RESOURCE SHARING
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app",
+  "https://react-study-online-ij5g72zga-krishnaprasad45s-projects.vercel.app",
   ];
 app.use(
   cors({
@@ -58,9 +58,10 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    // origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
-    // "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
-    origin:'*',
+    origin: [
+      `http://localhost:5173`,
+      "https://react-study-online-ij5g72zga-krishnaprasad45s-projects.vercel.app"
+    ],
     credentials: true,
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
     optionsSuccessStatus: 200, 

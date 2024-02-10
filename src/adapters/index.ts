@@ -58,8 +58,9 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
-    "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
+    // origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
+    // "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
+    origin:'*',
     credentials: true,
     methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
     optionsSuccessStatus: 200, 

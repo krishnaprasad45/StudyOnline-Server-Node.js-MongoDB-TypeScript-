@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import connectDB from "../frameworks/database/mongo";
 import userRoute from "../frameworks/express/routes/userRoute";
 import mentorRoute from "../frameworks/express/routes/mentorRoute";
@@ -25,56 +25,42 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/public/images", express.static("public/images"));
 
+
 //CROSS ORIGIN RESOURCE SHARING
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://react-study-online-ij5g72zga-krishnaprasad45s-projects.vercel.app",
-  ];
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-    optionsSuccessStatus: 200, 
-    credentials: true,
-    preflightContinue: true,
-    allowedHeaders: [
-      "Accept",
-      "Accept-Language",
-      "Content-Language",
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin",
-    ],
-  })
-);
+  "https://react-study-online.vercel.app",
+];
+
+const corsOptions: CorsOptions = {
+	origin(requestOrigin, callback) {
+		if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+			callback(null, true);
+		} else {
+			callback(new Error("Not allowed by CORS"));
+		}
+	},
+	methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+	optionsSuccessStatus: 200, 
+	credentials: true,
+	preflightContinue: true,
+	allowedHeaders: [
+		"Accept",
+		"Accept-Language",
+		"Content-Language",
+		"Content-Type",
+		"Authorization",
+		"Access-Control-Allow-Origin",
+	],
+}
+
+app.options("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
-  cors: {
-    origin: [
-      `http://localhost:5173`,
-      "https://react-study-online-ij5g72zga-krishnaprasad45s-projects.vercel.app"
-    ],
-    credentials: true,
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-    optionsSuccessStatus: 200, 
-    preflightContinue: true,
-    allowedHeaders: [
-      "Accept",
-      "Accept-Language",
-      "Content-Language",
-      "Content-Type",
-      "Authorization",
-      "Access-Control-Allow-Origin",
-	  ],
-  },
+  cors: corsOptions,
   transports: ["websocket", "polling"],
   allowEIO3: true,
 });
@@ -109,6 +95,8 @@ const {PORT, HOST} = process.env;
 // httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
 //   console.log(`Server listening at http://${HOST}:${PORT}`);
 // });
+
+// 113
 
 app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`))
 

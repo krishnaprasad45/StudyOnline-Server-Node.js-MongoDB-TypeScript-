@@ -38,11 +38,11 @@ app.use("/public/images", express_1.default.static("public/images"));
 //CROSS ORIGIN RESOURCE SHARING
 const allowedOrigins = [
     "http://localhost:5173",
-    "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app",
+    "https://react-study-online.vercel.app",
 ];
-app.use((0, cors_1.default)({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+const corsOptions = {
+    origin(requestOrigin, callback) {
+        if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
             callback(null, true);
         }
         else {
@@ -61,25 +61,12 @@ app.use((0, cors_1.default)({
         "Authorization",
         "Access-Control-Allow-Origin",
     ],
-}));
+};
+app.options("*", (0, cors_1.default)(corsOptions));
+app.use((0, cors_1.default)(corsOptions));
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
-    cors: {
-        origin: [`http://localhost:5173`, "https://study-online-bcmpbl3ve-krishnaprasad45s-projects.vercel.app/*",
-            "https://study-online-7tm4dvh56-krishnaprasad45s-projects.vercel.app/*"],
-        credentials: true,
-        methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-        optionsSuccessStatus: 200,
-        preflightContinue: true,
-        allowedHeaders: [
-            "Accept",
-            "Accept-Language",
-            "Content-Language",
-            "Content-Type",
-            "Authorization",
-            "Access-Control-Allow-Origin",
-        ],
-    },
+    cors: corsOptions,
     transports: ["websocket", "polling"],
     allowEIO3: true,
 });
@@ -106,5 +93,6 @@ const { PORT, HOST } = process.env;
 // httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
 //   console.log(`Server listening at http://${HOST}:${PORT}`);
 // });
+// 113
 app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`));
 (0, socket_io_2.default)(io);

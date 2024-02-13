@@ -92,11 +92,7 @@ app.get("/", (req, res) => {
 
 const {PORT, HOST} = process.env;
 
-// httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
-//   console.log(`Server listening at http://${HOST}:${PORT}`);
-// });
 
-// 113
 
 app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`))
 

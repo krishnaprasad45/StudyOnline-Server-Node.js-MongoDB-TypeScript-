@@ -27,6 +27,7 @@ const http_1 = require("http");
 const chat_useCase_1 = __importDefault(require("../business/usecases/chat-useCase/chat-useCase"));
 const socket_io_2 = __importDefault(require("../frameworks/socket-io/socket-io"));
 const app = (0, express_1.default)();
+const { PORT, HOST } = process.env;
 (0, mongo_1.default)();
 dotenv_1.default.config();
 // Middleware
@@ -36,37 +37,25 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/public/images", express_1.default.static("public/images"));
 //CROSS ORIGIN RESOURCE SHARING
-const allowedOrigins = [
-    "http://localhost:5173",
-    "https://react-study-online.vercel.app",
-];
-const corsOptions = {
-    origin(requestOrigin, callback) {
-        if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
+const allowedOrigins = ["http://localhost:5173", "https://react-study-online.vercel.app",];
+app.use((0, cors_1.default)({
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         }
         else {
             callback(new Error("Not allowed by CORS"));
         }
     },
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-    optionsSuccessStatus: 200,
     credentials: true,
-    preflightContinue: true,
-    allowedHeaders: [
-        "Accept",
-        "Accept-Language",
-        "Content-Language",
-        "Content-Type",
-        "Authorization",
-        "Access-Control-Allow-Origin",
-    ],
-};
-app.options("*", (0, cors_1.default)(corsOptions));
-app.use((0, cors_1.default)(corsOptions));
+}));
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
-    cors: corsOptions,
+    cors: {
+        origin: [`http://localhost:5173`, "https://react-study-online.vercel.app"],
+        methods: ["GET", "POST"],
+        credentials: true,
+    },
     transports: ["websocket", "polling"],
     allowEIO3: true,
 });
@@ -89,10 +78,7 @@ io.on("connection", (socket) => __awaiter(void 0, void 0, void 0, function* () {
 app.get("/", (req, res) => {
     res.send().status(200);
 });
-const { PORT, HOST } = process.env;
-// httpServer.listen(typeof PORT === "number" ? PORT : 8080, HOST ?? '0.0.0.0', () => {
-//   console.log(`Server listening at http://${HOST}:${PORT}`);
-// });
-// 113
-app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`));
+const server = httpServer.listen(PORT, () => {
+    debug(`Server is running on http://localhost:${PORT}`);
+});
 (0, socket_io_2.default)(io);

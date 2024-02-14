@@ -1,6 +1,6 @@
 import express from "express";
 import cookieParser from "cookie-parser";
-import cors, { CorsOptions } from "cors";
+import cors from "cors";
 import connectDB from "../frameworks/database/mongo";
 import userRoute from "../frameworks/express/routes/userRoute";
 import mentorRoute from "../frameworks/express/routes/mentorRoute";
@@ -15,9 +15,10 @@ import socketManager from "../frameworks/socket-io/socket-io";
 import message from "../business/interfaces/chatInterface";
 const app = express();
 
+const {PORT, HOST} = process.env;
+
 connectDB();
 dotenv.config();
-
 // Middleware
 app.use(cors());
 app.use(cookieParser());
@@ -25,42 +26,29 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/public/images", express.static("public/images"));
 
-
 //CROSS ORIGIN RESOURCE SHARING
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://react-study-online.vercel.app",
-];
-
-const corsOptions: CorsOptions = {
-	origin(requestOrigin, callback) {
-		if (!requestOrigin || allowedOrigins.includes(requestOrigin)) {
-			callback(null, true);
-		} else {
-			callback(new Error("Not allowed by CORS"));
-		}
-	},
-	methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-	optionsSuccessStatus: 200, 
-	credentials: true,
-	preflightContinue: true,
-	allowedHeaders: [
-		"Accept",
-		"Accept-Language",
-		"Content-Language",
-		"Content-Type",
-		"Authorization",
-		"Access-Control-Allow-Origin",
-	],
-}
-
-app.options("*", cors(corsOptions));
-app.use(cors(corsOptions));
+const allowedOrigins = ["http://localhost:5173","https://react-study-online.vercel.app",];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
 
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
-  cors: corsOptions,
+  cors: {
+    origin: [`http://localhost:5173`, "https://react-study-online.vercel.app"],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
   transports: ["websocket", "polling"],
   allowEIO3: true,
 });
@@ -90,10 +78,8 @@ app.get("/", (req, res) => {
   res.send().status(200);
 });
 
-const {PORT, HOST} = process.env;
-
-
-
-app.listen(PORT, () => console.log(`server started at http://localhost${PORT}`))
+const server = httpServer.listen(PORT, () => {
+  debug(`Server is running on http://localhost:${PORT}`);
+});
 
 socketManager(io);

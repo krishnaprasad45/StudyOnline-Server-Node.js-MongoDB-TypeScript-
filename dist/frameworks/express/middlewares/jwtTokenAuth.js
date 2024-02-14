@@ -84,7 +84,8 @@ exports.verifyToken = verifyToken;
 function validateRole(req, res, next) {
     try {
         const requestedRoute = req.path;
-        console.log(req.path);
+        console.log(100);
+        // console.log(req.path)
         const publicRoutes = [
             /**********  User **********/
             "/",
@@ -105,12 +106,15 @@ function validateRole(req, res, next) {
             return next();
         }
         const authorizationHeader = req.header("Authorization");
+        console.log("auth", authorizationHeader);
         if (!authorizationHeader) {
             console.log("Unauthorized!!");
             return res.status(401).json({ error: "Unauthorized" });
         }
         const token = authorizationHeader.replace("Bearer ", "");
+        console.log("token", token);
         const decodedToken = encryptionDecryption_1.default.decryptdata(token);
+        console.log("decodedToken", decodedToken);
         const userRouteSegment = "/";
         const mentorRouteSegment = "/mentor";
         const adminRouteSegment = "/admin";

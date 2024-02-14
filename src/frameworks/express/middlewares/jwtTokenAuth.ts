@@ -69,6 +69,7 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
   try {
 
     const requestedRoute = req.path;
+   
     console.log(req.path)
     
     const publicRoutes = [
@@ -94,6 +95,7 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
       return next();
     }
     const authorizationHeader = req.header("Authorization");
+   
 
     if (!authorizationHeader) {
       console.log("Unauthorized!!");
@@ -101,7 +103,9 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
     }
 
     const token = authorizationHeader.replace("Bearer ", "");
+   
     const decodedToken = encryptionDecryption.decryptdata(token);
+ 
 
     const userRouteSegment = "/";
     const mentorRouteSegment = "/mentor";

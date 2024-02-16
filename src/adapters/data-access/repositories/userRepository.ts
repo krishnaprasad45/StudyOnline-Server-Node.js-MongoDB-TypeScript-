@@ -1,8 +1,11 @@
 import userModel from "../models/userModel";
 
-import { userGoogleSignUp,userProfileInterface } from "../../../business/interfaces/userInterfaces";
+import {
+  userGoogleSignUp,
+  userProfileInterface,
+} from "../../../business/interfaces/userInterfaces";
 
-export async function saveUser(data:userProfileInterface) {
+export async function saveUser(data: userProfileInterface) {
   try {
     const user = new userModel({ ...data });
 
@@ -31,13 +34,37 @@ export async function updateOne(data: userProfileInterface) {
   );
   return userData;
 }
-export async function updateMentor(email:string,mentorName:string,courseId:string) {
+export async function updatenewPassword(
+  email: string,
+  securedPassword: string | undefined
+) {
+  try {
+    console.log(35);
+    const userData = await userModel.findOneAndUpdate(
+      { email: email },
+      {
+        
+          password: securedPassword,
+        
+      },
+      { new: true }
+    );
+    return userData;
+  } catch (error) {
+    console.log("error", error);
+  }
+}
+export async function updateMentor(
+  email: string,
+  mentorName: string,
+  courseId: string
+) {
   const userData = await userModel.findOneAndUpdate(
     { email: email },
     {
       $set: {
-        mentorIncharge:mentorName,
-        courseId:courseId,
+        mentorIncharge: mentorName,
+        courseId: courseId,
       },
     },
     { new: true }
@@ -54,4 +81,11 @@ export async function deleteOne(_id: string) {
   }
 }
 
-module.exports = { saveUser, findUserByEmail, updateOne, deleteOne ,updateMentor};
+module.exports = {
+  saveUser,
+  findUserByEmail,
+  updateOne,
+  deleteOne,
+  updateMentor,
+  updatenewPassword
+};

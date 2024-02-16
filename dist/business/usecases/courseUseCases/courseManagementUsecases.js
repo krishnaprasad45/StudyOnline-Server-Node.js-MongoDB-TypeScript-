@@ -39,10 +39,30 @@ exports.default = {
             console.log(error);
         }
     }),
-    createChapter: (_b) => __awaiter(void 0, void 0, void 0, function* () {
+    updateCourse: (_b) => __awaiter(void 0, void 0, void 0, function* () {
         var data = __rest(_b, []);
         try {
+            console.log("update-course", data);
+            const courseData = yield courseRepository_1.default.updateCourseOne(Object.assign({}, data));
+            return courseData;
+        }
+        catch (error) {
+            throw new Error("Course not found");
+        }
+    }),
+    createChapter: (_c) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_c, []);
+        try {
             return yield chapterRepository_1.default.saveChapter(Object.assign({}, data));
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    updateChapter: (_d) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_d, []);
+        try {
+            return yield chapterRepository_1.default.updateChapter(Object.assign({}, data));
         }
         catch (error) {
             console.log(error);
@@ -97,6 +117,16 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
+    deleteChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const result = yield courseRepository_1.default.deleteChapter(chapterId);
+            return result;
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error("Error fetching courses");
+        }
+    }),
     unlistCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const result = yield courseRepository_1.default.unlistCourse(courseId);
@@ -127,8 +157,8 @@ exports.default = {
             throw new Error("Error fetching courses");
         }
     }),
-    savePaymentDetails: (_c) => __awaiter(void 0, void 0, void 0, function* () {
-        var data = __rest(_c, []);
+    savePaymentDetails: (_e) => __awaiter(void 0, void 0, void 0, function* () {
+        var data = __rest(_e, []);
         try {
             yield courseRepository_1.default.savePayment(Object.assign({}, data));
         }

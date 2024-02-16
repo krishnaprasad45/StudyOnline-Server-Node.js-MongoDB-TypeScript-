@@ -1,5 +1,5 @@
-export default interface ChapterInterface{
-  
+export default interface ChaptersInterface{
+    chapterId:String,
     title:String,
     duration:String,
     description:String,

@@ -2,7 +2,9 @@ import chapterRepository from "../../../adapters/data-access/repositories/chapte
 import courseRepository from "../../../adapters/data-access/repositories/courseRepository";
 import { formatDate } from "../../../adapters/external services/moment";
 import ChapterInterface from "../../interfaces/chapterInterface";
-import CourseInterface from "../../interfaces/courseInterface";
+import ChaptersInterface from "../../interfaces/chaptersInterface";
+import CourseInterface from '../../interfaces/courseInterface';
+import CoursesInterface from '../../interfaces/coursesInterface';
 import PaymentDetails from "../../interfaces/paymentDetails";
 
 export default {
@@ -17,9 +19,28 @@ export default {
       console.log(error);
     }
   },
+  updateCourse: async ({ ...data }: CoursesInterface) => {
+    try {
+        console.log("update-course",data)
+        const courseData = await courseRepository.updateCourseOne({...data});
+        return courseData;
+      }catch (error) {
+      throw new Error("Course not found");
+    }
+    
+  },
+  
+  
   createChapter: async ({ ...data }: ChapterInterface) => {
     try {
       return await chapterRepository.saveChapter({ ...data });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateChapter: async ({ ...data }: ChaptersInterface) => {
+    try {
+      return await chapterRepository.updateChapter({ ...data });
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +86,15 @@ export default {
   deleteCourse: async (courseId: string) => {
     try {
       const result = await courseRepository.deleteCourse(courseId);
+      return result;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Error fetching courses");
+    }
+  },
+  deleteChapter: async (chapterId: string) => {
+    try {
+      const result = await courseRepository.deleteChapter(chapterId);
       return result;
     } catch (error) {
       console.log(error);
@@ -140,3 +170,5 @@ export default {
     }
   },
 };
+
+

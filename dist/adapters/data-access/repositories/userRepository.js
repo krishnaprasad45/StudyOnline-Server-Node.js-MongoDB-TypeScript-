@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOne = exports.updateMentor = exports.updateOne = exports.findUserByEmail = exports.saveUser = void 0;
+exports.deleteOne = exports.updateMentor = exports.updatenewPassword = exports.updateOne = exports.findUserByEmail = exports.saveUser = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
 function saveUser(data) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -43,6 +43,21 @@ function updateOne(data) {
     });
 }
 exports.updateOne = updateOne;
+function updatenewPassword(email, securedPassword) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            console.log(35);
+            const userData = yield userModel_1.default.findOneAndUpdate({ email: email }, {
+                password: securedPassword,
+            }, { new: true });
+            return userData;
+        }
+        catch (error) {
+            console.log("error", error);
+        }
+    });
+}
+exports.updatenewPassword = updatenewPassword;
 function updateMentor(email, mentorName, courseId) {
     return __awaiter(this, void 0, void 0, function* () {
         const userData = yield userModel_1.default.findOneAndUpdate({ email: email }, {
@@ -67,4 +82,11 @@ function deleteOne(_id) {
     });
 }
 exports.deleteOne = deleteOne;
-module.exports = { saveUser, findUserByEmail, updateOne, deleteOne, updateMentor };
+module.exports = {
+    saveUser,
+    findUserByEmail,
+    updateOne,
+    deleteOne,
+    updateMentor,
+    updatenewPassword
+};

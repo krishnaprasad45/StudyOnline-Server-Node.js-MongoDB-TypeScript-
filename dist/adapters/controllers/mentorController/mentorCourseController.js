@@ -34,11 +34,49 @@ exports.default = {
             res.json(error);
         }
     }),
+    updateCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { courseId, title, subtitle, duration, fee, createdby, description, banner, introvideo, } = req.body;
+            const courseData = yield courseManagementUsecases_1.default.updateCourse({
+                courseId,
+                title,
+                subtitle,
+                duration,
+                description,
+                fee,
+                createdby,
+                banner,
+                introvideo,
+            });
+            res.status(201).json(courseData);
+        }
+        catch (error) {
+            console.log(error);
+            res.json(error);
+        }
+    }),
     addChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const { title, duration, description, chaptervideo, courseId } = req.body;
-            console.log("add chapter data", req.body);
             const chapterData = yield courseManagementUsecases_1.default.createChapter({
+                title,
+                duration,
+                description,
+                chaptervideo,
+                courseId,
+            });
+            res.status(201).json(chapterData);
+        }
+        catch (error) {
+            console.log(error);
+            res.json(error);
+        }
+    }),
+    updateChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const { chapterId, title, duration, description, chaptervideo, courseId } = req.body;
+            const chapterData = yield courseManagementUsecases_1.default.updateChapter({
+                chapterId,
                 title,
                 duration,
                 description,
@@ -55,7 +93,6 @@ exports.default = {
     getChaptersList: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const courseId = req.query.courseId;
-            console.log("chapter- courseId", courseId);
             if (courseId) {
                 const chapersData = yield courseManagementUsecases_1.default.getChapters(courseId);
                 res.json(chapersData);
@@ -101,9 +138,7 @@ exports.default = {
     getCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const courseId = req.query.courseId;
-            console.log(courseId);
             const coursesData = yield courseManagementUsecases_1.default.getCourse(courseId);
-            console.log(coursesData);
             res.json(coursesData);
         }
         catch (error) {
@@ -113,10 +148,18 @@ exports.default = {
     deleteCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
             const courseId = req.query.courseId;
-            console.log(courseId);
             const coursesData = yield courseManagementUsecases_1.default.deleteCourse(courseId);
-            console.log(coursesData);
             res.status(201).json(coursesData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }),
+    deleteChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const chapterId = req.query.chapterId;
+            const chapterData = yield courseManagementUsecases_1.default.deleteChapter(chapterId);
+            res.status(201).json(chapterData);
         }
         catch (error) {
             console.log(error);
@@ -124,11 +167,8 @@ exports.default = {
     }),
     unlistCourse: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(222);
             const courseId = req.query.courseId;
-            console.log(courseId);
             const coursesData = yield courseManagementUsecases_1.default.unlistCourse(courseId);
-            console.log(coursesData);
             res.status(201).json(coursesData);
         }
         catch (error) {
@@ -137,9 +177,7 @@ exports.default = {
     }),
     unlistChapter: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            console.log(222);
             const chapterId = req.query.chapterId;
-            console.log(chapterId);
             const chapterData = yield courseManagementUsecases_1.default.unlistChapter(chapterId);
             res.status(201).json(chapterData);
         }

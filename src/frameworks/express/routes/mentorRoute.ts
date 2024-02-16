@@ -19,7 +19,7 @@ mentorRoute.get("/courses", verifyToken,mentorCourseController.getCourseList );
 mentorRoute.get("/course", verifyToken,mentorCourseController.getCourse);
 
 mentorRoute.get("/mycourses", verifyToken,mentorCourseController.getMyCourseList );
-mentorRoute.get("/update/course", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.patch("/edit/course",verifyToken,mentorCourseController.updateCourse);
 mentorRoute.get("/edit/course", verifyToken,mentorCourseController.getMyCourseList );
 mentorRoute.delete("/delete/course", verifyToken,mentorCourseController.deleteCourse );
 mentorRoute.post("/unlist/course", verifyToken,mentorCourseController.unlistCourse );
@@ -27,9 +27,8 @@ mentorRoute.post("/unlist/course", verifyToken,mentorCourseController.unlistCour
 mentorRoute.post("/add/chapter", upload.array("images[]",2), verifyToken,mentorCourseController.addChapter );
 mentorRoute.get("/chapter/list", verifyToken,mentorCourseController.getChaptersList );
 mentorRoute.get("/chapter/details", verifyToken,mentorCourseController.getChapterDetails );
-mentorRoute.get("/update/chapter", verifyToken,mentorCourseController.getMyCourseList );
-mentorRoute.get("/edit/chapter", verifyToken,mentorCourseController.getMyCourseList );
-mentorRoute.get("/delete/chapter", verifyToken,mentorCourseController.getMyCourseList );
+mentorRoute.patch("/edit/chapter", verifyToken,mentorCourseController.updateChapter );
+mentorRoute.delete("/delete/chapter", verifyToken,mentorCourseController.deleteChapter );
 mentorRoute.post("/unlist/chapter", verifyToken,mentorCourseController.unlistChapter );
 
 mentorRoute.get("/payments/history", verifyToken,mentorCourseController.getPaymentHistory );

@@ -14,6 +14,9 @@ const chat_useCase_1 = __importDefault(require("../../../business/usecases/chat-
 const userRoute = express_1.default.Router();
 userRoute.post("/signup", multer_1.upload.single("image"), userController_1.userSignup);
 userRoute.get("/login", userController_1.userLogin);
+userRoute.post("/sent/email", userCourseController_1.default.usersentEmail);
+userRoute.post("/forgot/password", userCourseController_1.default.forgotPassword);
+userRoute.post("/newpassword", userCourseController_1.default.newPassword);
 userRoute.get("/profile", jwtTokenAuth_1.verifyToken, userController_1.profile);
 userRoute.post("/profile/update", multer_1.upload.single("image"), jwtTokenAuth_1.verifyToken, userController_1.profileUpdate);
 userRoute.post("/google/signin", userSigninController_1.default.googleSignin);

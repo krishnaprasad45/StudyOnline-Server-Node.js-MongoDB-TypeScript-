@@ -18,6 +18,12 @@ exports.default = {
         const chapter = new chapterModel_1.default(Object.assign({}, data));
         return yield chapter.save();
     }),
+    updateChapter: (data) => __awaiter(void 0, void 0, void 0, function* () {
+        const chapterData = yield chapterModel_1.default.findOneAndUpdate({ _id: data.chapterId }, {
+            $set: Object.assign({}, data),
+        }, { new: true });
+        return chapterData;
+    }),
     getAllChapter: () => __awaiter(void 0, void 0, void 0, function* () {
         return yield chapterModel_1.default.find().lean();
     }),

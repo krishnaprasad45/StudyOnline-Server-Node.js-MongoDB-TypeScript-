@@ -9,9 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateMentorName = exports.updateUser = void 0;
+exports.updateMentorName = exports.updatePassword = exports.updateUser = void 0;
 const userRepository_1 = require("../../../adapters/data-access/repositories/userRepository");
 ;
+const bcrypt_1 = require("../../../adapters/external services/bcrypt");
 const updateUser = ({ firstname, lastname, email, mobile, image, oldEmail }) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (oldEmail) {
@@ -30,6 +31,21 @@ const updateUser = ({ firstname, lastname, email, mobile, image, oldEmail }) => 
     }
 });
 exports.updateUser = updateUser;
+const updatePassword = (newPassword, email) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const securedPassword = yield (0, bcrypt_1.securePassword)(newPassword);
+        console.log("secure", securedPassword);
+        if (securedPassword) {
+            console.log(26);
+            const userData = yield (0, userRepository_1.updatenewPassword)(email, securedPassword);
+            return userData;
+        }
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.updatePassword = updatePassword;
 const updateMentorName = (mentorName, email, courseId) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         if (email) {

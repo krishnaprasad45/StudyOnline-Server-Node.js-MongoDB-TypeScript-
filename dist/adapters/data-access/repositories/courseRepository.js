@@ -36,6 +36,9 @@ exports.default = {
     deleteCourse: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         return yield courseModel_1.default.findByIdAndDelete(courseId);
     }),
+    deleteChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
+        return yield chapterModel_1.default.findByIdAndDelete(chapterId);
+    }),
     getAllChapters: (courseId) => __awaiter(void 0, void 0, void 0, function* () {
         return yield chapterModel_1.default.find({ courseId: courseId }).lean();
     }),
@@ -50,6 +53,16 @@ exports.default = {
         catch (error) {
             throw new Error(error.message);
         }
+    }),
+    findCourseByEmail: (id) => __awaiter(void 0, void 0, void 0, function* () {
+        const courseData = yield courseModel_1.default.findOne({ id });
+        return courseData;
+    }),
+    updateCourseOne: (data) => __awaiter(void 0, void 0, void 0, function* () {
+        const courseData = yield courseModel_1.default.findOneAndUpdate({ _id: data.courseId }, {
+            $set: Object.assign({}, data),
+        }, { new: true });
+        return courseData;
     }),
     unlistChapter: (chapterId) => __awaiter(void 0, void 0, void 0, function* () {
         try {

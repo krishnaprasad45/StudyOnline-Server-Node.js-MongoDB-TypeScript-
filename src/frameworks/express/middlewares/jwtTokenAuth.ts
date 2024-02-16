@@ -79,6 +79,9 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
       "/signup",
       "/google/signin",
       "/socket.io/",
+      "/sent/email",
+      "/forgot/password",
+      "/newpassword",
 
       /**********  Mentor **********/
       "/mentor/home",
@@ -105,7 +108,7 @@ export function validateRole(req: Request, res: Response, next: NextFunction) {
     const token = authorizationHeader.replace("Bearer ", "");
    
     const decodedToken = encryptionDecryption.decryptdata(token);
- 
+  
 
     const userRouteSegment = "/";
     const mentorRouteSegment = "/mentor";

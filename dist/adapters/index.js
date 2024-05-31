@@ -27,9 +27,9 @@ const http_1 = require("http");
 const chat_useCase_1 = __importDefault(require("../business/usecases/chat-useCase/chat-useCase"));
 const socket_io_2 = __importDefault(require("../frameworks/socket-io/socket-io"));
 const app = (0, express_1.default)();
+dotenv_1.default.config();
 const { PORT } = process.env;
 (0, mongo_1.default)();
-dotenv_1.default.config();
 // Middleware
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());

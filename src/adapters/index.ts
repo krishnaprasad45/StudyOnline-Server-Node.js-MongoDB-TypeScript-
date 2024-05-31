@@ -14,11 +14,11 @@ import chatUseCase from "../business/usecases/chat-useCase/chat-useCase";
 import socketManager from "../frameworks/socket-io/socket-io";
 import message from "../business/interfaces/chatInterface";
 const app = express();
+dotenv.config();
 
 const {PORT} = process.env;
 
 connectDB();
-dotenv.config();
 // Middleware
 app.use(cookieParser());
 app.use(express.json());

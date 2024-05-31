@@ -31,7 +31,6 @@ const { PORT, HOST } = process.env;
 (0, mongo_1.default)();
 dotenv_1.default.config();
 // Middleware
-app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));

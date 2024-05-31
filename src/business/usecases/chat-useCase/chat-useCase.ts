@@ -14,7 +14,6 @@ export default {
              const checkChatExists = await chatRepositoryGetQuery.getChatByChatId(data.id);
             let chat
             if (checkChatExists) {
-                // Assuming updateChat function takes an id and the entire data
                 chat = await chatRepositoryUpdateQuery.updateChat(checkChatExists._id, data);
             } else {
                 chat = await chatRepositorySaveQuery.createNewChat(data);

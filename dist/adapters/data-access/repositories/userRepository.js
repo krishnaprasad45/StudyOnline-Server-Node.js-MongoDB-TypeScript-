@@ -46,7 +46,6 @@ exports.updateOne = updateOne;
 function updatenewPassword(email, securedPassword) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            console.log(35);
             const userData = yield userModel_1.default.findOneAndUpdate({ email: email }, {
                 password: securedPassword,
             }, { new: true });

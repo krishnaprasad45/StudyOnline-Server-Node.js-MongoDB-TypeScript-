@@ -21,7 +21,6 @@ export default {
   },
   updateCourse: async ({ ...data }: CoursesInterface) => {
     try {
-        console.log("update-course",data)
         const courseData = await courseRepository.updateCourseOne({...data});
         return courseData;
       }catch (error) {

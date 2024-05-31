@@ -5,11 +5,9 @@ import {
 import { createUser } from "../../../business/usecases/userUseCases/createUser";
 import { loginUser } from "../../../business/usecases/userUseCases/loginUser";
 import { findUser } from "../../../business/usecases/userUseCases/findUser";
-
 import { Request, Response } from "express";
-import { updatePassword, updateUser } from "../../../business/usecases/userUseCases/updateUser";
-import sendOTPByEmail from "../../../business/shared/utilities/mailer";
-import { findUserByEmail } from "../../data-access/repositories/userRepository";
+import { updateUser } from "../../../business/usecases/userUseCases/updateUser";
+
 
 export const userSignup = async (req: Request, res: Response) => {
   try {
@@ -49,25 +47,20 @@ export const userLogin = async (req: Request, res: Response) => {
         .status(400)
         .json({ message: "Email and password are required." });
     }
-
     const response = await loginUser(email, password);
     const { userData, token } = response;
-
     res.json({ userData, token });
   } catch (error) {
     res.json(error as Error);
   }
 };
   
-
 export const profile = async (req: Request, res: Response) => {
   try {
     const email = req.query.email?.toString();
-
     if (!email) {
       return res.status(400).json({ message: "Something Error" });
     }
-
     const userData = await findUser(email);
     res.json(userData);
   } catch (error) {
@@ -96,6 +89,5 @@ export const profileUpdate = async (req: Request, res: Response) => {
     console.log(error);
   }
 };
-
 
 module.exports = { userSignup, userLogin, profile, profileUpdate };

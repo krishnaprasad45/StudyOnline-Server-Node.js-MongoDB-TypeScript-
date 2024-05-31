@@ -3,7 +3,6 @@ import message from "../../../../business/interfaces/chatInterface"
 export default {
     createNewChat: async (data: message) => {
         try {
-
             const chat = new ChatSchema({
                 chatId: data.id,
                 messages: [{

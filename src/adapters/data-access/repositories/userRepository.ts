@@ -1,14 +1,11 @@
 import userModel from "../models/userModel";
-
 import {
-  userGoogleSignUp,
   userProfileInterface,
 } from "../../../business/interfaces/userInterfaces";
 
 export async function saveUser(data: userProfileInterface) {
   try {
     const user = new userModel({ ...data });
-
     const result = await user.save();
     return result;
   } catch (error) {
@@ -18,7 +15,6 @@ export async function saveUser(data: userProfileInterface) {
 
 export async function findUserByEmail(email: string | undefined) {
   const userData = await userModel.findOne({ email });
-
   return userData;
 }
 
@@ -39,13 +35,10 @@ export async function updatenewPassword(
   securedPassword: string | undefined
 ) {
   try {
-    console.log(35);
     const userData = await userModel.findOneAndUpdate(
       { email: email },
       {
-        
           password: securedPassword,
-        
       },
       { new: true }
     );

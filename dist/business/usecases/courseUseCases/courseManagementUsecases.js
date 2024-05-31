@@ -42,7 +42,6 @@ exports.default = {
     updateCourse: (_b) => __awaiter(void 0, void 0, void 0, function* () {
         var data = __rest(_b, []);
         try {
-            console.log("update-course", data);
             const courseData = yield courseRepository_1.default.updateCourseOne(Object.assign({}, data));
             return courseData;
         }

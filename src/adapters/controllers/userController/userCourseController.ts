@@ -2,7 +2,10 @@ import courseManagementUsecases from "../../../business/usecases/courseUseCases/
 import { Request, Response, Express } from "express";
 import dotenv from "dotenv";
 import PaymentDetails from "../../../business/interfaces/paymentDetails";
-import { updateMentorName, updatePassword } from "../../../business/usecases/userUseCases/updateUser";
+import {
+  updateMentorName,
+  updatePassword,
+} from "../../../business/usecases/userUseCases/updateUser";
 import sendOTPByEmail from "../../../business/shared/utilities/mailer";
 import { findUserByEmail } from "../../data-access/repositories/userRepository";
 import generateOtp from "../../../business/shared/utilities/generateOtp";
@@ -56,7 +59,6 @@ export default {
         paymentDetails.usedEmail,
         paymentDetails.courseId
       );
-
       res.json({ client_secret: intent.client_secret });
     } catch (error) {
       console.log(error);
@@ -65,7 +67,6 @@ export default {
   getPaymentHistory: async (req: Request, res: Response) => {
     try {
       const email = req.query.email as string | undefined;
-
       if (email) {
         const historyData =
           await courseManagementUsecases.getHistoryForUser(email);
@@ -80,7 +81,6 @@ export default {
       const email = req.body.email;
       const otp = req.body.otp;
       sendOTPByEmail(email, otp);
-
       res.json({ email });
     } catch (error) {
       res.json(error as Error);
@@ -96,33 +96,22 @@ export default {
         sendOTPByEmail(email, otp);
         res.status(200).json({ otp });
       }
-      if(!existingUser){
-        res.status(409).json({ error: 'Conflict - Email already exists' });
-
+      if (!existingUser) {
+        res.status(409).json({ error: "Conflict - Email already exists" });
       }
     } catch (error) {
       res.json(error as Error);
     }
   },
-  newPassword : async (req: Request, res: Response) => {
+  newPassword: async (req: Request, res: Response) => {
     try {
-      const email:string = req.body.email;
-      const newPassword:string | undefined = req.body.newPassword;
-      console.log("email,new",email,newPassword)
-    
-      
-      const userData = await updatePassword(
-        newPassword,
-        email
-       
-       );
+      const email: string = req.body.email;
+      const newPassword: string | undefined = req.body.newPassword;
+      const userData = await updatePassword(newPassword, email);
       res.status(201).json(userData);
-    } 
-  
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
-  
   },
   getChaptersList: async (req: Request, res: Response) => {
     try {

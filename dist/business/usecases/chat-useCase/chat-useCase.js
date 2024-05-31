@@ -21,7 +21,6 @@ exports.default = {
             const checkChatExists = yield chatRepositoryGetQuery_1.default.getChatByChatId(data.id);
             let chat;
             if (checkChatExists) {
-                // Assuming updateChat function takes an id and the entire data
                 chat = yield chatRepositoryUpdateQuery_1.default.updateChat(checkChatExists._id, data);
             }
             else {

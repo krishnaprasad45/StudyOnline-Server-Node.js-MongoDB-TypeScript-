@@ -37,7 +37,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateRole = exports.verifyToken = exports.generateadminToken = exports.generateMentorAuthToken = exports.generateAuthToken = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-// dotenv.ts
 const dotenv = __importStar(require("dotenv"));
 const encryptionDecryption_1 = __importDefault(require("../../../business/shared/utilities/encryptionDecryption"));
 dotenv.config();
@@ -101,7 +100,6 @@ function validateRole(req, res, next) {
             "/mentor/register",
             "/mentor/login",
             /**********  Admin **********/
-            // "/admin/dashboard",
             "/admin/login",
         ];
         if (publicRoutes.includes(requestedRoute)) {
@@ -140,7 +138,6 @@ function validateRole(req, res, next) {
     }
     catch (error) {
         console.log(error);
-        // return res.status(401).json({ error: (error as Error).message });
     }
 }
 exports.validateRole = validateRole;

@@ -15,7 +15,7 @@ import socketManager from "../frameworks/socket-io/socket-io";
 import message from "../business/interfaces/chatInterface";
 const app = express();
 
-const {PORT, HOST} = process.env;
+const {PORT} = process.env;
 
 connectDB();
 dotenv.config();

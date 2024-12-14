@@ -1,4 +1,3 @@
-// import { findUserByEmail } from "../../repositories/userRepository";
 import { findUserByEmail } from "../../../adapters/data-access/repositories/userRepository";
 import { matchPassword } from "../../../adapters/external services/bcrypt";
 import { generateAuthToken } from "../../../frameworks/express/middlewares/jwtTokenAuth";

@@ -27,17 +27,16 @@ const http_1 = require("http");
 const chat_useCase_1 = __importDefault(require("../business/usecases/chat-useCase/chat-useCase"));
 const socket_io_2 = __importDefault(require("../frameworks/socket-io/socket-io"));
 const app = (0, express_1.default)();
-const { PORT, HOST } = process.env;
-(0, mongo_1.default)();
 dotenv_1.default.config();
+const { PORT } = process.env;
+(0, mongo_1.default)();
 // Middleware
-app.use((0, cors_1.default)());
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use("/public/images", express_1.default.static("public/images"));
 //CROSS ORIGIN RESOURCE SHARING
-const allowedOrigins = ["http://localhost:5173", "https://react-study-online.vercel.app",];
+const allowedOrigins = ["http://localhost:5173", "https://react-study-online.vercel.app", "*"];
 app.use((0, cors_1.default)({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -52,7 +51,7 @@ app.use((0, cors_1.default)({
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
     cors: {
-        origin: [`http://localhost:5173`, "https://react-study-online.vercel.app"],
+        origin: [`http://localhost:5173`, "https://react-study-online.vercel.app", "*"],
         methods: ["GET", "POST"],
         credentials: true,
     },

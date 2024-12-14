@@ -14,20 +14,19 @@ import chatUseCase from "../business/usecases/chat-useCase/chat-useCase";
 import socketManager from "../frameworks/socket-io/socket-io";
 import message from "../business/interfaces/chatInterface";
 const app = express();
+dotenv.config();
 
-const {PORT, HOST} = process.env;
+const {PORT} = process.env;
 
 connectDB();
-dotenv.config();
 // Middleware
-app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/public/images", express.static("public/images"));
 
 //CROSS ORIGIN RESOURCE SHARING
-const allowedOrigins = ["http://localhost:5173","https://react-study-online.vercel.app",];
+const allowedOrigins = ["http://localhost:5173","https://react-study-online.vercel.app","*"];
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -45,7 +44,7 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [`http://localhost:5173`, "https://react-study-online.vercel.app"],
+    origin: [`http://localhost:5173`, "https://react-study-online.vercel.app","*"],
     methods: ["GET", "POST"],
     credentials: true,
   },

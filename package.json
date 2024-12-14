@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node dist/adapters/index.js",
+    "starts": "node dist/adapters/index.js",
+    "start": "concurrently \"tsc -w\" \"nodemon dist/adapters/index.js\"",
     "build": "tsc",
     "lint": "eslint ."
   },

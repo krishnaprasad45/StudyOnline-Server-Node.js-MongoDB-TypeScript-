@@ -9,7 +9,6 @@ export const loginAdmin = async (req:Request,res:Response) => {
     const adminData = await adminLogin({email,password });
     res.json(adminData);
   } catch (error) {
-    // throw new Error(error as string);
     throw new Error("Something error happened");
   }
 };

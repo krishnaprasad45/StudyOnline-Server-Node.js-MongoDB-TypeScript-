@@ -20,7 +20,6 @@ const loginAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.json(adminData);
     }
     catch (error) {
-        // throw new Error(error as string);
         throw new Error("Something error happened");
     }
 });

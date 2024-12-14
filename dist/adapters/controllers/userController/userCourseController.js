@@ -99,7 +99,7 @@ exports.default = {
                 res.status(200).json({ otp });
             }
             if (!existingUser) {
-                res.status(409).json({ error: 'Conflict - Email already exists' });
+                res.status(409).json({ error: "Conflict - Email already exists" });
             }
         }
         catch (error) {
@@ -110,7 +110,6 @@ exports.default = {
         try {
             const email = req.body.email;
             const newPassword = req.body.newPassword;
-            console.log("email,new", email, newPassword);
             const userData = yield (0, updateUser_1.updatePassword)(newPassword, email);
             res.status(201).json(userData);
         }

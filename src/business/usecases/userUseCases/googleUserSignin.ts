@@ -5,26 +5,20 @@ import { createUserFromGoogle } from "./createUserFromGoogle";
 import { findUser } from "./findUser";
 
 export default {
-    googleSignin: async (data: userGoogleSignUp) => {
-        try {
-            const checkEmailExists = await findUser(data.email)
-    
-            if (checkEmailExists) {
-                
-                return true
-            }
-            else {
-            
-                const saveUser = await createUserFromGoogle({
-                    name: data.name,
-                    email: data.email,
-                   
-                  })
-                return true
-            }
-
-        } catch (error) {
-            handleError(error as Error)
-        }
-    },
-}
+  googleSignin: async (data: userGoogleSignUp) => {
+    try {
+      const checkEmailExists = await findUser(data.email);
+      if (checkEmailExists) {
+        return true;
+      } else {
+        const saveUser = await createUserFromGoogle({
+          name: data.name,
+          email: data.email,
+        });
+        return true;
+      }
+    } catch (error) {
+      handleError(error as Error);
+    }
+  },
+};

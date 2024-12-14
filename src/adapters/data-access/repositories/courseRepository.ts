@@ -71,7 +71,6 @@ export default {
       throw new Error((error as Error).message);
     }
   },
-
   getChapterDetails: async (chapterId: string) => {
     const data = await chapterModel.findById(chapterId);
     if (data) return data;
